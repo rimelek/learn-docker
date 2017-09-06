@@ -1,5 +1,14 @@
 # Utasítások
 
+## Információ a rendszerről
+
+```bash
+docker help
+docker info
+docker version
+docker --version
+```
+
 ## Előrecsomagolt alkalmazás tesztelése
 
 ```bash
@@ -136,6 +145,7 @@ Háttérben indítás:
 ```bash
 docker run -d --name web httpd:2.4
 ```
+Ezután a "docker ps" utasítással már látható a futó konténer.
 
 A háttérben futó "web" konténer kimenetének ellenőrzése
 
@@ -168,7 +178,11 @@ docker rm -f web
 docker run -d -p "8080:80" --name web httpd:2.4
 ```
 
-# Hálózatok
+## Munka a konténer fájlrendszerével saját image nélkül
+
+...folyamatban...
+
+## Hálózatok
 
 ...folyamatban...
 
