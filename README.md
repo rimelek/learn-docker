@@ -161,9 +161,10 @@ Kimenet:
 <html><body><h1>It works!</h1></body></html>
 ```
 
-Hoszt portjának átirányítása a konténer portjára
+"web" konténer törlése és elindítás a hoszt portjának átirányításával
 
 ```bash
+docker rm -f web
 docker run -d -p "8080:80" --name web httpd:2.4
 ```
 
