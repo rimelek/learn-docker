@@ -160,11 +160,8 @@ wget -qO- 172.17.0.2
 Hoszt portjának átirányítása a konténer portjára
 
 ```bash
-docker run -d --name web httpd:2.4
+docker run -d -p "8080:80" --name web httpd:2.4
 ```
-
-Konténer 
-
 
 # Hálózatok
 
