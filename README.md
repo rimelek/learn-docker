@@ -156,6 +156,10 @@ Tesztelhető wget-tel, hogy működik a szerver:
 ```bash
 wget -qO- 172.17.0.2
 ```
+Kimenet:
+```html
+<html><body><h1>It works!</h1></body></html>
+```
 
 Hoszt portjának átirányítása a konténer portjára
 
