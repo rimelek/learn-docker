@@ -180,6 +180,18 @@ docker run -d -p "8080:80" --name web httpd:2.4
 
 ## Munka a konténer fájlrendszerével saját image nélkül
 
+Parancs futtatása a futó "web" konténerben
+
+```bash
+docker exec -it web ls -la
+```
+
+"Belépés" a konténerbe
+
+```bash
+docker exec -it web bash
+```
+
 ...folyamatban...
 
 ## Hálózatok
