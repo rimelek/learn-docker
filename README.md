@@ -14,7 +14,6 @@ docker --version
 ```bash
 docker run --rm -p "8080:80" rimelek/phar-examples:1.0
 ```
-Tesztelhető a 
 
 ## Demo "hello-world" image
 
@@ -190,6 +189,12 @@ docker exec -it web ls -la
 
 ```bash
 docker exec -it web bash
+```
+
+"Belépés" a konténerbe nsenter-rel (régen):
+
+```bash
+sudo nsenter -t $(docker inspect --format '{{ .State.Pid }}' web) -m -u -i -n -p -w
 ```
 
 ...folyamatban...
