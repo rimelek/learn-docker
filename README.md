@@ -1,4 +1,52 @@
-# Utasítások
+# LXD
+
+Elérhető távoli szerverek
+
+https://images.linuxcontainers.org
+
+```bash
+lxc remote list
+```
+
+```bash
+lxc image list images:ubuntu
+# vagy
+lxc image list images:ubuntu xenial
+# vagy
+lxc image list ubuntu:16.04
+```
+
+Összes alias lekérdezése megadott alias alapján
+
+```bash
+lxc image info ubuntu:x
+```
+
+Ubuntu 16.04 indítása
+
+```bash
+lxc launch ubuntu:16.04 ubuntu
+```
+
+Konténerek listázása
+
+```bash
+lxc list
+```
+
+Belépés a konténerbe
+
+```bash
+lxc exec ubuntu bash
+```
+
+Konténer törlése
+
+```bash
+lxc delete --force ubuntu
+```
+
+# Docker
 
 ## Információ a rendszerről
 
