@@ -1,0 +1,29 @@
+version: "3.1"
+
+volumes:
+  www:
+
+networks:
+  proxy:
+    external:
+      name: nginx_proxy
+
+services:
+  php:
+    image: y/p06_php
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - www:/var/www/html
+  httpd:
+    image: rimelek/httpd24
+    volumes:
+      - www:/var/www/html
+    environment:
+      SRV_PHP: 1
+      SRV_DOCROOT: /var/www/html
+      VIRTUAL_HOST: web2.127.0.0.1.xip.io
+    networks:
+      - default
+      - proxy
