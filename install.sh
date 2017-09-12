@@ -3,9 +3,12 @@
 DOCKER_VERSION=17.06.2~ce-0~ubuntu
 DOCKER_COMPOSE_VERSION=1.16.1
 
-# Repository
+# upgrade
 
 apt-get update
+apt-get dist-upgrade
+
+# Repository
 
 apt-get install -y --no-install-recommends \
     apt-transport-https \
@@ -31,7 +34,7 @@ chmod +x /usr/local/bin/docker-compose
 
 # LXD upgrade
 
-add-apt-repository ppa:ubuntu-lxc/lxd-stable
+add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
 
 apt-get update
 
