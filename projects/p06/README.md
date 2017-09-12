@@ -10,7 +10,7 @@ Ellenőrzés:
 docker network ls
 ```
 
-Belépés a proxy mappába:
+Belépés az nginxproxy mappába:
 
 ```bash
 cd nginxproxy
@@ -45,11 +45,5 @@ Mindkét szolgáltatás elérhető a 80-as porton:
 ```text
 http://web1.193.x.x.x.xip.io
 http://web2.193.x.x.x.xip.io
-```
-HA proxy-val:
-
-```bash
-cd ../nginxproxy
-docker-compose down
 ```
 
