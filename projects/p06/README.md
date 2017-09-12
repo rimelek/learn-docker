@@ -1,7 +1,7 @@
 Proxy hálózat létrehozása:
 
 ```bash
-docker network create proxy
+docker network create public_proxy
 ```
 
 Ellenőrzés:
@@ -13,7 +13,7 @@ docker network ls
 Belépés a proxy mappába:
 
 ```bash
-cd proxy
+cd nginxproxy
 ```
 
 Proxy indítása:
@@ -46,3 +46,10 @@ Mindkét szolgáltatás elérhető a 80-as porton:
 http://web1.193.x.x.x.xip.io
 http://web2.193.x.x.x.xip.io
 ```
+HA proxy-val:
+
+```bash
+cd ../nginxproxy
+docker-compose down
+```
+
