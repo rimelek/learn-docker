@@ -1,0 +1,22 @@
+version: "3.1"
+
+volumes:
+  www:
+
+services:
+  php:
+    image: y/p05_php
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - www:/var/www/html
+  httpd:
+    image: rimelek/httpd24
+    volumes:
+      - www:/var/www/html
+    environment:
+      SRV_PHP: 1
+      SRV_DOCROOT: /var/www/html
+    ports:
+      - "8080:80"

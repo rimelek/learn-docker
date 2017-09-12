@@ -7,7 +7,7 @@ docker-compose up -d
 Konténer ellenőrzése:
 
 ```bash
-docker ps -f ancestor=y/p04_php
+docker-compose ps
 # A konténer neve: p04_php_1
 ```
 
