@@ -1,8 +1,9 @@
 Image készítése:
 
 ```bash
-docker build -t y/p02_httpd
+docker build -t y/p02_httpd .
 ```
+A fenti utasításban figyelni kell a végén a pontra.
 
 Konténer indítása
 
