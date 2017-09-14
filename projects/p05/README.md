@@ -1,4 +1,4 @@
-Konténerek indítása és php php image készítése
+Konténerek indítása és php image készítése
 
 ```bash
 docker-compose up -d
