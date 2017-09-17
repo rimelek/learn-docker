@@ -10,7 +10,7 @@ networks:
 
 services:
   php:
-    image: y/p06_php
+    image: y/p06_php_web2
     build:
       context: .
       dockerfile: Dockerfile
