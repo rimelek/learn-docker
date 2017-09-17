@@ -8,6 +8,10 @@ A példák az Ipszilon szemináriumra készültek a Cloud For Education rendszer
 virtuális gépekre, így a projekt olyan szkripteket is tartalmaz, amik adott
 környezetben szükségesek voltak, de más gépeken a telepítésük elhagyható.
 
+## Szkriptek
+
+* [install.sh](install.sh): az alábbi szkriptek kivételével a szükséges komponensek telepítését tartalmazza. 
+A telepítés után szükséges lehet egy újraindítás.
 * [fixhost.sh](system/etc/profile.d/fixhost.sh): A "sudo" parancs kiadásakor megjelenő
 hibaüzenet elhallgattatására szolgál. Ellenőrzi, hogy a gép hosztneve szerepel-e a hosts fájlban.
 Ha nem, akkor beírja. A szkript Ubuntu 16.04-ben az /etc/profile.d/ mappába másolandó.
@@ -23,9 +27,15 @@ hasonló domaint tartalmazza, ami felhasználható a docker-compose.yml fájlokb
 A fenti szkripteknek futtatási jogot is kell adni. Saját környezetben azonban nem szükséges
 a telepítésük. Az XIP változót manuálisan is be lehet állítani.
 
+## Gyakorló projektek
 
-## Projekt struktúra
+A [projects](projects) mappa tartalmazza a gyakorló feladatokat. pXX formátumú mappanevekkel, ahol az XX egy kétjegyű sorszám.
 
-- projects: A példaprojektek mappája
-- system: A rendszerre telepíthető szkriptek gyűjteménye
-- install.sh: A futtatáshoz szükséges programok telepítése, a rendszer előkészítése
+* [p00](projects/p00/README.md): Alapvető parancsok gyűjteménye
+* [p01](projects/p01/README.md): Egyszerű webszerver indítása felcsatolt gyökér könyvtárral.
+* [p02](projects/p02/README.md): Saját webszerver image készítése, gyökér könyvtár felmásolása.
+* [p03](projects/p03/READMe.md): Saját alkalmazás image készítése beépített PHP szerverrel.
+* [p04](projects/p04/README.md): Egyszerű [Docker Compose](https://docs.docker.com/compose/) projekt készítése
+* [p05](projects/p05/README.md): PHP és Apache webszerver kommunikációja [Docker Compose](https://docs.docker.com/compose/) segítségével.
+* [p06](projects/p06/README.md): Több [Docker Compose](https://docs.docker.com/compose/) projekt indítása azonos porton [nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy) segítségével.
+
