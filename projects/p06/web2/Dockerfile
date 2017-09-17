@@ -1,4 +1,4 @@
-FROM rimelek/php:7.1-fpm
+FROM itsziget/php:7.1-fpm
 
 COPY www /var/www/html
 

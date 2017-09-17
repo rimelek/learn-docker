@@ -60,7 +60,7 @@ docker --version
 ## Előrecsomagolt alkalmazás tesztelése
 
 ```bash
-docker run --rm -p "8080:80" rimelek/phar-examples:1.0
+docker run --rm -p "8080:80" itsziget/phar-examples:1.0
 ```
 
 ## Demo "hello-world" image
