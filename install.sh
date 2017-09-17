@@ -6,7 +6,7 @@ DOCKER_COMPOSE_VERSION=1.16.1
 # upgrade
 
 apt-get update
-apt-get dist-upgrade
+apt-get dist-upgrade -y
 
 # Repository
 
@@ -38,4 +38,4 @@ add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
 
 apt-get update
 
-apt-get dist-upgrade
+apt-get dist-upgrade -y
