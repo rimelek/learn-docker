@@ -29,7 +29,7 @@ a telepítésük. Az XIP változót manuálisan is be lehet állítani.
 
 ## Gyakorló projektek
 
-A [projects](projects) mappa tartalmazza a gyakorló feladatokat. pXX formátumú mappanevekkel, ahol az XX egy kétjegyű sorszám.
+A [projects](https://github.com/itsziget/learn-docker/tree/master/projects) mappa tartalmazza a gyakorló feladatokat. pXX formátumú mappanevekkel, ahol az XX egy kétjegyű sorszám.
 
 * [p00](projects/p00/README.md): Alapvető parancsok gyűjteménye
 * [p01](projects/p01/README.md): Egyszerű webszerver indítása felcsatolt gyökér könyvtárral.
