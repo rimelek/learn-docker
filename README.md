@@ -36,6 +36,20 @@ git clone https://github.com/itsziget/learn-docker.git
 cd learn-docker/projects
 ```
 
+Szükség lesz a gyakorlatok alatt az $XIP környezeti változóra. Ellenőrizzük, hogy van-e már értéke:
+
+```bash
+echo $XIP
+```
+
+Ha nincs, akkor előbb be kell állítani:
+```bash
+export XIP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}').xip.io
+# vagy, ha az xip szkript már telepítve van:
+export XIP=$(xip)
+```
+
+
 A [projects](https://github.com/itsziget/learn-docker/tree/master/projects) mappa tartalmazza a gyakorló feladatokat. pXX formátumú mappanevekkel, ahol az XX egy kétjegyű sorszám.
 
 * [p00](projects/p00/README.md): Alapvető parancsok gyűjteménye
