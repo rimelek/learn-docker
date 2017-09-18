@@ -29,6 +29,13 @@ a telepítésük. Az XIP változót manuálisan is be lehet állítani.
 
 ## Gyakorló projektek
 
+A feladatok elkezdéséhez először le kell tölteni a GitHub-ról a teljes git projektet:
+
+```bash
+git clone https://github.com/itsziget/learn-docker.git
+cd learn-docker/projects
+```
+
 A [projects](https://github.com/itsziget/learn-docker/tree/master/projects) mappa tartalmazza a gyakorló feladatokat. pXX formátumú mappanevekkel, ahol az XX egy kétjegyű sorszám.
 
 * [p00](projects/p00/README.md): Alapvető parancsok gyűjteménye
