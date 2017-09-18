@@ -61,4 +61,4 @@ A feladatok alatt használt Docker verzió 17.06.2. A Docker Compose verziója 1
 * [p05](projects/p05/README.md): PHP és Apache webszerver kommunikációja [Docker Compose](https://docs.docker.com/compose/) segítségével.
 * [p06](projects/p06/README.md): Több [Docker Compose](https://docs.docker.com/compose/) projekt indítása azonos porton [nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy) segítségével.
 * [p07](projects/p07/README.md): HTTP autentikációval védett webszerver
-
+* [p08](projects/p08/README.md): Memória limit tesztelése PHP segítségével konténerben.
