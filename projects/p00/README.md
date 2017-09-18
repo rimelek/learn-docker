@@ -256,6 +256,4 @@ docker inspect web --format "{{.NetworkSettings.IPAddress}}"
 docker inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
 ```
 
-
-
-
+[Vissza a főoldalra](../../README.md)

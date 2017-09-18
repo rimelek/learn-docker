@@ -17,3 +17,5 @@ Hálózatok ellenőrzése:
 docker network ls
 # Új bridge típusú hálózat: p04_default
 ```
+
+[Vissza a főoldalra](../../README.md)
