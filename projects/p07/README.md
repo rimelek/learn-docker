@@ -13,6 +13,7 @@ A htpasswd fájlt automatikusan hozza létre egy konténer, ami ezután le is á
 A [.env](https://github.com/itsziget/learn-docker/tree/master/projects/p07/.env) fájlban
 a HTTPD_USER és HTTPD_PASS változókat kell megadni, amit a [docker-compose.yml](https://github.com/itsziget/learn-docker/tree/master/projects/p07/) fájlban
 a "htpasswd" szolgáltatás használ fel a jelszófájl generálásához, amit a "httpd"
+szolgáltatással közös volume-on keresztül oszt meg.
 
 
 A "fixperm" szolgáltatás a "htpasswd"-hez hasonlóan csak elvégzo a dolgát, majd leáll.
