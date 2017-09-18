@@ -19,6 +19,13 @@ docker run -ti -e MAX_CPU_CORES=1 -e STRESS_SYSTEM_FOR=30s --cpus=0.5 --cpuset-c
 ```
 A fenti példában kiválasztottuk, hogy a 0 indexű CPU-nak használja csak a felét a teszt.
 
+Az ellenőrzéshez ismét hazsnálható a "top" parancs, viszont az alábbi módon fel kell venni 
+a CPU indexeinek oszlopát:
 
+* "top" parancs kiadása
+* "f" billentyű leütése
+* "P" oszlop kiválasztása nyilakkal
+* Kijelölés SPACE billentyűvel 
+* "ESC" billentyű megnyomása
 
 [Vissza a főoldalra](../../README.md)
