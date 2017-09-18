@@ -29,3 +29,5 @@ pontos eredményt, de 50MB környékén következik be a hibaüzenet.
 A Docker Compose "run" utasítása egy kiválasztott szolgáltatást indít el a docker-compose.yml fájlból
 hasonlóan, mint a "docker run". Így a "--rm" jelentése is azonos. A lefutás után
 a konténer törlődik.
+
+[Vissza a főoldalra](../../README.md)
