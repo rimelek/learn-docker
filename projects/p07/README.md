@@ -28,6 +28,11 @@ docker-compose up -d
 ```
 
 Ezután a böngészőben a p07.X.X.X.X.xip.io webcímen már jelszót kér a böngésző.
+A konkrét webcímet a feladatok előtt opcionálisan telepített xip programmal is lehet generálni.
+
+```bash
+xip p07
+```
 
 
 [Vissza a főoldalra](../../README.md)

@@ -15,7 +15,7 @@ A telepítés után szükséges lehet egy újraindítás.
 * [fixhost.sh](system/etc/profile.d/fixhost.sh): A "sudo" parancs kiadásakor megjelenő
 hibaüzenet elhallgattatására szolgál. Ellenőrzi, hogy a gép hosztneve szerepel-e a hosts fájlban.
 Ha nem, akkor beírja. A szkript Ubuntu 16.04-ben az /etc/profile.d/ mappába másolandó.
-* [xip.sh](system/usr/local/bin/xip.sh): Az xip.io publikus névszerver szolgáltatáshoz
+* [xip.sh](system/usr/local/bin/xip.sh): Az [xip.io](http://xip.io) publikus névszerver szolgáltatáshoz
 generál domain neveket a gép aktuális nyilvános, vagy helyi hálózati IP címe alapján.
 A fájlt "xip" néven a /usr/local/bin/ mappába kell másolni. Ezután az "xip" parancs kiadásakor
 megjelenik egy használható domain név 192.168.1.2.xip.io formában. Az xip paramétert is fogad. 
