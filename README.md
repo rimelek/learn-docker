@@ -49,8 +49,9 @@ export XIP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}').xip.io
 export XIP=$(xip)
 ```
 
-
 A [projects](https://github.com/itsziget/learn-docker/tree/master/projects) mappa tartalmazza a gyakorló feladatokat. pXX formátumú mappanevekkel, ahol az XX egy kétjegyű sorszám.
+
+A feladatok alatt használt Docker verzió 17.06.2. A Docker Compose verziója 1.16.1.
 
 * [p00](projects/p00/README.md): Alapvető parancsok gyűjteménye
 * [p01](projects/p01/README.md): Egyszerű webszerver indítása felcsatolt gyökér könyvtárral.
