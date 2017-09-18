@@ -38,4 +38,5 @@ A [projects](https://github.com/itsziget/learn-docker/tree/master/projects) mapp
 * [p04](projects/p04/README.md): Egyszerű [Docker Compose](https://docs.docker.com/compose/) projekt készítése
 * [p05](projects/p05/README.md): PHP és Apache webszerver kommunikációja [Docker Compose](https://docs.docker.com/compose/) segítségével.
 * [p06](projects/p06/README.md): Több [Docker Compose](https://docs.docker.com/compose/) projekt indítása azonos porton [nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy) segítségével.
+* [p07](projects/p07/README.md): HTTP autentikációval védett webszerver
 

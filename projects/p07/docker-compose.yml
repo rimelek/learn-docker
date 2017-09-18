@@ -1,0 +1,43 @@
+version: "3.1"
+
+volumes:
+  apache2:
+
+networks:
+  proxy:
+    external:
+      name: public_proxy
+
+services:
+  htpasswd:
+    image: itsziget/httpd24
+    volumes:
+      - apache2:/usr/local/apache2
+    command:
+      - "/bin/bash"
+      - "-c" 
+      - "htpasswd -nb $HTTPD_USER $HTTPD_PASS >> /usr/local/apache2/.htpasswd"
+    network_mode: none
+  httpd:
+    depends_on:
+      - htpasswd
+    image: itsziget/httpd24
+    volumes:
+      - apache2:/usr/local/apache2
+      - ./www:/usr/local/apache2/htdocs
+    networks:
+      - proxy
+    environment:
+      SRV_AUTH: 1
+      VIRTUAL_HOST: p07.$XIP
+  fixperm:
+    depends_on:
+      - httpd
+    image: bash
+    volumes:
+      - ./www:/htdocs
+    network_mode: none
+    command:
+      - "bash"
+      - "-c"
+      - "chmod -R 0655 /htdocs && chmod 0775 /htdocs && chown -R 33:33 /htdocs"
