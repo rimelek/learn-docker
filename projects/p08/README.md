@@ -21,7 +21,7 @@ MEMSIZE=50MB docker-compose run --rm php
 ```
 
 A "Killed" jelzi, hogy meghaladtuk a limitet. 40MB memóriahasználat mellett
-még nincs hibaüzenet. 50MB-ot meghaladva már igen. A fenti memóriatezst nem ad 100%-osan 
+még nincs hibaüzenet. 50MB-ot meghaladva már igen. A fenti memóriateszt nem ad 100%-osan 
 pontos eredményt, de 50MB környékén következik be a hibaüzenet.
 
 ## Paraméterek magyarázata
