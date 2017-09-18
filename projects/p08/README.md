@@ -12,11 +12,11 @@ A konténer 50MB memórialimitet kap. (minimum 4MB állíthat be).
 Az alábbi példák fokozatosan növelt memóriahasználatot tesztelnek:
 
 ```bash
-MEMSIZE=10M docker-compose run --rm php
-MEMSIZE=20M docker-compose run --rm php
-MEMSIZE=30M docker-compose run --rm php
-MEMSIZE=40M docker-compose run --rm php
-MEMSIZE=50M docker-compose run --rm php
+MEMSIZE=10MB docker-compose run --rm php
+MEMSIZE=20MB docker-compose run --rm php
+MEMSIZE=30MB docker-compose run --rm php
+MEMSIZE=40MB docker-compose run --rm php
+MEMSIZE=50MB docker-compose run --rm php
 # bash: line 1:  8 Killed   php -r ' ob_start(); readfile("/tmp/50MB"); ob_clean(); echo (memory_get_peak_usage(true)/1024/1024)." MiB\n"; '
 ```
 
