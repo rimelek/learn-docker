@@ -1,4 +1,4 @@
-# Projekt: P07
+# Projekt: p07
 
 ## Leírás
 
