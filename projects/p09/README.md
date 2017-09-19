@@ -19,7 +19,7 @@ docker run -ti -e MAX_CPU_CORES=1 -e STRESS_SYSTEM_FOR=30s --cpus=0.5 --cpuset-c
 ```
 A fenti példában kiválasztottuk, hogy a 0 indexű CPU-nak használja csak a felét a teszt.
 
-Az ellenőrzéshez ismét hazsnálható a "top" parancs, viszont az alábbi módon fel kell venni 
+Az ellenőrzéshez ismét használható a "top" parancs, viszont az alábbi módon fel kell venni 
 a CPU indexeinek oszlopát:
 
 * "top" parancs kiadása
@@ -27,5 +27,10 @@ a CPU indexeinek oszlopát:
 * "P" oszlop kiválasztása nyilakkal
 * Kijelölés SPACE billentyűvel 
 * "ESC" billentyű megnyomása
+
+Ezután a "P" oszlopban látszik, melyik CPU dolgozik a folyamaton.
+
+Az "1"-es billentyű megnyomásával a terminál tetején az összes CPU
+fel lesz sorolva, így folyamattól függetlenül figyelni lehet a CPU terhelést mindegyiken.
 
 [Vissza a főoldalra](../../README.md)
