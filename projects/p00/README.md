@@ -1,3 +1,4 @@
+{% raw %}
 # LXD
 
 Elérhető távoli szerverek
@@ -257,3 +258,5 @@ docker inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {
 ```
 
 [Vissza a főoldalra](../../README.md)
+
+{% endraw %}
