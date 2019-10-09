@@ -1,15 +1,15 @@
-# Projekt: p08
+# Project: p08
 
-## Leírás
+## Description
 
-A példa a memórialimit tesztelését mutatja be egy php konténerben, ahol a "truncate"
-parancs generál egy megadott méretű fájlt, majd a php azt beolvassa a memóriába.
-A méretet környezeti változóból adjuk át a docker-compose.yml fájlnak.
+This example shows the memory testing in a PHP container, where the "truncate"
+command generates a file with a defined size and the PHP reads it into the memory.
+We use an environment variable to set the memory size.
 
-## Teszt indítása
+## Start the test
 
-A konténer 50MB memórialimitet kap. (minimum 4MB állíthat be). 
-Az alábbi példák fokozatosan növelt memóriahasználatot tesztelnek:
+The container will have 50MB memory limit. (It must be at least 4MB). 
+The examples below will test the memory usage from 10MB to 50MB increased by 10MB for each test.
 
 ```bash
 MEMSIZE=10MB docker-compose run --rm php
@@ -20,14 +20,12 @@ MEMSIZE=50MB docker-compose run --rm php
 # bash: line 1:  8 Killed   php -r ' ob_start(); readfile("/tmp/50MB"); ob_clean(); echo (memory_get_peak_usage(true)/1024/1024)." MiB\n"; '
 ```
 
-A "Killed" jelzi, hogy meghaladtuk a limitet. 40MB memóriahasználat mellett
-még nincs hibaüzenet. 50MB-ot meghaladva már igen. A fenti memóriateszt nem ad 100%-osan 
-pontos eredményt, de 50MB környékén következik be a hibaüzenet.
+"Killed" means we exceeded the memory limit. There is no error until 50MB. It is not a 100% exact result but it shows
+the error occurs about 50MB.
 
-## Paraméterek magyarázata
+## Explanation of the parameters
 
-A Docker Compose "run" utasítása egy kiválasztott szolgáltatást indít el a docker-compose.yml fájlból
-hasonlóan, mint a "docker run". Így a "--rm" jelentése is azonos. A lefutás után
-a konténer törlődik.
+The "docker-compose run" is similar to "docker run", but it runs a service from the compose file.
+"--rm" means the same as it meant for "docker run". Deletes the container right after it stopped.
 
-[Vissza a főoldalra](../../README.md)
+[Back to the main page](../../README.md)
