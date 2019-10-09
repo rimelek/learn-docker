@@ -1,38 +1,35 @@
-# Projekt: p07
+# Project: p07
 
-## Leírás
+## Description
 
-A példa előfeltétele a [p06-os projekt-ben](../p06/README.md) az nginx-proxy elindítása.
+At this point the nginx proxy must be already running. See it in the previous example: [p06-os projekt-ben](../p06/README.md).
 
-Szükség esetén villámgyorsan elindítható egy webszerver HTTP autentikációval,
-amihez a nevet és jelszót változóban adjuk át. Hosszú távon érdemesebb biztonságosabb módon
-létrehozni előre a ".htpasswd" fájlt.
+You can simply start a web server protected by HTTP authentication. The name and the password will come from environment variables.
+I recommend you to use a more secure way in production. Create the .htpasswd file manually and mount it inside the container.
 
-A htpasswd fájlt automatikusan hozza létre egy konténer, ami ezután le is áll.
+The htpasswd container will create .htpasswd automatically and exits.
 
-A [.env](https://github.com/itsziget/learn-docker/tree/master/projects/p07/.env) fájlban
-a HTTPD_USER és HTTPD_PASS változókat kell megadni, amit a [docker-compose.yml](https://github.com/itsziget/learn-docker/tree/master/projects/p07/) fájlban
-a "htpasswd" szolgáltatás használ fel a jelszófájl generálásához, amit a "httpd"
-szolgáltatással közös volume-on keresztül oszt meg.
+In the [.env](https://github.com/itsziget/learn-docker/tree/master/projects/p07/.env) file you can find two variables.
+HTTPD_USER and HTTPD_PASS will be used in [docker-compose.yml](https://github.com/itsziget/learn-docker/tree/master/projects/p07/)
+by the "htpasswd" service to generate the password file and then the "httpd" service will read it from the common volume.
 
 
-A "fixperm" szolgáltatás a "htpasswd"-hez hasonlóan csak elvégzo a dolgát, majd leáll.
-Az a dolga, hogy a szerver elindulása után beállítsa megfelelően a fájlok és mappák jogait.
+The "fixperm" service runs exits similar to "htpasswd". It sets the permission of the files after the web server starts.
 
-A szolgáltatások indulásának sorrendjét a "depends_on" opcióval lehet szabályozni.
+Use the "depends_on" option to control which service starts first.
 
-## Webszerver indítása
+## Start the web server
 
 ```bash
 docker-compose up -d
 ```
 
-Ezután a böngészőben a p07.X.X.X.X.xip.io webcímen már jelszót kér a böngésző.
-A konkrét webcímet a feladatok előtt opcionálisan telepített xip programmal is lehet generálni.
+Open the web page in your browser (Ex.: p07.X.X.X.X.xip.io). You will get a password prompt.
+Remember, you can use the xip command to generate the domain name:
 
 ```bash
 xip p07
 ```
 
 
-[Vissza a főoldalra](../../README.md)
+[Back to the main page](../../README.md)
