@@ -1,7 +1,7 @@
 {% raw %}
 # LXD
 
-Elérhető távoli szerverek
+Available remote servers to download base images.
 
 https://images.linuxcontainers.org
 
@@ -17,31 +17,31 @@ lxc image list images:ubuntu xenial
 lxc image list ubuntu:16.04
 ```
 
-Összes alias lekérdezése megadott alias alapján
+List all aliases using one known alias
 
 ```bash
 lxc image info ubuntu:x
 ```
 
-Ubuntu 16.04 indítása
+Start Ubuntu 16.04
 
 ```bash
 lxc launch ubuntu:16.04 ubuntu
 ```
 
-Konténerek listázása
+List LXC containers
 
 ```bash
 lxc list
 ```
 
-Belépés a konténerbe
+Enter the container
 
 ```bash
 lxc exec ubuntu bash
 ```
 
-Konténer törlése
+Delete the container
 
 ```bash
 lxc delete --force ubuntu
@@ -49,7 +49,7 @@ lxc delete --force ubuntu
 
 # Docker
 
-## Információ a rendszerről
+## About the system
 
 ```bash
 docker help
@@ -58,7 +58,7 @@ docker version
 docker --version
 ```
 
-## Előrecsomagolt alkalmazás tesztelése
+## Test a stateless DEMO application
 
 ```bash
 docker run --rm -p "8080:80" itsziget/phar-examples:1.0
@@ -66,14 +66,14 @@ docker run --rm -p "8080:80" itsziget/phar-examples:1.0
 
 ## Demo "hello-world" image
 
-Konténer indítása:
+Start the container:
 
 ```bash
 docker run hello-world
-# vagy
+# or
 docker container run hello-world
 ```
-A hello-world kimenete
+Output:
 
 ```text
 Hello from Docker!
@@ -82,6 +82,7 @@ This message shows that your installation appears to be working correctly.
 To generate this message, Docker took the following steps:
  1. The Docker client contacted the Docker daemon.
  2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
  3. The Docker daemon created a new container from that image which runs the
     executable that produces the output you are currently reading.
  4. The Docker daemon streamed that output to the Docker client, which sent it
@@ -91,88 +92,89 @@ To try something more ambitious, you can run an Ubuntu container with:
  $ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
- https://cloud.docker.com/
+ https://hub.docker.com/
 
 For more examples and ideas, visit:
- https://docs.docker.com/engine/userguide/
+ https://docs.docker.com/get-started/
 ```     
 
-A futó konténerek listázása
+List running containers
 
 ```bash
 docker ps
-# vagy
+# or
 docker container ls
-# vagy 
+# or 
 docker container list
 ```
 
-Az összes konténer listázása
+List all containers
 
 ```bash
 docker ps -a
 ```
-Csak a hello-world image-ből indított konténerek listázása
+
+List containers based on the hello-world image:
 
 ```bash
 docker ps -a -f ancestor=hello-world
-# vagy
+# or
 docker container list --all --filter ancestor=hello-world
 ```
 
-Leállított konténer törlése
+Delete a stopped container
 
 ```bash
-docker rm konténernév
-# vagy
-docker container rm konténernév
-# vagy
-docker container remove konténernév
+docker rm containername
+# or
+docker container rm containername
+# or
+docker container remove containername
 ```
 
-Futó konténer esetén:
+Delete a running container:
 ```bash
-docker rm -f konténernév
+docker rm -f containername
 ```
 
-Ha a konténer generált neve "angry_shaw"
+If the generated name of the container is "angry_shaw"
 
 ```bash
 docker rm angry_shaw
 ```
 
-Konténer indítása névvel:
+Start a container with a name:
 
 ```bash
 docker run --name hello hello-world
 ```
 
-Újra lefuttatva a fenti utasítást hibaüzenetet kapunk, mert "hello" néven már létezik konténer.
-Az alábbi paranccsal ellenőrizhető:
+Running the above command again results an error message since "hello" is already used for the previously started container.
+Run the following command to check the stopped containers:
 
 ```bash
 docker ps -a
 ```
 
-Viszont már a megadott néven lehet rá hivatkozni és újra elindítani:
+Or you can start the stopped container again by using its name:
 
 ```bash
 docker start hello
 ```
 
-A fenti parancs csak kiírja a konténer nevét. "attached" módban kell indítani:
+The above command will display the name of the container. You need to start it in "attached" mode in order to see the output:
 
 ```bash
 docker start -a hello
 ```
 
-A "hello" konténer törlése
+Delete the container named "hello"
 
 ```bash
 docker rm hello
 ```
 
-Konténer automatikus törlése leállítás után
+Start a container and delete it automatically when it stops.
 
 ```bash
 docker run --rm hello-world
@@ -180,83 +182,79 @@ docker run --rm hello-world
 
 ## Apache HTTPD webszerver
 
-Szerver indítása előtérben ("attached" módban)
+Start the container in the foreground. ("attached" mode)
 
 ```bash
 docker run --name web httpd:2.4
 ```
 
-Nem kapunk vissza promptot. "CTRL+C" billentyűkombinációval leállítható a szerver.
+There will be no prompt until you press "CTRL+C" to stop the container running in the foreground.
 
-Háttérben indítás:
+Start it in the background as a daemon:
 
 ```bash
 docker run -d --name web httpd:2.4
 ```
-Ezután a "docker ps" utasítással már látható a futó konténer.
+Now you can see the running container by executing "docker ps".
 
-A háttérben futó "web" konténer kimenetének ellenőrzése
+Check the output of the container running in the background:
 
 ```bash
 docker logs web
-# vagy 
+# or
 docker container logs web
 ```
 
-A kimenet (logok) folyamatos figyelése
+Watch the output (logs) continuously
 
 ```bash
 docker logs -f web
 ```
 
-Tesztelhető wget-tel, hogy működik a szerver:
+You can test if the server is working using wget:
 
 ```bash
 wget -qO- 172.17.0.2
 ```
-Kimenet:
+Output:
 ```html
 <html><body><h1>It works!</h1></body></html>
 ```
 
-"web" konténer törlése és elindítás a hoszt portjának átirányításával
+Delete the container named "web" and forward the port 8080 from the host to the containers internal port 80:
 
 ```bash
 docker rm -f web
 docker run -d -p "8080:80" --name web httpd:2.4
 ```
 
-## Munka a konténer fájlrendszerével saját image nélkül
+## Work with the container's filesystem without an own image:
 
-Parancs futtatása a futó "web" konténerben
+Run a command inside a container:
 
 ```bash
 docker exec -it web ls -la
 ```
 
-"Belépés" a konténerbe
+"Enter" the container
 
 ```bash
 docker exec -it web bash
 ```
 
-"Belépés" a konténerbe nsenter-rel (régen):
+"Enter" the container with nsenter (in the past):
 
 ```bash
 sudo nsenter -t $(docker inspect --format '{{ .State.Pid }}' web) -m -u -i -n -p -w
 ```
 
-...folyamatban...
-
-## Hálózatok
-
-...folyamatban...
+## Networks
 
 ```bash
 docker inspect web --format "{{.NetworkSettings.IPAddress}}"
 docker inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
 ```
 
-[Vissza a főoldalra](../../README.md)
+[Back to the main page](../../README.md)
 
 {% endraw %}
