@@ -1,21 +1,21 @@
-Konténer indítása ás image készítése
+Build an image and start the container:
 
 ```bash
 docker-compose up -d
 ```
 
-Konténer ellenőrzése:
+Check the container:
 
 ```bash
 docker-compose ps
-# A konténer neve: p04_php_1
+# The name of the container: p04_php_1
 ```
 
-Hálózatok ellenőrzése:
+Check the networks:
 
 ```bash
 docker network ls
-# Új bridge típusú hálózat: p04_default
+# New bridge network: p04_default
 ```
 
-[Vissza a főoldalra](../../README.md)
+[Back to the main page](../../README.md)
