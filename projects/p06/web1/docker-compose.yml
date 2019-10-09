@@ -17,11 +17,11 @@ services:
     volumes:
       - www:/var/www/html
   httpd:
-    image: itsziget/httpd24
+    image: itsziget/httpd24:2.0
     volumes:
       - www:/var/www/html
     environment:
-      SRV_PHP: 1
+      SRV_PHP: "true"
       SRV_DOCROOT: /var/www/html
       VIRTUAL_HOST: web1.$XIP
     networks:
