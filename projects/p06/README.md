@@ -1,50 +1,56 @@
-Proxy hálózat létrehozása:
+Create the proxy network:
 
 ```bash
 docker network create public_proxy
 ```
 
-Ellenőrzés:
+Check the networks:
 
 ```bash
 docker network ls
 ```
 
-Belépés az nginxproxy mappába:
+Navigate to the nginxproxy folder
 
 ```bash
 cd nginxproxy
 ```
 
-Proxy indítása:
+Start the proxy:
 
 ```bash
 docker-compose up -d
 ```
 
-Átlépés a web1 mappába:
+Navigate to the web1 folder:
 
 ```bash
 cd ../web1
 ```
 
-web1 indítása:
+Start the containers:
 
 ```bash
 docker-compose up -d
 ```
 
-Átlépés a web2 mappába:
+Navigate to the web2 folder:
+
+```bash
+cd ../web2
+```
+
+Start the containers:
 
 ```bash
 docker-compose up -d
 ```
 
-Mindkét szolgáltatás elérhető a 80-as porton:
+Both of the services are available on port 80:
 
 ```text
 http://web1.193.x.x.x.xip.io
 http://web2.193.x.x.x.xip.io
 ```
 
-[Vissza a főoldalra](../../README.md)
+[Back to the main page](../../README.md)
