@@ -1,19 +1,19 @@
-image készítése
+Build an image:
 
 ```bash
 docker build -t y/p03_php .
 ```
 
-Konténer indítása
+Start the container:
 
 ```bash
 docker run -d --name p03_php -p "8080:80" y/p03_php
 ```
 
-Konténer indítása volume-mal:
+Start the container with a volume:
 
 ```bash
 docker run -d --mount source=p03_php_www,target=/var/www --name p03_php -p "8080:80" y/p03_php
 ```
 
-[Vissza a főoldalra](../../README.md)
+[Back to the main page](../../README.md)

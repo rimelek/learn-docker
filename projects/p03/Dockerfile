@@ -5,5 +5,5 @@ COPY www /var/www
 CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/www"]
 
 # CMD php -S 0.0.0.0:80 -t /var/www
-# ugyanaz, mint
+# is the same as
 # CMD ["sh", "-c", "php -S 0.0.0.0:80 -t /var/www"]
