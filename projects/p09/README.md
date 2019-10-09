@@ -1,36 +1,35 @@
-# Projekt: p09
+# Project: p09
 
-A CPU limitet teszteljük ebben a feladatban. A teszthez [petermaric docker.cpu-stress-test] image-ét használjuk.
+We test the CPU limit in this example using [petermaric/docker.cpu-stress-test](https://hub.docker.com/r/petarmaric/docker.cpu-stress-test).
 
 ```bash
 docker run -ti -e MAX_CPU_CORES=1 -e STRESS_SYSTEM_FOR=30s --cpus=1 petarmaric/docker.cpu-stress-test
 ```
 
-A "top" parancs kidásával másik terminálban  megfigyelhető , hogy a "stress" nevű folyamat
-100% CPU-t használ. Tehát 1 CPU teljes kapacitását. 
+Run "top" in an other terminal to see that the "stress" process uses 100% of one CPU. 
 
 ```bash
 docker run -ti -e MAX_CPU_CORES=2 -e STRESS_SYSTEM_FOR=30s --cpus=1.5 petarmaric/docker.cpu-stress-test
 ```
-Szintén a "top" paranccsal megfigyelhető, hogy két "stress" folyamat van és mindkettő egy CPU 75%-át használja ki.
+
+USe "top" again to see that the "stress" process uses 75% of two CPU.
 
 ```bash
 docker run -ti -e MAX_CPU_CORES=1 -e STRESS_SYSTEM_FOR=30s --cpus=0.5 --cpuset-cpus=0 petarmaric/docker.cpu-stress-test
 ```
-A fenti példában kiválasztottuk, hogy a 0 indexű CPU-nak használja csak a felét a teszt.
 
-Az ellenőrzéshez ismét használható a "top" parancs, viszont az alábbi módon fel kell venni 
-a CPU indexeinek oszlopát:
+Running the above command we told the stress test to use 50% of the CPU with the index 0.
 
-* "top" parancs kiadása
-* "f" billentyű leütése
-* "P" oszlop kiválasztása nyilakkal
-* Kijelölés SPACE billentyűvel 
-* "ESC" billentyű megnyomása
+You can use top again, but do not forget to add the index column to the list:
 
-Ezután a "P" oszlopban látszik, melyik CPU dolgozik a folyamaton.
+* run "top"
+* press "f"
+* Select column "P" by navigating with the arrow keys
+* Press "SPACE" to select "P" 
+* Press "ESC"
 
-Az "1"-es billentyű megnyomásával a terminál tetején az összes CPU
-fel lesz sorolva, így folyamattól függetlenül figyelni lehet a CPU terhelést mindegyiken.
+Now you can see the indexes in the column "P".
 
-[Vissza a főoldalra](../../README.md)
+Press "1" to list all the CPU-s at the top of the terminal so you can see the usage of all the CPU-s.
+
+[Back to the main page](../../README.md)
