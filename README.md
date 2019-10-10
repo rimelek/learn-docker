@@ -27,7 +27,7 @@ them in a local virtual machine. If you don't want to rely on automatic IP addre
 
 ## Example projects
 
-Before you start, download the git repository from GiitHub:
+Before you start, download the git repository from GitHub:
 
 ```bash
 git clone https://github.com/itsziget/learn-docker.git
