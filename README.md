@@ -43,7 +43,7 @@ echo $XIP
 If it does not exist or empty, then set the value manually or run the script below:
 ```bash
 export XIP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}').xip.io
-# vagy, ha az xip szkript már telepítve van:
+# or if xip is already installed:
 export XIP=$(xip)
 ```
 
