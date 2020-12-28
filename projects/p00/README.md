@@ -11,9 +11,9 @@ lxc remote list
 
 ```bash
 lxc image list images:ubuntu
-# vagy
+# or
 lxc image list images:ubuntu xenial
-# vagy
+# or
 lxc image list ubuntu:16.04
 ```
 
