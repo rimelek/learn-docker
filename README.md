@@ -49,7 +49,7 @@ export XIP=$(xip)
 
 The [projects](https://github.com/itsziget/learn-docker/tree/master/projects) folder contains the examples.
 
-All off the examples were tested with Docker 17.06.2. The version of Docker Compose was 1.16.1.
+All off the examples were tested with Docker 20.10.1. The version of Docker Compose was 1.27.4.
 You can try with more recent versions but some behaviour could be different in the future.
 
 * [p00](projects/p00/README.md): Collection of basic commands
