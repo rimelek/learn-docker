@@ -12,9 +12,11 @@ lxc remote list
 ```bash
 lxc image list images:ubuntu
 # or
-lxc image list images:ubuntu xenial
+lxc image list images:ubuntu focal
 # or
-lxc image list ubuntu:16.04
+lxc image list images:ubuntu 20.04
+# or
+lxc image list ubuntu:20.04
 ```
 
 List all aliases using one known alias
@@ -23,10 +25,16 @@ List all aliases using one known alias
 lxc image info ubuntu:x
 ```
 
-Start Ubuntu 16.04
+It is a valid YAML so you can use [yq](https://github.com/mikefarah/yq) to process it. 
 
 ```bash
-lxc launch ubuntu:16.04 ubuntu
+lxc image info ubuntu:focal | yq '.Aliases'
+```
+
+Start Ubuntu 20.04
+
+```bash
+lxc launch ubuntu:20.04 ubuntu-focal
 ```
 
 List LXC containers
@@ -38,14 +46,22 @@ lxc list
 Enter the container
 
 ```bash
-lxc exec ubuntu bash
+lxc exec ubuntu-focal bash
 ```
 
 Delete the container
 
 ```bash
-lxc delete --force ubuntu
+lxc delete --force ubuntu-focal
 ```
+
+You can even create a virtual machine instead of container if you have at least LXD 4.0 installed on your machine.
+
+```bash
+lxc launch --vm ubuntu:20.04 ubuntu-focal-vm
+```
+
+It will not work on all machines, only when Qemu KVM is supported on that machine. It also requires further configuration which is not part of this tutorial.
 
 # Docker
 
