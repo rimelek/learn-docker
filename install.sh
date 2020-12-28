@@ -1,19 +1,15 @@
 #!/bin/bash
 
-DOCKER_VERSION=17.06.2~ce-0~ubuntu
-DOCKER_COMPOSE_VERSION=1.16.1
-
-# upgrade
-
-apt-get update
-apt-get dist-upgrade -y
+DOCKER_VERSION=5:20.10.1~3-0~ubuntu-focal
+DOCKER_COMPOSE_VERSION=1.27.4
 
 # Repository
-
+apt update
 apt-get install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
     curl \
+    gnupg-agent \
     software-properties-common
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
