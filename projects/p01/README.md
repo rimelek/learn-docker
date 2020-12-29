@@ -10,14 +10,14 @@ Generate a domain name:
 
 ```bash
 xip
-# output:
-# 193.x.x.x.xip.io
+# example output:
+# 192.168.1.2.xip.io
 ```
 
 Test the web page:
 
 ```text
-http://193.x.x.x.xip.io:8080
+http://192.168.1.2.xip.io:8080
 # output:
 # Hello Docker (p01)
 ```
