@@ -21,4 +21,11 @@ http://192.168.1.2.xip.io:8080
 # output:
 # Hello Docker (p01)
 ```
+
+Delete the container to make port 8080 free again.
+
+```bash
+docker rm -f p01_httpd
+```
+
 [Back to the main page](../../README.md)

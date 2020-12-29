@@ -15,4 +15,10 @@ docker run -d --name p02_httpd -p "80:80" localhost/p02_httpd
 You can open the website from a web browser on port 80.
 The output should be "Hello Docker (p02)"
 
+Delete the container to make port 8080 free again.
+
+```bash
+docker rm -f p02_httpd
+```
+
 [Back to the main page](../../README.md)
