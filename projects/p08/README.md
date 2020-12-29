@@ -8,24 +8,42 @@ We use an environment variable to set the memory size.
 
 ## Start the test
 
-The container will have 50MB memory limit. (It must be at least 4MB). 
+The container will have 50MB memory limit. (It must be at least 6MB in Docker Compose 1.27.4). 
 The examples below will test the memory usage from 10MB to 50MB increased by 10MB for each test.
 
 ```bash
-MEMSIZE=10MB docker-compose run --rm php
-MEMSIZE=20MB docker-compose run --rm php
-MEMSIZE=30MB docker-compose run --rm php
-MEMSIZE=40MB docker-compose run --rm php
-MEMSIZE=50MB docker-compose run --rm php
-# bash: line 1:  8 Killed   php -r ' ob_start(); readfile("/tmp/50MB"); ob_clean(); echo (memory_get_peak_usage(true)/1024/1024)." MiB\n"; '
+MEMSIZE=10MiB docker-compose run --rm php
+MEMSIZE=20MiB docker-compose run --rm php
+MEMSIZE=30MiB docker-compose run --rm php
+MEMSIZE=40MiB docker-compose run --rm php
+MEMSIZE=50MiB docker-compose run --rm php
 ```
 
-"Killed" means we exceeded the memory limit. There is no error until 50MB. It is not a 100% exact result but it shows
-the error occurs about 50MB.
+output:
+
+```
+bash: line 5:     9 Killed                  php -r '
+   ob_start();
+   readfile("/tmp/50MiB");
+   ob_clean();
+   echo (memory_get_peak_usage(true)/1024/1024)." MiB\n";
+'
+```
+
+"Killed" means we exceeded the memory limit. There is no error until 50MB.
+Since there is some additional memory usage in the container, it kills the process at 50MiB even though 50 is still allowed.
 
 ## Explanation of the parameters
 
 The "docker-compose run" is similar to "docker run", but it runs a service from the compose file.
 "--rm" means the same as it meant for "docker run". Deletes the container right after it stopped.
+
+Clean the project:
+
+```bash
+docker-compose down
+```
+
+The containers were deleted automatically, but it can still delete the network. 
 
 [Back to the main page](../../README.md)

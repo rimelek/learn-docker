@@ -1,16 +1,18 @@
-version: "2"
+version: "3.9"
 
 services:
   php:
-    image: php:7.1-fpm
+    image: php:7.4-fpm
     command:
       - bash
       - -c
-      - truncate -s $MEMSIZE /tmp/$MEMSIZE; php -r '
+      - |
+        truncate -s $MEMSIZE /tmp/$MEMSIZE; php -r '
            ob_start();
            readfile("/tmp/$MEMSIZE");
            ob_clean();
            echo (memory_get_peak_usage(true)/1024/1024)." MiB\n";
         '
     mem_limit: 50m
+    mem_swappiness: 0
 
