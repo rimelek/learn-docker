@@ -1,4 +1,4 @@
-Build an image and start the container:
+Build an image and start the container using [Docker Compose](https://docs.docker.com/compose/):
 
 ```bash
 docker-compose up -d
