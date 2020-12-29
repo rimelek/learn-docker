@@ -1,4 +1,6 @@
-FROM itsziget/php:7.1-fpm
+FROM itsziget/php:7.4-fpm
+
+LABEL hu.itsziget.ld.project=p05
 
 COPY www /var/www/html
 
