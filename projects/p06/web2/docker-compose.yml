@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.9"
 
 volumes:
   www:
@@ -10,7 +10,7 @@ networks:
 
 services:
   php:
-    image: y/p06_php_web2
+    image: localhost/p06_php_web2
     build:
       context: .
       dockerfile: Dockerfile
