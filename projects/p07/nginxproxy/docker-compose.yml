@@ -1,0 +1,14 @@
+version: "3.9"
+
+networks:
+  default:
+    external:
+      name: public_proxy
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:0.8.0
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
