@@ -71,6 +71,9 @@ It will not work on all machines, only when Qemu KVM is supported on that machin
 docker help
 docker info
 docker version
+docker version --format '{{json .}}' | jq # requires jq installed
+docker version --format '{{.Client.Version}}'
+docker version --format '{{.Server.Version}}'
 docker --version
 ```
 
@@ -78,6 +81,7 @@ docker --version
 
 ```bash
 docker run --rm -p "8080:80" itsziget/phar-examples:1.0
+# Press Ctrl-C to quit
 ```
 
 ## Demo "hello-world" image
@@ -144,8 +148,6 @@ Delete a stopped container
 docker rm containername
 # or
 docker container rm containername
-# or
-docker container remove containername
 ```
 
 Delete a running container:
@@ -156,7 +158,7 @@ docker rm -f containername
 If the generated name of the container is "angry_shaw"
 
 ```bash
-docker rm angry_shaw
+docker rm -f angry_shaw
 ```
 
 Start a container with a name:
@@ -209,6 +211,7 @@ There will be no prompt until you press "CTRL+C" to stop the container running i
 Start it in the background as a daemon:
 
 ```bash
+docker rm web
 docker run -d --name web httpd:2.4
 ```
 Now you can see the running container by executing "docker ps".
@@ -225,12 +228,19 @@ Watch the output (logs) continuously
 
 ```bash
 docker logs -f web
+# Press Ctrl-C to stop wathcing
+```
+
+Get the local IP address of the container:
+
+```bash
+CONTAINER_IP=$(docker inspect web --format '{{.NetworkSettings.IPAddress}}')
 ```
 
 You can test if the server is working using wget:
 
 ```bash
-wget -qO- 172.17.0.2
+wget -qO- $CONTAINER_IP
 ```
 Output:
 ```html
@@ -244,7 +254,7 @@ docker rm -f web
 docker run -d -p "8080:80" --name web httpd:2.4
 ```
 
-## Work with the container's filesystem without an own image:
+## Work with the container's filesystem without building your own image:
 
 Run a command inside a container:
 
@@ -261,8 +271,20 @@ docker exec -it web bash
 "Enter" the container with nsenter (in the past):
 
 ```bash
-sudo nsenter -t $(docker inspect --format '{{ .State.Pid }}' web) -m -u -i -n -p -w
+CONTAINER_PID=$(docker inspect --format '{{ .State.Pid }}' web)
+sudo nsenter \
+  --target $CONTAINER_PID \
+  --mount \
+  --uts \
+  --ipc \
+  --net \
+  --pid \
+  --cgroup \
+  --wd \
+  env -i - $(sudo cat /proc/$CONTAINER_PID/environ | xargs -0) bash
 ```
+
+It does not support Pseudo-TTY so some commands may not work.
 
 ## Networks
 
