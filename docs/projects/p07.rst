@@ -1,20 +1,26 @@
-# Project: p07
+================================================
+Protect your web server with HTTP authentication
+================================================
 
-## Description
+Go to Project 6 from the git repository root:
 
-The first step is the same as it was in project p07.
+.. code:: bash
+
+  cd projects/p06
+
+The first step is the same as it was in :doc:`p06`.
 Start the proxy server:
 
-```bash
-cd nginxproxy
-docker-compose up -d
-```
+.. code:: bash
+
+  cd nginxproxy
+  docker-compose up -d
 
 Go to the web folder:
 
-```bash
-cd ../web
-```
+.. code:: bash
+
+  cd ../web
 
 You can simply start a web server protected by HTTP authentication. The name and the password will come from environment variables.
 I recommend you to use a more secure way in production. Create the .htpasswd file manually and mount it inside the container.
@@ -30,24 +36,22 @@ The "fixperm" service runs and exits similar to "htpasswd". It sets the permissi
 
 Use the "depends_on" option to control which service starts first.
 
-At this point you need to have the XIP variable set as the [main README]](../../README.md) refers to it.
+At this point you need to have the XIP variable set as the :doc:`../index` refers to it.
 
 Alternative option: set the XIP variable in the ".env" file:
 
 ## Start the web server
 
-```bash
-docker-compose up -d
-```
+.. code:: bash
+
+  docker-compose up -d
 
 Open the web page in your browser (Ex.: p07.192.168.1.6.xip.io). You will get a password prompt.
 
 Clean the project:
 
-```bash
-docker-compose down --volume
-cd ../nginxproxy
-docker-compose down --volume
-```
+.. code:: bash
 
-[Back to the main page](../../README.md)
+  docker-compose down --volume
+  cd ../nginxproxy
+  docker-compose down --volume

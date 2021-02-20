@@ -90,3 +90,4 @@ You can try with more recent versions but some behaviour could be different in t
    projects/p04
    projects/p05
    projects/p06
+   projects/p07
