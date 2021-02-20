@@ -75,9 +75,6 @@ If it does not exist or empty, then set the value manually or run the script bel
 All off the examples were tested with Docker 20.10.1. The version of Docker Compose was 1.27.4.
 You can try with more recent versions but some behaviour could be different in the future.
 
-* [p00](projects/p00/README.md): Collection of basic commands
-* [p01](projects/p01/README.md): Start a simple web server with mounted document root.
-* [p02](projects/p02/README.md): Build yur own web server image and copy the document root into the image.
 * [p03](projects/p03/READMe.md): Create your own PHP application with built-in PHP web server.
 * [p04](projects/p04/README.md): Create a simple [Docker Compose](https://docs.docker.com/compose/) project.
 * [p05](projects/p05/README.md): Communication of PHP and Apache HTTPD web serverwith the help of [Docker Compose](https://docs.docker.com/compose/).
@@ -92,3 +89,4 @@ You can try with more recent versions but some behaviour could be different in t
 
    projects/p00
    projects/p01
+   projects/p02
