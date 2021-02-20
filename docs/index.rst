@@ -22,13 +22,13 @@ Before you begin, read :doc:`getting-started`.
    :caption: Example projects:
    
    getting-started
-   projects/p00
-   projects/p01
-   projects/p02
-   projects/p03
-   projects/p04
-   projects/p05
-   projects/p06
-   projects/p07
-   projects/p08
-   projects/p09
+   pages/projects/p00
+   pages/projects/p01
+   pages/projects/p02
+   pages/projects/p03
+   pages/projects/p04
+   pages/projects/p05
+   pages/projects/p06
+   pages/projects/p07
+   pages/projects/p08
+   pages/projects/p09
