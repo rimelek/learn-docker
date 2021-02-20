@@ -91,3 +91,4 @@ You can try with more recent versions but some behaviour could be different in t
    :caption: Projects:
 
    projects/p00
+   projects/p01
