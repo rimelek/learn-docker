@@ -77,7 +77,7 @@ You can try with more recent versions but some behaviour could be different in t
 
 .. toctree::
    :maxdepth: 2
-   :caption: Projects:
+   :caption: Example projects:
 
    projects/p00
    projects/p01
