@@ -2,6 +2,12 @@
 Create your own PHP application with built-in PHP web server
 ============================================================
 
+Go to Project 3 from the git repository root:
+
+.. code:: bash
+
+  cd projects/p03
+
 Build an image:
 
 .. code:: bash

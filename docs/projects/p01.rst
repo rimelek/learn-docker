@@ -2,6 +2,12 @@
 Start a simple web server with mounted document root
 ====================================================
 
+Go to Project 1 from the git repository root:
+
+.. code:: bash
+
+  cd projects/p01
+
 Start the container:
 
 .. code:: bash
