@@ -75,7 +75,6 @@ If it does not exist or empty, then set the value manually or run the script bel
 All off the examples were tested with Docker 20.10.1. The version of Docker Compose was 1.27.4.
 You can try with more recent versions but some behaviour could be different in the future.
 
-* [p03](projects/p03/READMe.md): Create your own PHP application with built-in PHP web server.
 * [p04](projects/p04/README.md): Create a simple [Docker Compose](https://docs.docker.com/compose/) project.
 * [p05](projects/p05/README.md): Communication of PHP and Apache HTTPD web serverwith the help of [Docker Compose](https://docs.docker.com/compose/).
 * [p06](projects/p06/README.md): Run more [Docker Compose](https://docs.docker.com/compose/) project on the same port using [nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy).
@@ -90,3 +89,4 @@ You can try with more recent versions but some behaviour could be different in t
    projects/p00
    projects/p01
    projects/p02
+   projects/p03
