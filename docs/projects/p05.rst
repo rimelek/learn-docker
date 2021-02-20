@@ -1,0 +1,35 @@
+================================================================================
+Communication of PHP and Apache HTTPD web server with the help of Docker Compose
+================================================================================
+
+Go to Project 5 from the git repository root:
+
+.. code:: bash
+
+  cd projects/p05
+
+Build PHP image and start the containers:
+
+.. code:: bash
+
+  docker-compose up -d
+
+Start multiple container for PHP:
+
+.. code:: bash
+
+  docker-compose up -d --scale php=2
+
+List the containers to see PHP has multiple instance:
+
+.. code:: bash
+
+  docker-compose ps
+
+Open the page in your browser and you can see the hostname in the first line is not constant. It changes but not every time, although the data is permanent.
+
+Delete everything created by Docker Compose for this project:
+
+.. code:: bash
+
+  docker-compose down --volume
