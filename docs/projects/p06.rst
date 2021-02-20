@@ -1,0 +1,85 @@
+.. _nginx-proxy: https://hub.docker.com/r/jwilder/nginx-proxy
+
+==================================================================
+Run more Docker Compose project on the same port using nginx-proxy
+==================================================================
+
+See `nginx-proxy`_
+
+Go to Project 6 from the git repository root:
+
+.. code:: bash
+
+  cd projects/p06
+
+Create the proxy network:
+
+.. code:: bash
+
+  docker network create public_proxy
+
+Check the networks:
+
+.. code:: bash
+
+  docker network ls
+
+Navigate to the nginxproxy folder
+
+.. code:: bash
+
+  cd nginxproxy
+
+Start the proxy:
+
+.. code:: bash
+
+  docker-compose up -d
+
+Navigate to the web1 folder:
+
+.. code:: bash
+
+  cd ../web1
+
+At this point you need to have the XIP variable set as :doc:`../index` refers to it.
+
+Alternative option: set the XIP variable in the ".env" file:
+
+Start the containers:
+
+.. code:: bash
+
+  docker-compose up -d
+
+Navigate to the web2 folder:
+
+.. code:: bash
+
+  cd ../web2
+
+Start the containers:
+
+.. code:: bash
+
+  docker-compose up -d
+
+
+Both of the services are available on port 80. Example:
+
+.. code:: text
+
+  http://web1.192.168.1.6.xip.io
+  http://web2.192.168.1.6.xip.io
+
+This way you do not need to remove a container just because it is running on the same port you want to use for a new container.
+
+Clean the project:
+
+.. code:: bash
+
+  docker-compose down --volume
+  cd ../web1
+  docker-compose down --volume
+  cd ../nginxproxy
+  docker-compose down --volume
