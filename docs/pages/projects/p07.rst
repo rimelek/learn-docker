@@ -36,7 +36,7 @@ The "fixperm" service runs and exits similar to "htpasswd". It sets the permissi
 
 Use the "depends_on" option to control which service starts first.
 
-At this point you need to have the XIP variable set as the :doc:`../index` refers to it.
+At this point you need to have the XIP variable set as the :doc:`../../index` refers to it.
 
 Alternative option: set the XIP variable in the ".env" file:
 

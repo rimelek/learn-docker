@@ -42,7 +42,7 @@ Navigate to the web1 folder:
 
   cd ../web1
 
-At this point you need to have the XIP variable set as :doc:`../index` refers to it.
+At this point you need to have the XIP variable set as :doc:`../../index` refers to it.
 
 Alternative option: set the XIP variable in the ".env" file:
 

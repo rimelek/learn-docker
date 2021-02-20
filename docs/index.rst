@@ -15,13 +15,13 @@ The examples were originally made for the participants of the Ipszilon Seminar i
 The virtual machines were created in the Cloud For Education system.
 Some of the scripts may not be useful to you.
 
-Before you begin, read :doc:`getting-started`.
+Before you begin, read :doc:`pages/getting-started`.
 
 .. toctree::
    :maxdepth: 2
    :caption: Example projects:
    
-   getting-started
+   pages/getting-started
    pages/projects/p00
    pages/projects/p01
    pages/projects/p02
