@@ -75,8 +75,6 @@ If it does not exist or empty, then set the value manually or run the script bel
 All off the examples were tested with Docker 20.10.1. The version of Docker Compose was 1.27.4.
 You can try with more recent versions but some behaviour could be different in the future.
 
-* [p09](projects/p09/README.md): CPU limit test
-
 .. toctree::
    :maxdepth: 2
    :caption: Projects:
@@ -90,3 +88,4 @@ You can try with more recent versions but some behaviour could be different in t
    projects/p06
    projects/p07
    projects/p08
+   projects/p09
