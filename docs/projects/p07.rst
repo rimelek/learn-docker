@@ -2,11 +2,11 @@
 Protect your web server with HTTP authentication
 ================================================
 
-Go to Project 6 from the git repository root:
+Go to Project 7 from the git repository root:
 
 .. code:: bash
 
-  cd projects/p06
+  cd projects/p07
 
 The first step is the same as it was in :doc:`p06`.
 Start the proxy server:
