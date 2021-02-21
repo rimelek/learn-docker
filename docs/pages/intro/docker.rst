@@ -299,7 +299,7 @@ Delete the container named "web" and forward the port 8080 from the host to the 
   docker rm -f web
   docker run -d -p "8080:80" --name web httpd:2.4
 
-Then you can access the page using host's IP address.
+Then you can access the page using the host's IP address.
 
 How we could enter a container in the past
 ------------------------------------------
