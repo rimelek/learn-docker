@@ -1,85 +1,9 @@
-.. _yq: https://github.com/mikefarah/yq
-
-================
-Container basics
-================
-
-
-LXD
-===
-
-Available remote servers to download base images.
-
-https://images.linuxcontainers.org
-
-.. code:: shell
-
-  lxc remote list
-
-.. code:: shell
-
-  lxc image list images:ubuntu
-  # or
-  lxc image list images:ubuntu focal
-  # or
-  lxc image list images:ubuntu 20.04
-  # or
-  lxc image list ubuntu:20.04
-
-List all aliases using one known alias
-
-.. code:: shell
-
-  lxc image info ubuntu:x
-
-
-It is a valid YAML so you can use `yq`_ to process it. 
-
-.. code:: shell
-
-  lxc image info ubuntu:focal | yq '.Aliases'
-
-
-Start Ubuntu 20.04
-
-.. code:: shell
-
-  lxc launch ubuntu:20.04 ubuntu-focal
-
-
-List LXC containers
-
-.. code:: shell
-
-  lxc list
-
-
-Enter the container
-
-.. code:: shell
-
-  lxc exec ubuntu-focal bash
-
-Delete the container
-
-.. code:: shell
-
-  lxc delete --force ubuntu-focal
-
-You can even create a virtual machine instead of container if you have at least LXD 4.0 installed on your machine.
-
-.. code:: shell
-
-  lxc launch --vm ubuntu:20.04 ubuntu-focal-vm
-
-
-It will not work on all machines, only when Qemu KVM is supported on that machine. It also requires further configuration which is not part of this tutorial.
-
+======
 Docker
 ======
 
-About the system
-----------------
+System information
+==================
 
 .. code:: bash
 
@@ -91,8 +15,8 @@ About the system
   docker version --format '{{.Server.Version}}'
   docker --version
 
-Test a stateless DEMO application
----------------------------------
+Run a stateless DEMO application
+=================================
 
 .. code:: bash
 
@@ -100,10 +24,11 @@ Test a stateless DEMO application
   # Press Ctrl-C to quit
 
 
-Demo "hello-world" image
-------------------------
+Play with the "hello-world" container
+=====================================
 
-Start the container:
+Start "hello-world" container
+-----------------------------
 
 .. code:: bash
 
@@ -136,11 +61,16 @@ Output:
   For more examples and ideas, visit:
    https://docs.docker.com/get-started/
 
+List containers
+---------------
+
 List running containers
 
 .. code:: bash
 
   docker ps
+  # or
+  docker container ps
   # or
   docker container ls
   # or 
@@ -151,6 +81,7 @@ List all containers
 .. code:: bash
 
   docker ps -a
+  # or use the other alias commands
 
 List containers based on the hello-world image:
 
@@ -159,6 +90,9 @@ List containers based on the hello-world image:
   docker ps -a -f ancestor=hello-world
   # or
   docker container list --all --filter ancestor=hello-world
+
+Delete containers
+-----------------
 
 Delete a stopped container
 
@@ -180,7 +114,8 @@ If the generated name of the container is "angry_shaw"
 
   docker rm -f angry_shaw
 
-Start a container with a name:
+Start a container with a name
+-----------------------------
 
 .. code:: bash
 
@@ -211,16 +146,18 @@ Delete the container named "hello"
 
   docker rm hello
 
-Start a container and delete it automatically when it stops.
+Start a container and delete it automatically when it stops
+-----------------------------------------------------------
 
 .. code:: bash
 
   docker run --rm hello-world
 
-Apache HTTPD webszerver
------------------------
+Start Apache HTTPD webszerver
+=============================
 
 Start the container in the foreground. ("attached" mode)
+--------------------------------------------------------
 
 .. code:: bash
 
@@ -228,14 +165,18 @@ Start the container in the foreground. ("attached" mode)
 
 There will be no prompt until you press "CTRL+C" to stop the container running in the foreground.
 
-Start it in the background as a daemon:
+Start it in the background ("detached" mode)
+--------------------------------------------
 
 .. code:: bash
 
   docker rm web
   docker run -d --name web httpd:2.4
 
-Now you can see the running container by executing "docker ps".
+Now you can see the running container by executing :code:`docker ps`.
+
+Check container logs
+--------------------
 
 Check the output of the container running in the background:
 
@@ -252,7 +193,10 @@ Watch the output (logs) continuously
   docker logs -f web
   # Press Ctrl-C to stop wathcing
 
-Get the local IP address of the container:
+Open the webpage using an IP address
+------------------------------------
+
+Get the IP address:
 
 .. code:: bash
 
@@ -270,12 +214,17 @@ Output:
   
   <html><body><h1>It works!</h1></body></html>
 
+Use port forwarding
+-------------------
+
 Delete the container named "web" and forward the port 8080 from the host to the containers internal port 80:
 
 .. code:: bash
 
   docker rm -f web
   docker run -d -p "8080:80" --name web httpd:2.4
+
+Then you can access the page using host's IP address.
 
 Work with the container's filesystem without building your own image
 --------------------------------------------------------------------
@@ -311,10 +260,9 @@ Run a command inside a container:
 
 It does not support Pseudo-TTY so some commands may not work.
 
-Networks
---------
+Get all of the IP addresses
+---------------------------
 
 .. code:: bash
 
-  docker inspect web --format "{{.NetworkSettings.IPAddress}}"
   docker inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"

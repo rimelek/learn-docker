@@ -22,7 +22,8 @@ Before you start working with the example projects, read :doc:`pages/intro/getti
    :caption: Intro:
 
    pages/intro/getting-started
-   pages/intro/container-basics
+   pages/intro/lxd
+   pages/intro/docker
 
 .. toctree::
    :maxdepth: 2
