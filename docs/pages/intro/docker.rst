@@ -1,4 +1,6 @@
 .. _user namespace in a Docker container: https://docs.docker.com/engine/security/userns-remap/
+.. _Kata Containers: https://katacontainers.io/
+.. _Install Kata Containers on Ubuntu: https://github.com/kata-containers/documentation/blob/stable-1.12/install/ubuntu-installation-guide.md
 
 ======
 Docker
@@ -384,10 +386,59 @@ only the processes inside the container:
 
   docker exec web ps auxf $(docker container inspect --format '{{ .State.Pid }}' web)
 
-
 Get all of the IP addresses
 ---------------------------
 
 .. code:: bash
 
   docker container inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
+
+Start Ubuntu virtual machine
+============================
+
+There are multiple ways to run a virtual machine with Docker.
+Using a parameter is not enough. You need to choose a different runtime.
+The default is :code:`runc` which runs containers.
+One of the most popular and easiest runtime is `Kata Containers`_.
+
+Follow the instructions to install the latest stable version of the Kata runtime
+
+Source: `Install Kata Containers on Ubuntu`_
+
+.. code:: bash
+
+  ARCH=$(arch)
+  BRANCH="1.12"
+  sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/katacontainers:/releases:/${ARCH}:/${BRANCH}/xUbuntu_$(lsb_release -rs)/ /' > /etc/apt/sources.list.d/kata-containers.list"
+  curl -sL  http://download.opensuse.org/repositories/home:/katacontainers:/releases:/${ARCH}:/${BRANCH}/xUbuntu_$(lsb_release -rs)/Release.key | sudo apt-key add -
+  sudo -E apt-get update
+  sudo -E apt-get -y install kata-runtime kata-proxy kata-shim
+
+and configure Docker daemon to use it. An example :code:`/etc/docker/daemon.json`
+is the following:
+
+.. code:: json
+
+  {
+    "default-runtime": "runc",
+    "runtimes": {
+      "kata": {
+        "path": "/usr/bin/kata-runtime"
+      }
+    }
+  }
+
+Now run 
+
+.. code:: bash
+
+  docker run -d -it --runtime kata --name ubuntu-vm ubuntu:20.04
+
+It is still lightweight. You can run :code:`ps aux` inside to see
+there is no systemd or other process like that, however, run the
+following command on the host machine and see it has only one CPU core:
+
+.. code:: bash
+
+  docker exec -it ubuntu-vm cat /proc/cpuinfo
+  
