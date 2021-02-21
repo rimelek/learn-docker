@@ -275,7 +275,7 @@ Get the IP address:
 
 .. code:: bash
 
-  CONTAINER_IP=$(docker inspect web --format '{{.NetworkSettings.IPAddress}}')
+  CONTAINER_IP=$(docker container inspect web --format '{{.NetworkSettings.IPAddress}}')
 
 You can test if the server is working using wget:
 
@@ -311,7 +311,7 @@ except it does not support Pseudo-TTY so some commands may not work.
 
 .. code:: bash
 
-  CONTAINER_PID=$(docker inspect --format '{{ .State.Pid }}' web)
+  CONTAINER_PID=$(docker container inspect --format '{{ .State.Pid }}' web)
 
   sudo nsenter \
     --target $CONTAINER_PID \
@@ -331,4 +331,4 @@ Get all of the IP addresses
 
 .. code:: bash
 
-  docker contaner inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
+  docker container inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
