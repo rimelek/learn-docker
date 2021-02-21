@@ -331,4 +331,4 @@ Get all of the IP addresses
 
 .. code:: bash
 
-  docker inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
+  docker contaner inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
