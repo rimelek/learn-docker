@@ -1,3 +1,5 @@
+.. _user namespace in a Docker container: https://docs.docker.com/engine/security/userns-remap/
+
 ======
 Docker
 ======
@@ -325,6 +327,63 @@ except it does not support Pseudo-TTY so some commands may not work.
     env -i - $(sudo cat /proc/$CONTAINER_PID/environ | xargs -0) bash
 
 As you can see, :code:`nsenter` runs a process inside specific Linux namespaces.
+
+Share namespaces
+----------------
+
+.. code:: bash
+
+  docker rm -f web
+  docker run -d --name web \
+    --net host \
+    --uts host \
+    --pid host \
+    httpd:2.4
+
+This example shows how you can share the host's namespaces
+with the container.
+
+- **net**: The container will not get a virtual network.
+  Localhost inside the container will the same as localhost on the host operating system. 
+- **uts**: When you enter the container you will see that the hostname in the prompt 
+  is the same as you can see on the host. Without this, the container had a random hash as hostname.
+- **pid**: The container can see every process running on the host and not just inside the container.
+
+.. note::
+
+  Using `user namespace in a Docker container`_ is disabled by default
+
+Now enter the container 
+
+.. code:: bash
+
+  docker exec -it web bash
+
+and install the following tools, so you can see
+host processes and network interfaces from the container.
+
+.. code:: bash
+
+  apt update
+  apt install iproute2 procps psmisc
+
+- **iproute2**: adds the :code:`ip` command
+- **procps**: installs the :code:`ps` command
+- **psmisc**: this makes :code:`pstree` command available
+
+Now run 
+
+- :code:`ip addr` to see network interfaces
+- :code:`ps auxf` to see host processes
+- :code:`pstree` to see the process tree
+
+You can exit the container and run the following command to get
+only the processes inside the container:
+
+.. code:: bash
+
+  docker exec web ps auxf $(docker container inspect --format '{{ .State.Pid }}' web)
+
 
 Get all of the IP addresses
 ---------------------------
