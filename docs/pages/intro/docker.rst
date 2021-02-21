@@ -153,11 +153,69 @@ Start a container and delete it automatically when it stops
 
   docker run --rm hello-world
 
+Start an Ubuntu container
+=========================
+
+Start Ubuntu in foreground  ("attached" mode)
+---------------------------------------------
+
+.. code:: bash
+
+  docker run -it --name ubuntu-container ubuntu:20.04
+  
+Press :code:`Ctrl+P` and then :code:`Ctrl+Q` to detach from the container
+or type :code:`exit` and press :code:`enter` to exit bash and stop the container.
+
+Start Ubuntu in background ("detached" mode)
+--------------------------------------------
+
+Linux distribution base Docker images usually don't contain Systemd as LXD images
+so these containers cannot run in background unless you pass :code:`-it`
+to get interactive terminal. It wouldn't be necessary with a container
+which has a process inside running in foreground continuously.
+:code:`-it` works with other containers too as long as
+the containers command is "bash" or some other shell. 
+
+.. code:: bash
+
+  docker rm -f ubuntu-container
+  docker run -it -d --name ubuntu-container ubuntu:20.04
+
+.. note::
+
+  Actually only :code:`-i` or :code:`-t` would be enough to keep the container
+  in the backgorund, but if you want to attach the container later, it requires
+  both of them. Of course, :code:`-d` is always required.
+
+Attach the container
+--------------------
+
+You can attach the container and see the same as you could see
+when you run a container without :code:`-d`, in foreground.
+You can even interact with the container's main process so be careful
+and don't execute a command like :code:`exit`, or you will stop the whole
+container by stopping its main process.
+
+.. code:: bash
+
+  docker attach ubuntu-container
+
+Press Ctrl+P and then Ctrl+Q to quit without stopping the container.
+
+The better way to "enter" the container is :code:`docker exec` which
+is similar to the way of LXD.
+
+.. code:: bash
+
+  docker exec -it ubuntu-container
+
+Now you can use the "exit" command to quit the container and leave it running.
+
 Start Apache HTTPD webszerver
 =============================
 
-Start the container in the foreground. ("attached" mode)
---------------------------------------------------------
+Start the container in the foreground
+-------------------------------------
 
 .. code:: bash
 
@@ -165,20 +223,37 @@ Start the container in the foreground. ("attached" mode)
 
 There will be no prompt until you press "CTRL+C" to stop the container running in the foreground.
 
-Start it in the background ("detached" mode)
---------------------------------------------
+.. note::
+
+  When you change your terminal window it will send SIGWINCH signal to the container
+  and shut down the server. Use it only for some quick test.
+
+Start it in the background
+--------------------------
 
 .. code:: bash
 
   docker rm web
   docker run -d --name web httpd:2.4
 
-Now you can see the running container by executing :code:`docker ps`.
+.. note::
+
+  You don't need to use :code:`-it` and you should not use that either.
+  Running HTTPD server container with and interactive terminal
+  will send SIGWINCH signal to the container and shut down the HTTPD server
+  immediately when you try to attach it.
+
+  Even without :code:`-it`, attaching the HTTPD server container
+  will shut down the server when you change the size of your terminal window.
+
+  Use :code:`docker logs` instead. 
 
 Check container logs
 --------------------
 
-Check the output of the container running in the background:
+:code:`docker logs` shows the standard error and output of a container
+without attaching it. Actually it will read and show the content of
+the log file which was saved from the container's output.
 
 .. code:: bash
 
@@ -226,22 +301,13 @@ Delete the container named "web" and forward the port 8080 from the host to the 
 
 Then you can access the page using host's IP address.
 
-Work with the container's filesystem without building your own image
---------------------------------------------------------------------
+How we could enter a container in the past
+------------------------------------------
 
-Run a command inside a container:
-
-.. code:: bash
-
-  docker exec -it web ls -la
-
-"Enter" the container
-
-.. code:: bash
-
-  docker exec -it web bash
-
-"Enter" the container with nsenter (in the past):
+Before :code:`docker exec` was introduced, :code:`nsenter`
+was the only way to enter a container.
+It does almost the same as :code:`docker exec`
+except it does not support Pseudo-TTY so some commands may not work.
 
 .. code:: bash
 
@@ -258,7 +324,7 @@ Run a command inside a container:
     --wd \
     env -i - $(sudo cat /proc/$CONTAINER_PID/environ | xargs -0) bash
 
-It does not support Pseudo-TTY so some commands may not work.
+As you can see, :code:`nsenter` runs a process inside specific Linux namespaces.
 
 Get all of the IP addresses
 ---------------------------
