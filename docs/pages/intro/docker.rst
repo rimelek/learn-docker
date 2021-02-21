@@ -386,13 +386,6 @@ only the processes inside the container:
 
   docker exec web ps auxf $(docker container inspect --format '{{ .State.Pid }}' web)
 
-Get all of the IP addresses
----------------------------
-
-.. code:: bash
-
-  docker container inspect web --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}"
-
 Start Ubuntu virtual machine
 ============================
 
