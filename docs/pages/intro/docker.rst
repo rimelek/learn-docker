@@ -191,7 +191,7 @@ Watch the output (logs) continuously
 .. code:: bash
 
   docker logs -f web
-  # Press Ctrl-C to stop wathcing
+  # Press Ctrl-C to stop watching
 
 Open the webpage using an IP address
 ------------------------------------
