@@ -174,7 +174,7 @@ Before we continue, let's remove the containers
 
 We will use the other compose project in which :code:`EXPOSE 8080` is defined in the Dockerfile, which is the following.
 
-:code:`noexpose.Dockerfile`:
+:code:`expose/Dockerfile`:
 
 .. literalinclude:: ../../projects/p10/expose/Dockerfile
 
