@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DOCKER_VERSION=5:20.10.1~3-0~ubuntu-focal
-DOCKER_COMPOSE_VERSION=1.27.4
+DOCKER_VERSION=5:20.10.12~3-0~ubuntu-focal
+DOCKER_COMPOSE_VERSION=1.29.2
 
 # Repository
 apt update
