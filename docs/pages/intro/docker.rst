@@ -215,8 +215,8 @@ is similar to the way of LXD.
 
 Now you can use the "exit" command to quit the container and leave it running.
 
-Start Apache HTTPD webszerver
-=============================
+Start Apache HTTPD webserver
+============================
 
 Start the container in the foreground
 -------------------------------------
