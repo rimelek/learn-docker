@@ -9,8 +9,9 @@ x-client-base: &client-base
     - server
   image: nicolaka/netshoot:v0.2
   command:
-    - bash
-  tty: true
+    - sleep
+    - inf
+  init: true
 
 services:
 
