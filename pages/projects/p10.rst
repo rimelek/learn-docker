@@ -1,0 +1,284 @@
+========================================
+Learn what EXPOSE is and when it matters
+========================================
+
+Intro
+=====
+
+Go to Project 10 from the git repository root:
+
+.. code:: bash
+
+  cd projects/p10
+
+Project structure:
+
+.. code:: text
+
+  .
+  ├── expose
+  │   ├── docker-compose.yml
+  │   ├── Dockerfile
+  │   ├── .env
+  │   └── index.html
+  └── noexpose
+      ├── docker-compose.yml
+      ├── Dockerfile
+      ├── .env
+      └── index.html
+
+
+It is a misconception that exposing a port is required to make a service available on that specific port
+from the host or from an other container.
+
+
+Firewalls can make additional restrictions in which case the following examples can work differently.
+If some special firewall looks for the exposed ports today or in the future, it doesn't change the fact
+that exposed ports are just metadata for an interactive user or an other software to make decisions.
+
+This tutorial does not state that you should not use the :code:`EXPOSE` instruction in the Dockerfile or
+the :code:`--expose` option of :code:`docker run` or the :code:`expose` parameter in a Docker Compose file.
+It only states that it is not required, so use it when you now it is necessary either because some
+automation depends on it or just because you like to document which port is used in a container.
+
+Accessing services from the host using the container's IP address
+=================================================================
+
+We will use :code:`noexpose/Dockerfile` to build an example Python server:
+
+:code:`noexpose/Dockerfile`:
+
+.. literalinclude:: ../../projects/p10/noexpose/Dockerfile
+
+Let's build the image
+
+.. code-block:: bash
+
+  docker build ./noexpose -t localhost/expose:noexpose
+
+Run the container
+
+.. code-block:: bash
+
+  docker run --name p10_noexpose -d --init localhost/expose:noexpose
+
+List the exposed ports (you should not find any)
+
+.. code-block:: bash
+
+  docker container inspect p10_noexpose --format '{{ json .Config.ExposedPorts }}'
+  # output: null
+
+Get the IP address of the container:
+
+.. code-block:: bash
+
+  IP=$(docker container inspect p10_noexpose --format '{{ .NetworkSettings.IPAddress }}')
+
+Get the index page from the server:
+
+.. code-block:: bash
+
+  curl $IP:8080
+  # or
+  wget -qO- $IP:8080
+
+The output should be
+
+.. literalinclude:: ../../projects/p10/noexpose/index.html
+
+It means exposing a port is not necessary for making a service available on that port
+inside the container. It is just a metadata for you and for some proxy services to automate
+port forwarding based on exposed ports. Docker itself will not forward any port
+based on this information automatically.
+
+Let's remove the container
+
+.. code-block:: bash
+
+  docker container rm -f p10_noexpose
+
+Using custom networks to access services in containers
+======================================================
+
+You could think the previous example worked because we used the default Docker bridge which is a little different
+than custom networks. The following example shows you that it doesn't matter. Docker Compose creates a custom network
+for each project, so let's use Docker Compose to run wo containers. One for the server and one for the client.
+
+The `noexpose/docker-compose.yml` is the following:
+
+.. literalinclude:: ../../projects/p10/noexpose/docker-compose.yml
+
+.. note::
+
+  I used some special YAML syntax to make the compose file shorter.
+  This way I could define the common parameters of the client containers.
+
+Run the containers:
+
+.. code:: bash
+
+  docker-compose -f noexpose/docker-compose.yml up -d
+
+Get the IP address of the server container:
+
+.. code-block:: bash
+
+  ID=$(docker-compose -f noexpose/docker-compose.yml ps -q server)
+  IP=$(docker container inspect "$ID" --format '{{ .NetworkSettings.Networks.p10noexpose_default.IPAddress }}')
+
+Get the index page from the server:
+
+.. code-block:: bash
+
+  curl $IP:8080
+  # or
+  wget -qO- $IP:8080
+
+The output should be the same as before:
+
+.. literalinclude:: ../../projects/p10/noexpose/index.html
+
+Now let's get the main page using curl from an other container:
+
+.. code-block:: bash
+
+  docker-compose -f noexpose/docker-compose.yml exec client1 curl $IP:8080
+
+Again, we get the output as we expected:
+
+.. literalinclude:: ../../projects/p10/noexpose/index.html
+
+What if try from an other Docker network? "client2" has its own network and doesn't use default
+as the other two containers. Let's try from that.
+
+.. code-block:: bash
+
+  docker-compose -f noexpose/docker-compose.yml exec client2 curl --max-time 5 $IP:8080
+
+I set :code:`--max-time` to 5 so after about 5 seconds, it times out. Without :code:`--max-time`,
+it would try much longer.
+
+.. code-block:: text
+
+  curl: (28) Connection timed out after 5001 milliseconds
+
+I guess you think we finally found the case when we need to expose the port to make it available in an other
+docker network. Wrong.
+
+Before we continue, let's remove the containers
+
+.. code-block:: bash
+
+  docker-compose -f noexpose/docker-compose.yml down
+
+We will use the other compose project in which :code:`EXPOSE 8080` is defined in the Dockerfile, which is the following.
+
+:code:`noexpose.Dockerfile`:
+
+.. literalinclude:: ../../projects/p10/expose/Dockerfile
+
+It will COPY an :code:`index.html` containing one line:
+
+.. literalinclude:: ../../projects/p10/expose/index.html
+
+and we use the the :code:`docker-compose.yml` below:
+
+.. literalinclude:: ../../projects/p10/expose/docker-compose.yml
+
+Run the project
+
+.. code-block:: bash
+
+  docker-compose -f expose/docker-compose.yml up -d
+
+Get the IP address of the server
+
+.. code-block:: bash
+
+  ID=$(docker-compose -f expose/docker-compose.yml ps -q server)
+  IP=$(docker container inspect "$ID" --format '{{ .NetworkSettings.Networks.p10expose_default.IPAddress }}')
+
+Before you run the tests, list the exposed ports (Now should not find 8080/tcp)
+
+.. code-block:: bash
+
+  docker container inspect "$ID" --format '{{ json .Config.ExposedPorts }}'
+
+.. code-block:: json
+
+  {"8080/tcp":{}}
+
+Test the port from the host:
+
+.. code-block:: bash
+
+  curl $IP:8080
+  # or
+  wget -qO- $IP:8080
+
+And finally test it from client1 before client2, which is in a different network:
+
+  docker-compose -f expose/docker-compose.yml exec client1 curl $IP:8080
+  docker-compose -f expose/docker-compose.yml exec client2 curl --max-time 5  $IP:8080
+
+You probably figured it out why I used :code:`--max-time` again.
+
+It doesn't matter whether you expose the port or not.
+It will not help you to reach the server from a different Docker network.
+You need to attach a common network to the containers in order to communicate
+or forward a port from the host and use that host port as target.
+
+It's time to delete the containers:
+
+.. code-block:: bash
+
+  docker-compose -f expose/docker-compose.yml down
+
+What is the connection between port forwards and exposed ports?
+===============================================================
+
+Let's run a simple container to demonstrate it.
+
+.. code-block:: bash
+
+  docker run -d --name p10_port_forward --init -p 8081:8080 python:3.8-alpine python3 -m http.server 8080
+
+Check the exposed ports:
+
+.. code-block:: bash
+
+  docker container inspect p10_port_forward --format '{{ json .Config.ExposedPorts }}'
+
+The output is familiar. We have seen it before:
+
+.. code-block:: json
+
+  {"8080/tcp":{}}
+
+It means even if we don't expose the port directly, but forward a port from the host, the target port will be exposed.
+It is not enough though to use that port from an other machine. We tried that.
+There is an other setting for the container, and that is "PortBindings". Let's inspect that:
+
+.. code-block:: bash
+
+  docker container inspect p10_port_forward --format '{{ json .HostConfig.PortBindings }}'
+
+.. code-block:: json
+
+  {"8080/tcp":[{"HostIp":"","HostPort":"8081"}]}
+
+As you can see PortBindings in the HostConfig section. It is because it doesn't affect the container itself.
+Instead, it configures the host to forward a specified port to the container's IP address.
+You could do it without Docker. The problem is that you don't know what the IP address will be,
+so Docker solves it for you automatically.
+
+We can finally remove the last container since we know confidently how exposing a port does not affect whether
+we can access that port or not.
+
+.. code-block:: bash
+
+  docker container rm -f p10_port_forward
+
+However, when we use Docker's built-in port-forward, Docker also exposes the target port,
+which is just how Docker works internally at the moment. It is not necessary accessing the port.

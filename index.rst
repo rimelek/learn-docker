@@ -38,3 +38,4 @@ Before you start working with the example projects, read :doc:`pages/intro/getti
    pages/projects/p07
    pages/projects/p08
    pages/projects/p09
+   pages/projects/p10

@@ -1,0 +1,31 @@
+version: "3.9"
+
+networks:
+  default:
+  client:
+
+x-client-base: &client-base
+  depends_on:
+    - server
+  image: nicolaka/netshoot:v0.2
+  command:
+    - bash
+  tty: true
+
+services:
+
+  server:
+    build: .
+    init: true
+    networks:
+      - default
+
+  client1:
+    <<: *client-base
+    networks:
+      - default
+
+  client2:
+    <<: *client-base
+    networks:
+      - client
