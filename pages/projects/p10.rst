@@ -219,6 +219,8 @@ Test the port from the host:
 
 And finally test it from client1 before client2, which is in a different network:
 
+.. code-block:: bash
+
   docker-compose -f expose/docker-compose.yml exec client1 curl $IP:8080
   docker-compose -f expose/docker-compose.yml exec client2 curl --max-time 5  $IP:8080
 
