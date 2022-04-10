@@ -11,7 +11,7 @@ RUN pip3 --disable-pip-version-check install -r /code/requirements.txt
 
 COPY "." "/code/"
 RUN cd /code \
- && sphinx-build -b html . _build -W
+ && sphinx-build -M html "." "_build" -W
 
 FROM pierrezemb/gostatic
 COPY --from=build /code/_build/html /srv/http
