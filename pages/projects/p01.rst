@@ -8,7 +8,20 @@ Go to Project 1 from the git repository root:
 
   cd projects/p01
 
-Start the container:
+Project structure:
+
+.. code:: text
+
+  .
+  └── www
+      └── index.html
+
+This project contains only one folder, "www" and an :code:`index.html` in it
+with the following line:
+
+.. literalinclude:: ../../projects/p01/www/index.html
+
+Start the container and mount "www" as document root:
 
 .. code:: bash
   
@@ -29,8 +42,8 @@ Test the web page:
 .. code:: text
 
   http://192.168.1.2.xip.io:8080
-  # output:
-  # Hello Docker (p01)
+
+Now you should see the content of the mounted :code:`index.html`
 
 Delete the container to make port 8080 free again.
 

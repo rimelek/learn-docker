@@ -19,8 +19,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'Learn Docker'
-copyright = '2021, Takács Ákos'
-author = 'Takács Ákos'
+copyright = '2021, Ákos Takács'
+author = 'Ákos Takács'
 
 
 # -- General configuration ---------------------------------------------------
