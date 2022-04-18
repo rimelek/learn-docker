@@ -38,13 +38,13 @@ that exposed ports are just metadata for an interactive user or an other softwar
 
 This tutorial does not state that you should not use the :code:`EXPOSE` instruction in the Dockerfile or
 the :code:`--expose` option of :code:`docker run` or the :code:`expose` parameter in a Docker Compose file.
-It only states that it is not required, so use it when you now it is necessary either because some
+It only states that it is not required, so use it when you know it is necessary either because some
 automation depends on it or just because you like to document which port is used in a container.
 
 Accessing services from the host using the container's IP address
 =================================================================
 
-We will use :code:`noexpose/Dockerfile` to build an example Python server:
+We will use :code:`noexpose/Dockerfile` to build an example Python HTTP server:
 
 :code:`noexpose/Dockerfile`:
 
@@ -103,7 +103,7 @@ Using custom networks to access services in containers
 
 You could think the previous example worked because we used the default Docker bridge which is a little different
 than custom networks. The following example shows you that it doesn't matter. Docker Compose creates a custom network
-for each project, so let's use Docker Compose to run wo containers. One for the server and one for the client.
+for each project, so let's use Docker Compose to run the containers. One for the server and one for the client.
 
 The `noexpose/docker-compose.yml` is the following:
 
@@ -182,7 +182,7 @@ It will COPY an :code:`index.html` containing one line:
 
 .. literalinclude:: ../../projects/p10/expose/index.html
 
-and we use the the :code:`docker-compose.yml` below:
+and we use the :code:`docker-compose.yml` below:
 
 .. literalinclude:: ../../projects/p10/expose/docker-compose.yml
 
@@ -199,7 +199,7 @@ Get the IP address of the server
   ID=$(docker-compose -f expose/docker-compose.yml ps -q server)
   IP=$(docker container inspect "$ID" --format '{{ .NetworkSettings.Networks.p10expose_default.IPAddress }}')
 
-Before you run the tests, list the exposed ports (Now should not find 8080/tcp)
+Before you run the tests, list the exposed ports (Now you should not find 8080/tcp)
 
 .. code-block:: bash
 
@@ -259,7 +259,7 @@ The output is familiar. We have seen it before:
   {"8080/tcp":{}}
 
 It means even if we don't expose the port directly, but forward a port from the host, the target port will be exposed.
-It is not enough though to use that port from an other machine. We tried that.
+It is not enough though to use that port from an other machine.
 There is an other setting for the container, and that is "PortBindings". Let's inspect that:
 
 .. code-block:: bash
@@ -283,4 +283,4 @@ we can access that port or not.
   docker container rm -f p10_port_forward
 
 However, when we use Docker's built-in port-forward, Docker also exposes the target port,
-which is just how Docker works internally at the moment. It is not necessary accessing the port.
+which is just how Docker works internally at the moment. It is not necessary in order to be able to access the port.
