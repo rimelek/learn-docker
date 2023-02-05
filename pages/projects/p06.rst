@@ -1,4 +1,4 @@
-.. _nginx-proxy: https://hub.docker.com/r/jwilder/nginx-proxy
+.. _nginx-proxy: https://hub.docker.com/r/nginxproxy/nginx-proxy
 
 ==================================================================
 Run more Docker Compose project on the same port using nginx-proxy
@@ -89,8 +89,8 @@ Clean the project:
 
 .. code:: bash
 
-  docker-compose down --volume
+  docker-compose down --volumes
   cd ../web1
-  docker-compose down --volume
+  docker-compose down --volumes
   cd ../nginxproxy
-  docker-compose down --volume
+  docker-compose down --volumes
