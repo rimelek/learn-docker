@@ -1,6 +1,6 @@
 .. _user namespace in a Docker container: https://docs.docker.com/engine/security/userns-remap/
 .. _Kata Containers: https://katacontainers.io/
-.. _Install Kata Containers on Ubuntu: https://github.com/kata-containers/documentation/blob/stable-1.12/install/ubuntu-installation-guide.md
+.. _Install Kata Containers: https://github.com/kata-containers/kata-containers/tree/main/docs/install
 
 ======
 Docker
@@ -402,19 +402,7 @@ Using a parameter is not enough. You need to choose a different runtime.
 The default is :code:`runc` which runs containers.
 One of the most popular and easiest runtime is `Kata Containers`_.
 
-Follow the instructions to install the latest stable version of the Kata runtime
-
-Source: `Install Kata Containers on Ubuntu`_
-
-.. code:: bash
-
-  ARCH=$(arch)
-  BRANCH="1.12"
-  sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/katacontainers:/releases:/${ARCH}:/${BRANCH}/xUbuntu_$(lsb_release -rs)/ /' > /etc/apt/sources.list.d/kata-containers.list"
-  curl -sL  http://download.opensuse.org/repositories/home:/katacontainers:/releases:/${ARCH}:/${BRANCH}/xUbuntu_$(lsb_release -rs)/Release.key | sudo apt-key add -
-  sudo -E apt-get update
-  sudo -E apt-get -y install kata-runtime kata-proxy kata-shim
-
+Follow the instructions to install the latest stable version of the Kata runtime: `Install Kata Containers`_
 and configure Docker daemon to use it. An example :code:`/etc/docker/daemon.json`
 is the following:
 
