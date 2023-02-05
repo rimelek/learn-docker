@@ -29,7 +29,7 @@ services:
       - proxy
     environment:
       SRV_AUTH: "true"
-      VIRTUAL_HOST: p07.$XIP
+      VIRTUAL_HOST: p07.$NIP
   fixperm:
     depends_on:
       - httpd
@@ -40,4 +40,4 @@ services:
     command:
       - "bash"
       - "-c"
-      - "chmod -R 0655 /htdocs && chmod 0775 /htdocs && chown -R 33:33 /htdocs"
+      - "find htdocs/ -type f -exec chmod -R 0655 {} \\; && chmod 0775 /htdocs && chown -R 33:33 /htdocs"

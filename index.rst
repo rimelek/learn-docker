@@ -3,8 +3,6 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. _xip.io: http://xip.io
-
 ========================================
 Welcome to Learn Docker's documentation!
 ========================================

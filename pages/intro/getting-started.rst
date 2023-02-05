@@ -81,19 +81,19 @@ Clone the git repository
 Scripts
 =======
 
-system/usr/local/bin/xip.sh
-  `xip.io` generates domain names for the public DNS server based on
+system/usr/local/bin/nip.sh
+  `nip.io` generates domain names for the public DNS server based on
   the current WAN or LAN IP address of the host machine.
-  It must be copied into /usr/local/bin/ with the filename "xip".
-  When you execute "xip", a domain name will be shown (Ex.: 192.168.1.2.xip.io) which you can use for the examples.
-  The command takes one optional parameter as a subdomain. Ex.: "xip web1". The result would be: web1.192.168.1.2.xip.io
+  It must be copied into /usr/local/bin/ with the filename "nip.sh".
+  When you execute "nip.sh", a domain name will be shown (Ex.: 192.168.1.2.nip.io) which you can use for the examples.
+  The command takes one optional parameter as a subdomain. Ex.: "nip.sh web1". The result would be: web1.192.168.1.2.xnip.io
 
-system/etc/profile.d/xip.variable.sh
-  It uses the xip command to set the XIP environment variable so
+system/etc/profile.d/nip.variable.sh
+  It uses the nip command to set the NIP environment variable so
   you can use the variable in a docker-compose.yml too.
 
 Make sure you each script is executable before you continue. However, the above scripts are optional and you may not need
-them in a local virtual machine. If you don't want to rely on automatic IP address detection, set the XIP variable manually.
+them in a local virtual machine. If you don't want to rely on automatic IP address detection, set the NIP variable manually.
 
 Example projects
 ================
@@ -105,19 +105,20 @@ Example projects are in the `learn-docker/projects` folder, so go to there.
   cd learn-docker/projects
 
 
-Check the existence of :code:`$XIP` variable since you will need it for some examples:
+Check the existence of :code:`$NIP` variable since you will need it for some examples:
 
 .. code: shell
 
-  echo $XIP
+  echo $NIP
 
 If it does not exist or empty, then set the value manually or run the script below:
 
 .. code: shell
 
-  export XIP=$(ip route get 8.8.8.8 | grep -o 'src [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | awk '{print $NF}')
-  # or if xip is already installed:
-  export XIP=$(xip)
+  export NIP=$(../../../system/usr/local/bin/nip.sh)
+
+  # or if nip.sh is already installed:
+  export NIP=$(nip.sh)
 
 All off the examples were tested with Docker 20.10.1. The version of Docker Compose was 1.27.4.
 You can try with more recent versions but some behaviour could be different in the future.

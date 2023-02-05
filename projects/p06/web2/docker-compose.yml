@@ -23,7 +23,7 @@ services:
     environment:
       SRV_PHP: "true"
       SRV_DOCROOT: /var/www/html
-      VIRTUAL_HOST: web2.$XIP
+      VIRTUAL_HOST: web2.$NIP
     networks:
       - default
       - proxy

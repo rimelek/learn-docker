@@ -33,7 +33,7 @@ Generate a domain name:
 
 .. code:: bash
 
-  xip
+  nip.sh
   # example output:
   # 192.168.1.2.xip.io
 
@@ -41,7 +41,7 @@ Test the web page:
 
 .. code:: text
 
-  http://192.168.1.2.xip.io:8080
+  http://192.168.1.2.nip.io:8080
 
 Now you should see the content of the mounted :code:`index.html`
 

@@ -7,7 +7,7 @@ networks:
 
 services:
   nginx-proxy:
-    image: jwilder/nginx-proxy:0.8.0
+    image: nginxproxy/nginx-proxy:1.2.0
     ports:
       - "80:80"
     volumes:

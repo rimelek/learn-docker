@@ -42,15 +42,21 @@ Navigate to the web1 folder:
 
   cd ../web1
 
-At this point you need to have the XIP variable set as :doc:`../../index` refers to it.
+At this point you need to have the NIP variable set as :doc:`../../index` refers to it.
 
-Alternative option: set the XIP variable in the ".env" file:
+Alternative option: set the NIP variable in the ".env" file:
 
 Start the containers:
 
 .. code:: bash
 
   docker-compose up -d
+
+In case are working the cloned repository of this tutorial, you can also run the below command to set the variable
+
+.. code:: bash
+
+  NIP=$(../../../system/usr/local/bin/nip.sh) docker compose up -d
 
 Navigate to the web2 folder:
 
@@ -64,13 +70,18 @@ Start the containers:
 
   docker-compose up -d
 
+In case are working the cloned repository of this tutorial, you can also run the below command to set the variable
+
+.. code:: bash
+
+  NIP=$(../../../system/usr/local/bin/nip.sh) docker compose up -d
 
 Both of the services are available on port 80. Example:
 
 .. code:: text
 
-  http://web1.192.168.1.6.xip.io
-  http://web2.192.168.1.6.xip.io
+  http://web1.192.168.1.6.nip.io
+  http://web2.192.168.1.6.nip.io
 
 This way you do not need to remove a container just because it is running on the same port you want to use for a new container.
 
