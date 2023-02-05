@@ -128,5 +128,5 @@ If it does not exist or empty, then set the value manually or run the script bel
   # or if nip.sh is already installed:
   export NIP=$(nip.sh)
 
-All off the examples were tested with Docker 20.10.1. The version of Docker Compose was 1.27.4.
+All off the examples were tested with Docker 20.10.23. The version of Docker Compose was 2.15.1.
 You can try with more recent versions but some behaviour could be different in the future.
