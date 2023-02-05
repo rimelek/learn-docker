@@ -52,4 +52,5 @@ After you have deleted the container, you can delete the volume:
 
 .. code:: bash
 
+  docker rm -f p03_php
   docker volume rm p03_php_www
