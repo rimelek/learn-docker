@@ -41,6 +41,5 @@ Or delete the volumes too.
 
 .. code:: bash
 
-  docker-compose down --volume
+  docker-compose down --volumes
 
-docker-compose down
