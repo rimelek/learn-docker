@@ -81,12 +81,6 @@ Clone the git repository
 Scripts
 =======
 
-system/etc/profile.d/fixhost.sh
-  It fixes the missing hostname in :code:`/etc/hosts`,
-  so you will not see error messages after using "sudo". The script checks if the machine's
-  hostname is in the hosts file and writes into the file if the hostname was missing.
-  In case of Ubuntu 16.04 it can copied into /etc/profile.d/.
-
 system/usr/local/bin/xip.sh
   `xip.io` generates domain names for the public DNS server based on
   the current WAN or LAN IP address of the host machine.
