@@ -32,4 +32,4 @@ Delete everything created by Docker Compose for this project:
 
 .. code:: bash
 
-  docker-compose down --volume
+  docker-compose down --volumes
