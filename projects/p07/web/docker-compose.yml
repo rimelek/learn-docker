@@ -5,8 +5,8 @@ volumes:
 
 networks:
   proxy:
-    external:
-      name: public_proxy
+    external: true
+    name: public_proxy
 
 services:
   htpasswd:
