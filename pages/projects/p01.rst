@@ -37,6 +37,12 @@ Generate a domain name:
   # example output:
   # 192.168.1.2.xip.io
 
+In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
+
+.. code:: bash
+
+  ../../system/usr/local/bin/nip.sh
+
 Test the web page:
 
 .. code:: text
