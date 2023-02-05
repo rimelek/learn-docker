@@ -355,6 +355,14 @@ with the container.
 
   Using `user namespace in a Docker container`_ is disabled by default
 
+.. note::
+
+  Since Docker Desktop runs Docker CE in a virtual machine, sharing namespaces with the host means that you
+  will use the namespace of the virtual machine, not the actual host operating system where you run the Docker client.
+  As a result, you will still not be able to access ports on localhost of the host operating system, the hostname will
+  be the hostname of the virtual machine and the processes inside the container will see the processes running
+  inside the virtual machine only.
+
 Now enter the container 
 
 .. code:: bash
