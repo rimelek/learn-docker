@@ -84,6 +84,12 @@ jq for parsing json files
 Some of the examples will use `jq <https://stedolan.github.io/jq/>`_.
 Click the link for the installation instruction.
 
+Operating system
+----------------
+
+Linux is always supported and I do my best to support Docker Desktop on macOS, but not all the examples
+will work on macOS unless you run Linux in a virtual machine.
+
 
 Clone the git repository
 ========================
