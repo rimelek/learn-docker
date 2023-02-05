@@ -58,6 +58,6 @@ Clean the project:
 
 .. code:: bash
 
-  docker-compose down --volume
+  docker-compose down --volumes
   cd ../nginxproxy
-  docker-compose down --volume
+  docker-compose down --volumes
