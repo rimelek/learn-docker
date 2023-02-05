@@ -52,7 +52,7 @@ Start the containers:
 
   docker-compose up -d
 
-In case are working the cloned repository of this tutorial, you can also run the below command to set the variable
+In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
 
 .. code:: bash
 
@@ -70,7 +70,7 @@ Start the containers:
 
   docker-compose up -d
 
-In case are working the cloned repository of this tutorial, you can also run the below command to set the variable
+In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
 
 .. code:: bash
 

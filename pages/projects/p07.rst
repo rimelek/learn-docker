@@ -46,7 +46,7 @@ Alternative option: set the NIP variable in the ".env" file:
 
   docker-compose up -d
 
-In case are working the cloned repository of this tutorial, you can also run the below command to set the variable
+In case are working the in cloned repository of this tutorial, you can also run the below command to set the variable
 
 .. code:: bash
 
