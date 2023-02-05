@@ -346,7 +346,7 @@ This example shows how you can share the host's namespaces
 with the container.
 
 - **net**: The container will not get a virtual network.
-  Localhost inside the container will the same as localhost on the host operating system. 
+  Localhost inside the container will be the same as localhost on the host operating system.
 - **uts**: When you enter the container you will see that the hostname in the prompt 
   is the same as you can see on the host. Without this, the container had a random hash as hostname.
 - **pid**: The container can see every process running on the host and not just inside the container.
