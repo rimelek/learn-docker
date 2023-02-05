@@ -78,6 +78,12 @@ Docker Compose v2 is  Docker CLI plugin to run Docker Compose projects. This is 
 Docker Compose. Follow the official documentation for the installation instructions:
 `Install Docker Compose <https://docs.docker.com/compose/install/>`_
 
+jq for parsing json files
+-------------------------
+
+Some of the examples will use `jq <https://stedolan.github.io/jq/>`_.
+Click the link for the installation instruction.
+
 
 Clone the git repository
 ========================
