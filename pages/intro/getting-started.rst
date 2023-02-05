@@ -71,6 +71,14 @@ Rancher Desktop
   you can watch my Youtube video:
   `Docker Desktop and Rancher Desktop on the same macOS machine <https://www.youtube.com/watch?v=jaj5OCFQHxU>`_
 
+Install Docker Compose v2
+-------------------------
+
+Docker Compose v2 is  Docker CLI plugin to run Docker Compose projects. This is the recommended way to use
+Docker Compose. Follow the official documentation for the installation instructions:
+`Install Docker Compose <https://docs.docker.com/compose/install/>`_
+
+
 Clone the git repository
 ========================
 
