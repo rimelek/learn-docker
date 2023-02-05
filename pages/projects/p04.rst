@@ -14,14 +14,14 @@ Build an image and start the container using `Docker Compose`_:
 
 .. code:: bash
 
-  docker-compose up -d
+  docker compose up -d
 
 
 Check the container:
 
 .. code:: bash
 
-  docker-compose ps
+  docker compose ps
   # The name of the container: p04_php_1
 
 Check the networks:
@@ -35,11 +35,11 @@ Delete the container, and networks with Docker Compose:
 
 .. code:: bash
 
-  docker-compose down
+  docker compose down
 
 Or delete the volumes too.
 
 .. code:: bash
 
-  docker-compose down --volumes
+  docker compose down --volumes
 

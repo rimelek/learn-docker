@@ -14,7 +14,7 @@ Start the proxy server:
 .. code:: bash
 
   cd nginxproxy
-  docker-compose up -d
+  docker compose up -d
 
 Go to the web folder:
 
@@ -44,7 +44,7 @@ Start the web server
 
 .. code:: bash
 
-  docker-compose up -d
+  docker compose up -d
 
 In case are working the in cloned repository of this tutorial, you can also run the below command to set the variable
 
@@ -58,6 +58,6 @@ Clean the project:
 
 .. code:: bash
 
-  docker-compose down --volumes
+  docker compose down --volumes
   cd ../nginxproxy
-  docker-compose down --volumes
+  docker compose down --volumes

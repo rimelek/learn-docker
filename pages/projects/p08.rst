@@ -23,11 +23,11 @@ The examples below will test the memory usage from 10MB to 50MB increased by 10M
 
 .. code:: bash
 
-  MEMSIZE=10MiB docker-compose run --rm php
-  MEMSIZE=20MiB docker-compose run --rm php
-  MEMSIZE=30MiB docker-compose run --rm php
-  MEMSIZE=40MiB docker-compose run --rm php
-  MEMSIZE=50MiB docker-compose run --rm php
+  MEMSIZE=10MiB docker compose run --rm php
+  MEMSIZE=20MiB docker compose run --rm php
+  MEMSIZE=30MiB docker compose run --rm php
+  MEMSIZE=40MiB docker compose run --rm php
+  MEMSIZE=50MiB docker compose run --rm php
 
 output:
 
@@ -54,6 +54,6 @@ Clean the project:
 
 .. code:: bash
 
-  docker-compose down
+  docker compose down
 
 The containers were deleted automatically, but it can still delete the network. 

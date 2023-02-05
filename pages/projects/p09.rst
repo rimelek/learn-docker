@@ -58,8 +58,3 @@ Now you can see the indexes in the column "P".
 
 Press "1" to list all the CPU-s at the top of the terminal so you can see the usage of all the CPU-s.
 
-Clean the project:
-
-.. code:: bash
-
-  docker-compose down

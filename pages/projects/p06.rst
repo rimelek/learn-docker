@@ -34,7 +34,7 @@ Start the proxy:
 
 .. code:: bash
 
-  docker-compose up -d
+  docker compose up -d
 
 Navigate to the web1 folder:
 
@@ -68,7 +68,7 @@ Start the containers:
 
 .. code:: bash
 
-  docker-compose up -d
+  docker compose up -d
 
 In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
 
@@ -89,8 +89,8 @@ Clean the project:
 
 .. code:: bash
 
-  docker-compose down --volumes
+  docker compose down --volumes
   cd ../web1
-  docker-compose down --volumes
+  docker compose down --volumes
   cd ../nginxproxy
-  docker-compose down --volumes
+  docker compose down --volumes

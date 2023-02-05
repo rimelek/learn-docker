@@ -190,13 +190,13 @@ Run the project
 
 .. code-block:: bash
 
-  docker-compose -f expose/docker-compose.yml up -d
+  docker compose -f expose/docker-compose.yml up -d
 
 Get the IP address of the server
 
 .. code-block:: bash
 
-  ID=$(docker-compose -f expose/docker-compose.yml ps -q server)
+  ID=$(docker compose -f expose/docker-compose.yml ps -q server)
   IP=$(docker container inspect "$ID" --format '{{ .NetworkSettings.Networks.p10expose_default.IPAddress }}')
 
 Before you run the tests, list the exposed ports (Now you should not find 8080/tcp)
@@ -221,8 +221,8 @@ And finally test it from client1 before client2, which is in a different network
 
 .. code-block:: bash
 
-  docker-compose -f expose/docker-compose.yml exec client1 curl $IP:8080
-  docker-compose -f expose/docker-compose.yml exec client2 curl --max-time 5  $IP:8080
+  docker compose -f expose/docker-compose.yml exec client1 curl $IP:8080
+  docker compose -f expose/docker-compose.yml exec client2 curl --max-time 5  $IP:8080
 
 You probably figured it out why I used :code:`--max-time` again.
 
@@ -235,7 +235,7 @@ It's time to delete the containers:
 
 .. code-block:: bash
 
-  docker-compose -f expose/docker-compose.yml down
+  docker compose -f expose/docker-compose.yml down
 
 What is the connection between port forwards and exposed ports?
 ===============================================================

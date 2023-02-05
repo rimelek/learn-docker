@@ -12,19 +12,19 @@ Build PHP image and start the containers:
 
 .. code:: bash
 
-  docker-compose up -d
+  docker compose up -d
 
 Start multiple container for PHP:
 
 .. code:: bash
 
-  docker-compose up -d --scale php=2
+  docker compose up -d --scale php=2
 
 List the containers to see PHP has multiple instance:
 
 .. code:: bash
 
-  docker-compose ps
+  docker compose ps
 
 Open the page in your browser and you can see the hostname in the first line is not constant. It changes but not every time, although the data is permanent.
 
@@ -32,4 +32,4 @@ Delete everything created by Docker Compose for this project:
 
 .. code:: bash
 
-  docker-compose down --volumes
+  docker compose down --volumes
