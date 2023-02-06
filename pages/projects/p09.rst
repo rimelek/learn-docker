@@ -4,6 +4,20 @@
 CPU limit test
 ==============
 
+Go to Project 9 from the git repository root:
+
+.. code:: bash
+
+  cd projects/p09
+
+Files
+=====
+
+**Dockerfile**
+
+.. literalinclude:: ../../projects/p09/Dockerfile
+  :language: Dockerfile
+
 We test the CPU limit in this example using an image based on `petermaric/docker.cpu-stress-test`_. Since that image is outdated, we create a new image similar to Peter Maric's work.
 
 .. code:: bash
@@ -16,11 +30,17 @@ Execute the following command to test a whole CPU core:
 
   docker run -it --rm \
     -e STRESS_MAX_CPU_CORES=1 \
-    -e STRESS_SYSTEM_FOR=30 \
+    -e STRESS_TIMEOUT=30 \
     --cpus=1 \
     localhost/stress
 
-Run "top" in an other terminal to see that the "stress" process uses 100% of one CPU. 
+Run "top" in an other terminal to see that the "stress" process uses 100% of one CPU.
+To see the same result on any host operating system, we will run top in an Ubuntu container using the process
+namespace of the host.
+
+.. code:: bash
+
+  docker run --rm -it --pid host ubuntu:20.04 top
 
 Press Ctrl-C and execute the following command to test two CPU core and allow the container to use only 1 and a half CPU.
 
@@ -40,15 +60,15 @@ a specific CPU core by setting the core index.
 .. code:: bash
 
   docker run -it --rm \
-    -e MAX_CPU_CORES=1 \
-    -e STRESS_SYSTEM_FOR=60 \
+    -e STRESS_MAX_CPU_CORES=1 \
+    -e STRESS_TIMEOUT=60 \
     --cpus=0.5 \
     --cpuset-cpus=0 \
     localhost/stress
 
 You can use top again, but do not forget to add the index column to the list:
 
-* run "top"
+* run :code:`docker run --rm -it --pid host ubuntu:20.04 top`
 * press "f"
 * Select column "P" by navigating with the arrow keys
 * Press "SPACE" to select "P" 
