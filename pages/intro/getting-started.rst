@@ -75,7 +75,14 @@ Install Docker Compose v2
 -------------------------
 
 Docker Compose v2 is  Docker CLI plugin to run Docker Compose projects. This is the recommended way to use
-Docker Compose. Follow the official documentation for the installation instructions:
+Docker Compose. Since Docker Compose could already be on your system after installing Docker, check the below command first:
+
+.. code:: bash
+
+  docker compose version
+
+Use space between "docker" and "compose". If the "compose" subcommand doesn't work,
+follow the official documentation for the installation instructions:
 `Install Docker Compose <https://docs.docker.com/compose/install/>`_
 
 jq for parsing json files
