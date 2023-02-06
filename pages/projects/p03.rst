@@ -8,6 +8,15 @@ Go to Project 3 from the git repository root:
 
   cd projects/p03
 
+Project structure:
+
+.. code:: text
+
+  .
+  ├── Dockerfile
+  └── www
+      └── index.php
+
 Build an image:
 
 .. code:: bash

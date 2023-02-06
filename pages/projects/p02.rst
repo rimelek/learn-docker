@@ -8,6 +8,15 @@ Go to Project 2 from the git repository root:
 
   cd projects/p02
 
+Project structure:
+
+.. code:: text
+
+  .
+  ├── Dockerfile
+  └── www
+      └── index.html
+
 Building an image:
 
 .. code:: bash

@@ -10,6 +10,14 @@ Go to Project 9 from the git repository root:
 
   cd projects/p09
 
+Project structure:
+
+.. code:: text
+
+  .
+  └── Dockerfile
+
+
 Files
 =====
 

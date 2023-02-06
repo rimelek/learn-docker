@@ -8,6 +8,16 @@ Go to Project 5 from the git repository root:
 
   cd projects/p05
 
+Project structure:
+
+.. code:: text
+
+  .
+  ├── Dockerfile
+  ├── docker-compose.yml
+  └── www
+      └── index.php
+
 Build PHP image and start the containers:
 
 .. code:: bash

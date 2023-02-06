@@ -8,6 +8,13 @@ Go to Project 8 from the git repository root:
 
   cd projects/p08
 
+Project structure:
+
+.. code:: text
+
+  .
+  └── docker-compose.yml
+
 Files
 =====
 

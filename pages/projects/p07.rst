@@ -8,6 +8,18 @@ Go to Project 7 from the git repository root:
 
   cd projects/p07
 
+Project structure:
+
+.. code:: text
+
+  .
+  ├── nginxproxy
+  │   └── docker-compose.yml
+  └── web
+      ├── docker-compose.yml
+      └── www
+          └── index.html
+
 The first step is the same as it was in :doc:`p06`.
 Start the proxy server:
 

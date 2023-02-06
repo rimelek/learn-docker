@@ -12,6 +12,24 @@ Go to Project 6 from the git repository root:
 
   cd projects/p06
 
+Project structure:
+
+.. code:: text
+
+  .
+  ├── nginxproxy
+  │   └── docker-compose.yml
+  ├── web1
+  │   ├── Dockerfile
+  │   ├── docker-compose.yml
+  │   └── www
+  │       └── index.php
+  └── web2
+      ├── Dockerfile
+      ├── docker-compose.yml
+      └── www
+          └── index.php
+
 Create the proxy network:
 
 .. code:: bash
