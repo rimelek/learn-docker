@@ -8,12 +8,20 @@ Go to Project 8 from the git repository root:
 
   cd projects/p08
 
+Files
+=====
+
+**docker-compose.yml**
+
+.. literalinclude:: ../../projects/p08/docker-compose.yml
+  :language: yaml
+
 Description
 ===========
 
-This example shows the memory testing in a PHP container, where the "truncate"
-command generates a file with a defined size and the PHP reads it into the memory.
-We use an environment variable to set the memory size.
+This example shows the memory testing in a bash container, where the "fallocate"
+command generates a file with a defined size stored in memory using tmpfs.
+We use an environment variable to set the allocated memory and the memory limit is defined in the compose file as 50 MiB.
 
 Start the test
 ==============
@@ -23,31 +31,32 @@ The examples below will test the memory usage from 10MB to 50MB increased by 10M
 
 .. code:: bash
 
-  MEMSIZE=10MiB docker compose run --rm php
-  MEMSIZE=20MiB docker compose run --rm php
-  MEMSIZE=30MiB docker compose run --rm php
-  MEMSIZE=40MiB docker compose run --rm php
-  MEMSIZE=50MiB docker compose run --rm php
+  ALLOCATE=10MiB docker compose run --rm test
+  ALLOCATE=20MiB docker compose run --rm test
+  ALLOCATE=30MiB docker compose run --rm test
+  ALLOCATE=40MiB docker compose run --rm test
+  ALLOCATE=50MiB docker compose run --rm test
 
-output:
+
+Running it in Docker Desktop on macOS I get the following output:
 
 .. code:: text
 
-  bash: line 5:     9 Killed                  php -r '
-     ob_start();
-     readfile("/tmp/50MiB");
-     ob_clean();
-     echo (memory_get_peak_usage(true)/1024/1024)." MiB\n";
-  '
+  fallocate: fallocate '/app/test': Out of memory
+  Out of memory
 
+Running it on a virtual machine with an Ubuntu 20.04 host the output is:
 
-"Killed" means we exceeded the memory limit. There is no error until 50MB.
+.. code:: text
+
+  Out of memory
+
 Since there is some additional memory usage in the container, it kills the process at 50MiB even though 50 is still allowed.
 
 Explanation of the parameters
 =============================
 
-The "docker-compose run" is similar to "docker run", but it runs a service from the compose file.
+The "docker compose run" is similar to "docker run", but it runs a service from the compose file.
 "--rm" means the same as it meant for "docker run". Deletes the container right after it stopped.
 
 Clean the project:

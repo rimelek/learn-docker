@@ -1,18 +1,19 @@
 version: "3.9"
 
 services:
-  php:
-    image: php:7.4-fpm
+  test:
+    image: bash:5.2
+    environment:
+      - ALLOCATE
     command:
-      - bash
       - -c
-      - |
-        truncate -s $MEMSIZE /tmp/$MEMSIZE; php -r '
-           ob_start();
-           readfile("/tmp/$MEMSIZE");
-           ob_clean();
-           echo (memory_get_peak_usage(true)/1024/1024)." MiB\n";
-        '
-    mem_limit: 50m
+      - 'fallocate -l $ALLOCATE /app/test && echo $(( $(stat /app/test -c "%s") / 1024 / 1024))'
+    deploy:
+      resources:
+        limits:
+          memory: 50MB
     mem_swappiness: 0
+    tmpfs:
+      - /app
+
 
