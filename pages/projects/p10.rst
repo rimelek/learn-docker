@@ -1,6 +1,6 @@
-========================================
-Learn what EXPOSE is and when it matters
-========================================
+======================================
+Learn what EXPOSE and when it matters
+======================================
 
 Intro
 =====
@@ -98,11 +98,11 @@ Let's remove the container
 
   docker container rm -f p10_noexpose
 
-Using custom networks to access services in containers
-======================================================
+Using usr-defined networks to access services in containers
+===========================================================
 
 You could think the previous example worked because we used the default Docker bridge which is a little different
-than custom networks. The following example shows you that it doesn't matter. Docker Compose creates a custom network
+than user-defined networks. The following example shows you that it doesn't matter. Docker Compose creates a user-defined network
 for each project, so let's use Docker Compose to run the containers. One for the server and one for the client.
 
 The `noexpose/docker-compose.yml` is the following:
@@ -118,13 +118,13 @@ Run the containers:
 
 .. code:: bash
 
-  docker-compose -f noexpose/docker-compose.yml up -d
+  docker compose -f noexpose/docker-compose.yml up -d
 
 Get the IP address of the server container:
 
 .. code-block:: bash
 
-  ID=$(docker-compose -f noexpose/docker-compose.yml ps -q server)
+  ID=$(docker compose -f noexpose/docker-compose.yml ps -q server)
   IP=$(docker container inspect "$ID" --format '{{ .NetworkSettings.Networks.p10noexpose_default.IPAddress }}')
 
 Get the index page from the server:
@@ -139,7 +139,7 @@ The output should be the same as before:
 
 .. literalinclude:: ../../projects/p10/noexpose/index.html
 
-Now let's get the main page using curl from an other container:
+Now let's get the main page using curl from another container:
 
 .. code-block:: bash
 
@@ -149,12 +149,12 @@ Again, we get the output as we expected:
 
 .. literalinclude:: ../../projects/p10/noexpose/index.html
 
-What if try from an other Docker network? "client2" has its own network and doesn't use default
+What if we try from another Docker network? "client2" has its own network and doesn't use default
 as the other two containers. Let's try from that.
 
 .. code-block:: bash
 
-  docker-compose -f noexpose/docker-compose.yml exec client2 curl --max-time 5 $IP:8080
+  docker compose -f noexpose/docker-compose.yml exec client2 curl --max-time 5 $IP:8080
 
 I set :code:`--max-time` to 5 so after about 5 seconds, it times out. Without :code:`--max-time`,
 it would try much longer.
@@ -163,14 +163,14 @@ it would try much longer.
 
   curl: (28) Connection timed out after 5001 milliseconds
 
-I guess you think we finally found the case when we need to expose the port to make it available in an other
+I guess you think we finally found the case when we need to expose the port to make it available in another
 docker network. Wrong.
 
 Before we continue, let's remove the containers
 
 .. code-block:: bash
 
-  docker-compose -f noexpose/docker-compose.yml down
+  docker compose -f noexpose/docker-compose.yml down
 
 We will use the other compose project in which :code:`EXPOSE 8080` is defined in the Dockerfile, which is the following.
 
@@ -259,8 +259,8 @@ The output is familiar. We have seen it before:
   {"8080/tcp":{}}
 
 It means even if we don't expose the port directly, but forward a port from the host, the target port will be exposed.
-It is not enough though to use that port from an other machine.
-There is an other setting for the container, and that is "PortBindings". Let's inspect that:
+It is not enough though to use that port from another machine.
+There is another setting for the container, and that is "PortBindings". Let's inspect that:
 
 .. code-block:: bash
 
