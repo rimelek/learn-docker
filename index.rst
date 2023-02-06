@@ -11,7 +11,6 @@ This project contains examples and scripts to help you learn about Docker.
 
 The examples were originally made for the participants of the Ipszilon Seminar in 2017 in Hungary. 
 The virtual machines were created in the Cloud For Education system.
-Some of the scripts may not be useful to you.
 
 Before you start working with the example projects, read :doc:`pages/intro/getting-started`.
 
