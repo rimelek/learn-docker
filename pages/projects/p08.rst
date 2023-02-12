@@ -1,6 +1,6 @@
-=========================================
-Memory limit test with PHP in a container
-=========================================
+=====================================
+Memory limit test in a Bash container
+=====================================
 
 Go to Project 8 from the git repository root:
 
