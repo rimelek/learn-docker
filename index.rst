@@ -3,14 +3,30 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _forums.docker.com: https://forums.docker.com/
+.. _YouTube (Hungarian): https://www.youtube.com/@itsziget
+.. _YouTube (English): https://www.youtube.com/@akos.takacs
+.. _Twitter: https://twitter.com/rimelek
+
 ========================================
 Welcome to Learn Docker's documentation!
 ========================================
 
-This project contains examples and scripts to help you learn about Docker.
+.. image:: https://s.gravatar.com/avatar/75141374867e958949813356a942acf0?s=120
+  :width: 120
+  :alt: Ákos Takács
+  :align: left
 
+My name is Ákos Takács and I really like working with Docker containers and containers in general.
+I decided to share my experience so I created this page to help you through your journey in learning Docker
+and related tools and concepts.
+I am a moderator on `forums.docker.com`_, I'm on YouTube (`YouTube (Hungarian)`_, `YouTube (English)`_),
+and you can follow me on `Twitter`_
+
+In this project I share explanations, examples and scripts.
 The examples were originally made for the participants of the Ipszilon Seminar in 2017 in Hungary. 
-The virtual machines were created in the Cloud For Education system.
+The virtual machines were created in the Cloud For Education system. Since then I added more contents
+and I will continue to do so.
 
 Before you start working with the example projects, read :doc:`pages/intro/getting-started`.
 
