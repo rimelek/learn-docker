@@ -4,8 +4,8 @@
    contain the root `toctree` directive.
 
 .. _forums.docker.com: https://forums.docker.com/
-.. _YouTube (Hungarian): https://www.youtube.com/@itsziget
-.. _YouTube (English): https://www.youtube.com/@akos.takacs
+.. _@itsziget: https://www.youtube.com/@itsziget
+.. _@akos.takacs: https://www.youtube.com/@akos.takacs
 .. _Twitter: https://twitter.com/rimelek
 
 ========================================
@@ -20,7 +20,7 @@ Welcome to Learn Docker's documentation!
 My name is Ákos Takács and I really like working with Docker containers and containers in general.
 I decided to share my experience so I created this page to help you through your journey in learning Docker
 and related tools and concepts.
-I am a moderator on `forums.docker.com`_, I'm on YouTube (`YouTube (Hungarian)`_, `YouTube (English)`_),
+I am a moderator on `forums.docker.com`_, I'm on YouTube (`@itsziget`_ (Hungarian), `@akos.takacs`_ (English)),
 and you can follow me on `Twitter`_
 
 In this project I share explanations, examples and scripts.
