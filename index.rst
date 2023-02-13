@@ -52,3 +52,9 @@ Before you start working with the example projects, read :doc:`pages/intro/getti
    pages/projects/p08
    pages/projects/p09
    pages/projects/p10
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Advanced topics
+
+   pages/advanced/kernel-namespaces-network
