@@ -1,6 +1,6 @@
-============================================
-Kernel namespaces and containers in practice
-============================================
+=================================================
+Docker network and network namespaces in practice
+=================================================
 
 Linux Kernel Namespaces in general
 ==================================
