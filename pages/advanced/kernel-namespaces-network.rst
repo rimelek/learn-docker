@@ -550,8 +550,8 @@ Debugging of the Minotour
   :width: 660
   :height: 371
 
-I call this technique "Debugging of the Minotour" because unlike before when we ran a new container to attach it to an
-other containers network namespace, we are still on the host and we use most of the host's namespaces and we choose
+I call this technique "Debugging of the Minotour" because unlike before when we ran a new container to attach it to
+another containers network namespace, we are still on the host and we use most of the host's namespaces and we choose
 to use one container's mount namespace (and only the mount namespace) and another container's network namespace
 (and only the network namespace). As we were creating a Minotour where the body of the Minotour is the mount namespace
 of the debugger container with all of its tools and the head is the other containers network namespace which we want to
