@@ -1,3 +1,5 @@
+.. _nicolaka/netshoot: https://hub.docker.com/r/nicolaka/netshoot
+
 =================================================
 Docker network and network namespaces in practice
 =================================================
@@ -561,27 +563,66 @@ debug. To do this, we use only :code:`nsenter` and nothing else.
   :width: 660
   :height: 365
 
+We know that we can use an executable on the host's filesystem and run it in a network namespace.
+We can also choose the mount namespace and that can be the filesystem of a running container.
+First we want to have a running debugger container.
+`nicolaka/netshoot`_ is an excellent image to start a debugger container from. We need to run it in detached mode
+(:code:`-d`) so it will run in the background (not attaching to the container's namespaces) and also in interactive mode
+(:code:`-i`) so it will keep running instead of exiting immediately.
+
 .. code:: bash
 
-  docker run -d -i --name debug nicolaka/netshoot
+  docker run -d -i --name debug nicolaka/netshoot:v0.9
+
+Now we need to get the sandbox key for the network namespace and since we want to debug the PHP container,
+we will get the sandbox key from it. We also need something for the mount namespace of the debugger container.
+This is a good time to learn that if we have an existing process, we can find all of its namespaces using a path
+like this:
+
+.. code:: text
+
+  /proc/<PID>/ns/<NAMESPACE>
+
+where :code:`<PID>` is the process id and :code:`<NAMESPACE>` in case of the discussed best known namespaces is one of
+the followings: :code:`mnt`, :code:`net`, :code:`pid`. We could use :code:`/proc/$pid/ns/net` instead of the sandbox key,
+but in this example I will keep it to demonstrate that you can do both.
 
 .. code:: bash
 
   php_sandbox_key=$(docker container inspect php --format '{{ .NetworkSettings.SandboxKey }}')
   debug_pid=$(docker container inspect debug --format '{{ .State.Pid }}')
 
+Now that we have the variables, let's use :code:`nsenter` a new way. So far we used the sandbox key only to help
+the :code:`ip` command to recognize the network namespaces. Now we have to refer to it directly and :code:`nsenter`
+can do that.
+
 .. code:: bash
 
   sudo nsenter --net=$php_sandbox_key --mount=/proc/$debug_pid/ns/mnt ping dns.google
+
+This way we have a ping command running, but sometimes we need to do more debugging.
+The :code:`ping` command is almost always available on Linux systems, although
+you can use `tshark <https://www.wireshark.org/docs/man-pages/tshark.html>`_
+or `tcpdump <https://www.tcpdump.org/>`_ to see the network packets, but I prefer to use :code:`tshark`.
+The following command will show us packets going through the debugger container's :code:`eth0` interface
+so you can actually see the source of everything before those packets are reaching the :code:`veth*` interface
+on the host. Since you can use tshark from the debugger container, you don't have to install it.
+In case you have a more advanced debugger script which for some reason needs to access other namespaces on the host,
+you can do that too.
 
 .. code:: bash
 
   sudo nsenter --net=$php_sandbox_key --mount=/proc/$debug_pid/ns/mnt tshark -i eth0
 
+As a final step, open a new terminal and generate some traffic on the container network.
+Get the ip address of the container and use :code:`curl` to get the main page of the website in the container.
+
 .. code:: bash
 
   ip=$(docker container inspect php --format '{{ .NetworkSettings.IPAddress }}')
   curl "$ip"
+
+As a result, in the previous terminal window you should see the request packets and the response.
 
 
 
