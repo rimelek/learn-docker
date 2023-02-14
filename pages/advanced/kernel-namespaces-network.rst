@@ -554,7 +554,7 @@ I call this technique "Debugging of the Minotour" because unlike before when we 
 another container's network namespace, we are still on the host and we use most of the host's namespaces and we choose
 to use one container's mount namespace (and only the mount namespace) and another container's network namespace
 (and only the network namespace). As we were creating a Minotour where the body of the Minotour is the mount namespace
-of the debugger container with all of its tools and the head is the other containers network namespace which we want to
+of the debugger container with all of its tools and the head is the other container's network namespace which we want to
 debug. To do this, we use only :code:`nsenter` and nothing else.
 
 .. image:: https://ams03pap003files.storage.live.com/y4mWwg4TjkrinTW0umXmovn_zlsMsu0oXjQICPIiDwHHQaZkVIUHLxfPtELVVUwW09unIqiDzOqS_w0hPbh1UFt7l7rkg_IN2s2qVxWDlA2XZmxu7Z5JTNsjiEdbhTdJB1i-VqefQBJTTx39UrRNeYXqTrf3ZkCDLBP6sU532CU3R9M9NOQxod5kZLfD1QgHNlw?width=660&height=365&cropmode=none
