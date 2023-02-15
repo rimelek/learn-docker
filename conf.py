@@ -10,7 +10,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
+import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -29,6 +29,7 @@ author = 'Ákos Takács'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+  "sphinxext.opengraph",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,3 +52,8 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ['_static']
+
+ogp_site_name = 'Learn Docker'
+ogp_site_url = 'https://learn-docker.it-sziget.hu' \
+  if os.getenv('BUILD_ENV', 'prod') == 'prod'\
+  else os.getenv('DEV_SITE_URL', 'http://localhost:8080')

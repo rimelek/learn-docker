@@ -1,7 +1,13 @@
-version: "3.9"
+x-dev-site-port: &dev-site-port ${PORT:-80}
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        DEV_SITE_PORT: *dev-site-port
     ports:
-      - ${PORT:-80}:8043
+      - target: 8043
+        published: *dev-site-port
+        protocol: tcp
+        mode: host
