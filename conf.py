@@ -54,9 +54,9 @@ html_theme = 'sphinx_rtd_theme'
 # html_static_path = ['_static']
 
 ogp_site_name = 'Learn Docker'
-if os.getenv('READTHEDOCS', '0') == '0':
-  ogp_site_url = os.getenv('DEV_SITE_URL', 'http://localhost:8080')
-else:
-  ogp_site_url = 'https://learn-docker.it-sziget.hu/'\
-                 + os.getenv('READTHEDOCS_LANGUAGE')\
-                 + '/' + os.getenv('READTHEDOCS_VERSION')
+#if os.getenv('READTHEDOCS', '0') == '0':
+#  ogp_site_url = os.getenv('DEV_SITE_URL', 'http://localhost:8080')
+#else:
+#  ogp_site_url = 'https://learn-docker.it-sziget.hu/'\
+#                 + os.getenv('READTHEDOCS_LANGUAGE')\
+#                 + '/' + os.getenv('READTHEDOCS_VERSION') + '/'
