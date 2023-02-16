@@ -624,7 +624,74 @@ Get the ip address of the container and use :code:`curl` to get the main page of
 
 As a result, in the previous terminal window you should see the request packets and the response.
 
+Testing a web-based application without internet in a container
+===============================================================
 
+Running a web browser in a net namespace on Linux (Docker CE)
+-------------------------------------------------------------
+
+If you are running Docker CE on Linux (not Docker Desktop), you can just use a web browser on your host
+operating system and run it in the network namespace of a container. If the application inside is listening on
+localhost, you can access it from the web browser in the same network namespace.
+
+
+.. image:: https://ams03pap003files.storage.live.com/y4m6ttLxII7ZuOO9XM71cxcLPYhtAoda0zvw_av_anauoCriMR4_CzK0W3Mrmp_GNtOXY0pFYtNXIxdUqXoN6p-iGelwH-eh_zxKW4LiN5O51ROevUxhck26uAzfsonkqidFHX4onEilJw7yk5IuMhSsCoBAeA6ioEbhx30jcfihB0yFUVcurVhSeDTcda9X8UJ?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
+
+.. code:: bash
+
+  docker run -d --name php-networkless --network none itsziget/phar-examples:1.0
+  sudo nsenter --net=/proc/$pid_networkless/ns/net curl localhost
+
+Or sometimes you know that the frontend is safe to use, so you only want to test the backend.
+
+.. image:: https://ams03pap003files.storage.live.com/y4mXhMjni9wwMmpFJqj3lPKJojYSac-gNBsOBnPhauY_NIlBfbyF8Pyd9oV-ldlPsedtoV5HsKNKrWa-mQyVszazCiSLG1ErUId4e9ljFoEmogLdTYHmD5Knx5GWFjMb7_q0383amuLCjSf95O5-bj2-9utVrLcORhWwirk3RH6HvJr0_R-pPTWZqdWvhfmVrP9?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
+
+In that case you can run the container with network, but only with an "internal" network, so the host and the container
+can communicate, but no traffic will be forwarded to the internet from the Docker bridge.
+This way you can run your browser "on the host" and use the container's ip address instead of "localhost".
+
+.. note:: Actually everything is running on the host. Only the isolated processes will see it differently.
+
+You need to
+
+- create an internal network,
+- run the container using the internal network
+- get the ip address of the container
+- open your web browser or use curl to access the website
+
+.. code:: bash
+
+  docker network create internal --internal
+  docker run -d --name php-internal --network internal itsziget/phar-examples:1.0
+  ip_internal=$(docker container inspect php-internal --format '{{ .NetworkSettings.Networks.internal.IPAddress }}')
+  curl "$ip_internal"
+
+Since curl will not execute javascript, you can even check the generated source code, but nothing in the container will
+be able to send request to the outside world except the host machine:
+
+.. code:: bash
+
+  docker exec php-internal ping 8.8.8.8
+
+.. image:: https://ams03pap003files.storage.live.com/y4mECX4qRmNTWbprlH3XGcvtUsLmlFzsXN8URNWhaMh0xAQggd-yqWt2jLZ1Hw-id8a9zHhRlAacKNvx_a3T7x3na3jJb6cQZYJn-7mxUn-TeHOEQjF4fmzsVdT4CJ1evgpdQxbYkPy7tXbD58XWH6Hdj_XCY4aOXyKsOWUA1cUTaB_UpM0iMc8zt4MVOapsX3p?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
+
+.. image:: https://ams03pap003files.storage.live.com/y4mHdlEGf-ZLDYjXzq4C9mPSbTLfh70-KrSgGgqhE7IXgJ678siqxhjM6h3R62O1GIHqgc8ZaqXexQqDI1hDq7ejhjFEMX5skuuHUgvu49Ito3HLsfRyTlHDNhuIcMb_oE9yUdpC04oNWgRVrD3H29la6gk5G97WKp0KGYDaAFjm56gnbqMq-G6sRuHp3eKcNPB?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
+
+.. image:: https://ams03pap003files.storage.live.com/y4mSSQPTZz89Jl3ZGS-r19g4u2tWAJwAxSFgeFW5UolTHiEG7VBRlzcTAYPSFclGmXiUHjfe6xia5kjMJmCL6h7gm9TijyJG9fTDwfTz_xNNTWK73RNxNpT5qEq1Hg6RJxEFOUguIpGbaQDpkld0QKDbuTQW0-Lp2BVnhGnlCYomOpAyI4bctjjs5XWiy0K_6Mp?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
+
+.. image:: https://ams03pap003files.storage.live.com/y4m1KEFbfoWny_yv1Bp1TBAqStQfTw3DjvXsy4nX-jIhH3CajaoaYesfUqHIQ2toAJQEhKCVEvssJiyo8jIBsaTFNB2yN2qMoPQLIOVQ1bPzWDFnXdoE95U0Y6_0r0rRAoMDLE_6GVVVC9V33ygw8Ot6VvXm51c5LnVy02w1a9oC_x2f2YK1n8SIXqFLZVEu10w?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
 
 
 Used sources
