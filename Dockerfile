@@ -11,8 +11,6 @@ RUN pip3 --disable-pip-version-check install -r /code/requirements.txt
 
 COPY "." "/code/"
 
-ARG DEV_SITE_PORT=80
-ENV DEV_SITE_URL="http://localhost:${DEV_SITE_PORT}"
 RUN cd /code \
  && sphinx-build -M html "." "_build" -W
 
