@@ -10,6 +10,7 @@ COPY "requirements.txt" "/code/"
 RUN pip3 --disable-pip-version-check install -r /code/requirements.txt
 
 COPY "." "/code/"
+
 RUN cd /code \
  && sphinx-build -M html "." "_build" -W
 

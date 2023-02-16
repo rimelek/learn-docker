@@ -8,6 +8,9 @@
 .. _@akos.takacs: https://www.youtube.com/@akos.takacs
 .. _Twitter: https://twitter.com/rimelek
 
+:og:description: Learn about Docker and the technology behind it through examples
+
+
 ========================================
 Welcome to Learn Docker's documentation!
 ========================================
