@@ -231,8 +231,8 @@ It is actually the part of the UTS namespace. Since the long name of the namespa
 I will not share it at this point of the tutorial. The good news is that we can also use the UTS namespace of the
 container by adding the :code:`-u` flag to the "nsenter" command, and this is what the third line does.
 
-"ip" netns" to create new network namespaces
---------------------------------------------
+"ip netns" to create new network namespaces
+-------------------------------------------
 
 "nsenter" was great for running commands in existing namespaces. If you want to create network namespaces,
 you can use the :code:`ip netns` command, but before we create one, let's list existing network namespaces:
