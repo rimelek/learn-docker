@@ -278,7 +278,7 @@ The "ls" command isn't required here, but can show us that we indeed created a f
 
   .. code-block:: bash
 
-    nsenter --net=/run/netns/test ip addr
+    sudo nsenter --net=/run/netns/test ip addr
 
 The output will be
 
@@ -408,8 +408,8 @@ virtual machine created by `Multipass <https://multipass.run/>`_. By default, th
 is `127.0.0.53`. Remember, that this IP address belongs to the loopback interface which is different in each
 network namespace. In the network namespace of our PHP container there is no service listening on this IP address.
 
-Solution 1: Change the configuration of on the host
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+Solution 1: Change the configuration on the host
+++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. danger::
 
