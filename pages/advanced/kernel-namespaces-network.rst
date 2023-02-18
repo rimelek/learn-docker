@@ -271,6 +271,15 @@ The "ls" command isn't required here, but can show us that we indeed created a f
 
   sudo ip netns exec test ip addr
 
+.. note::
+
+  You could actually use nsenter to run :code:`ip addr` in a network namespace even if you don't have an existing
+  process.
+
+  .. code-block:: bash
+
+    nsenter --net=/run/netns/test ip addr
+
 The output will be
 
 .. code:: text
