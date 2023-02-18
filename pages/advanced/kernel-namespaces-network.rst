@@ -280,7 +280,7 @@ The output will be
 
 As you can see this new network namespace doesn't even have a loopback IP address so basically
 it doesn't have "localhost". It shows us that a network namespace does not give us a fully configured
-private network, it only gives us the network isolation. Now that we know it it is not surprising
+private network, it only gives us the network isolation. Now that we know it, it is not surprising
 that the following commands will give us error messages.
 
 .. code:: bash
