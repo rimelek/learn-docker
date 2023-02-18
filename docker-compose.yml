@@ -1,13 +1,9 @@
-x-dev-site-port: &dev-site-port ${PORT:-80}
-
 services:
   web:
     build:
       context: .
-      args:
-        DEV_SITE_PORT: *dev-site-port
     ports:
       - target: 8043
-        published: *dev-site-port
+        published: ${PORT:-80}
         protocol: tcp
         mode: host
