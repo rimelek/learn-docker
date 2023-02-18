@@ -510,6 +510,10 @@ to learn about the relation of different types of namespaces. The solution is ba
 - Mounting a file over a symbolic link is not possible, but mounting over an empty file which is a target
   of a symbolic link works.
 
+.. image:: https://ams03pap003files.storage.live.com/y4mtBjb3SWEr509GikMqcFifbSbWvRHVqnRPaGKnfhKZa2saQwrhiU_aapdOhAs7lqmeypQsNL3_XYZw_B4XykZYaBgwzXbcd6ztRXe5TGwjUVev79gw3zuit-W3j-0lJoAAxb2u6ATf8qQ-sDHwcwKcKQgcvkOnzI0bmguPPWrkHM4sLFAxW5IjurrDIVS_X9g?width=1024&height=458&cropmode=none
+  :width: 660
+  :height: 295
+
 First we will set the variables again with an additional :code:`project_dir` which you can change if you want
 
 .. code:: bash
