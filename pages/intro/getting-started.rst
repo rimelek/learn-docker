@@ -44,6 +44,8 @@ Mirantis Container Runtime
   used for `Mirantis Kubernetes Engine <https://www.mirantis.com/software/mirantis-kubernetes-engine/>`_
   If you need commercial support (from Mirantis) this is the recommended way.
 
+.. _getting_started_docker_desktop:
+
 Docker Desktop
   Docker Desktop was created for two purposes:
 

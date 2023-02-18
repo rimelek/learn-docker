@@ -99,12 +99,17 @@ Since this is on the host outside of the network namespace, any process running 
 address so processes running inside the container could use this IP to access a webservice listening on it.
 
 Sometimes you don't want a containerized process to access the internet, because you don't trust an application
-and you want to test or run in without internet access for security reasons indefinitely. This is when
+and you want to test or run it without internet access for security reasons indefinitely. This is when
 "internal networks" can help.
 
 .. image:: https://ams03pap003files.storage.live.com/y4mppUzYKGFL3m29qkojJsrZ04p08epKXHllkDNM1T_mfW8KyEZ9MFmklxHqUrSWfo66V0YfA4XWalAHO5jTW76fuNjiwaM_Rea1VIUOZOTBmmfJFKqIBqPKat9Ytnoq6AnIqpM5icNg6jjPZ44Y2HCn6xeppNz4vmAUKiqz0lYOvQwofrUkKUOe-zeXrqMvtEZ?width=660&height=371&cropmode=none
   :width: 660
   :height: 371
+
+.. _internal_network_port_forward:
+
+Containers don't accept port forwards on IP addresses in internal networks so it is not just rejecting
+outgoing traffic to the outside world, but also rejecting incoming requests from other networks.
 
 You can create a user-defined Docker network which will have a new bridge. If you also define that network as "internal"
 using the following command for example
@@ -677,22 +682,139 @@ be able to send request to the outside world except the host machine:
 
   docker exec php-internal ping 8.8.8.8
 
+Running a web browser in a net namespace in a VM (Docker Desktop)
+-----------------------------------------------------------------
+
+When you start to use Docker Desktop, one of the most important facts is that your containers will run in a virtual
+machine even on Linux (See: :ref:`Getting Started: Docker Desktop <getting_started_docker_desktop>`).
+It means your actual host, the virtual machine and the container's will have their own "localhost".
+
 .. image:: https://ams03pap003files.storage.live.com/y4mECX4qRmNTWbprlH3XGcvtUsLmlFzsXN8URNWhaMh0xAQggd-yqWt2jLZ1Hw-id8a9zHhRlAacKNvx_a3T7x3na3jJb6cQZYJn-7mxUn-TeHOEQjF4fmzsVdT4CJ1evgpdQxbYkPy7tXbD58XWH6Hdj_XCY4aOXyKsOWUA1cUTaB_UpM0iMc8zt4MVOapsX3p?width=660&height=371&cropmode=none
   :width: 660
   :height: 371
+
+The network namespaces will be in that virtual machine, so you can't just run your web browser on your
+host operating system inside the network namespace.
 
 .. image:: https://ams03pap003files.storage.live.com/y4mHdlEGf-ZLDYjXzq4C9mPSbTLfh70-KrSgGgqhE7IXgJ678siqxhjM6h3R62O1GIHqgc8ZaqXexQqDI1hDq7ejhjFEMX5skuuHUgvu49Ito3HLsfRyTlHDNhuIcMb_oE9yUdpC04oNWgRVrD3H29la6gk5G97WKp0KGYDaAFjm56gnbqMq-G6sRuHp3eKcNPB?width=660&height=371&cropmode=none
   :width: 660
   :height: 371
 
+You can't even run the web browser in the virtual machine (in case of Docker Desktop) since that is just a server
+based on LinuxKit without GUI inside so you can't simply just use an internal network and connect to the IP address
+from the browser.
+
 .. image:: https://ams03pap003files.storage.live.com/y4mSSQPTZz89Jl3ZGS-r19g4u2tWAJwAxSFgeFW5UolTHiEG7VBRlzcTAYPSFclGmXiUHjfe6xia5kjMJmCL6h7gm9TijyJG9fTDwfTz_xNNTWK73RNxNpT5qEq1Hg6RJxEFOUguIpGbaQDpkld0QKDbuTQW0-Lp2BVnhGnlCYomOpAyI4bctjjs5XWiy0K_6Mp?width=660&height=371&cropmode=none
   :width: 660
   :height: 371
+
+We need a much more complex solution which requires everything that we have learnt so far and more.
+
+- We know that our PHP app has to run in a container without internet access
+- We also know that we can achieve that by using internal networks or no network at all except loopback interface.
+- Since Docker Desktop runs containers in a virtual machine, we definitely need network in the PHP container
+  so we can access it from the outside.
+  It means we obviously need to forward a port from the host to Docker Desktop's virtual machine,
+  but we have also learnt that internal networks `do not accept forwarded ports <internal_network_port_forward>`_.
+- We can however run a container with only an internal network and a proxy container with an internal and a public
+  network which will be accessible from the outside. This container will forward all traffic to another container
+  in the internal network.
+- There is a way to run a web browser in a container and you can run this container in the PHP container's
+  network namespace. The problem is that you need to access the graphical interface inside the container.
+- Fortunately there is also a sponsored OSS project called `linuxserver/firefox <https://hub.docker.com/r/linuxserver/firefox>`_.
+  This project let's you run Firefox and a remote desktop server in the container.
+
+How will this all look like? The following diagram illustrates it.
 
 .. image:: https://ams03pap003files.storage.live.com/y4m1KEFbfoWny_yv1Bp1TBAqStQfTw3DjvXsy4nX-jIhH3CajaoaYesfUqHIQ2toAJQEhKCVEvssJiyo8jIBsaTFNB2yN2qMoPQLIOVQ1bPzWDFnXdoE95U0Y6_0r0rRAoMDLE_6GVVVC9V33ygw8Ot6VvXm51c5LnVy02w1a9oC_x2f2YK1n8SIXqFLZVEu10w?width=660&height=371&cropmode=none
   :width: 660
   :height: 371
 
+- You will use a web browser on the host as a remote desktop client to access the forwarded port of the proxy server
+  on the IP address of the public network.
+- The PHP container will have an internal network
+- The Firefox container with the remote desktop client will use the network namespace of the PHP container
+  so Firefox will not have internet access.
+- The proxy server (with both internal and public network) will forward your request to the PHP container's
+  network namespace to access the remote desktop server.
+- The remote desktop server will stream back the screen only through the proxy server so
+  the graphical interface of the containerized Firefox will appear in the web browser running on your host.
+  If a harmful application tries to use JavaScript to access another website it won't be able to
+  since all you can see is a picture of a web browser running in an isolated environment.
+
+I have created a compose file which we can use to create this whole environment.
+
+Create a project folder anywhere you like. This is mine:
+
+.. code-block:: bash
+
+  project_dir="$HOME/Data/projects/testprojects/netns"
+  mkdir -p "$project_dir"
+  cd "$project_dir"
+
+Download the compose file from GitHub
+
+.. code-block:: bash
+
+  curl --output compose.yml \
+       https://gist.githubusercontent.com/rimelek/91702f6e9c9e0ae75a72a42211099b63/raw/339beaf0c50790e86ab8a011ed298c250da3b7ec/compose.yml
+
+Compose file content:
+
+.. code-block:: yaml
+
+  networks:
+    default:
+      internal: true
+    public:
+
+  services:
+    php:
+      image: itsziget/phar-examples:1.0
+
+    firefox:
+      network_mode: service:php
+      environment:
+        PUID: 1000
+        PGID: 1000
+        TZ: Europe/London
+      shm_size: "1gb"
+      image: lscr.io/linuxserver/firefox:101.0.1
+
+    proxy:
+      image: alpine/socat:1.7.4.4-r0
+      command: "TCP-LISTEN:3000,fork,reuseaddr TCP:php:3000"
+      ports:
+        - 3000:3000
+      networks:
+        - default
+        - public
+
+
+Start the containers:
+
+.. code-block:: bash
+
+  docker compose up -d
+
+If you open :code:`localhost:3000` in your browser, you will see the containerized browser and the demo application
+without CSS and JavaScript since those files would be loaded from an external source and they are not available.
+
+.. image:: https://ams03pap003files.storage.live.com/y4mf8p2GdGcbpsiRfhhoAul1AGccS-ltD0xLb1Xwwk18GT_catC9ZKsnFeRFNhydqLS8_oX8m9eYgUbbIaB6bIEQOP2ycerGxZTc1i8IbX50GLRS7ENcKh-_n6PVgAb2CC0yQ9nzKFLwSxPN8y0hm6l790oRmcQT9JdjRpZ4Oeue9bvWg4-wooi_anUnuFKAe3C?width=1024&height=608&cropmode=none
+  :width: 660
+  :height: 392
+
+Now that you know it is trying to load CSS and some harmless JavaScripts, you can run it with a public network
+
+.. code-block:: bash
+
+  docker run -d --name php-internet -p 8080:80  itsziget/phar-examples:1.0
+
+and open it in an other tab on port 8080.
+
+.. image:: https://ams03pap003files.storage.live.com/y4mJmFWwgDzMO3t3sTv6E7iqACDdmxsKyd5HKz45U6xXlaP6dmnhCV-iN3fEAT6ZFY5JGXvOlXCj1AxyUnDDkW5WEUBw_qIDO1NiXQ4NO5uJfdkUdbHcWLQjYwH7g1kVRhUZ29BbmyRC1JZnRO2wdZhOAN7JgxIc35xSg1lE1kvJeF4VJc5VkmsJi9lINq1l1UJ?width=1024&height=596&cropmode=none
+  :width: 660
+  :height: 392
 
 Used sources
 ============
