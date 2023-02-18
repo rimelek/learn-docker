@@ -550,14 +550,14 @@ the PHP container to run ping.
   64 bytes from dns.google (8.8.4.4): icmp_seq=2 ttl=112 time=12.1 ms
   64 bytes from dns.google (8.8.4.4): icmp_seq=3 ttl=112 time=11.7 ms
 
-Debugging of the Minotour
+Debugging the Minotour
 -------------------------
 
-.. image:: https://ams03pap003files.storage.live.com/y4mr1D0jGmHwCggOST2qxXX06T3N0wpYgBEwKj8bvoD_ZkqvlcEQQZ5fx6RjAquKsid1VUq-gOF41fFLlFIMAyQCVy3msfDSS9R5ZfTV684EXRHIb9AGgxky1bMw3WliOWC9DwZzy5ykAoLG5jENJ2QJ5E1iT-fauWhuaXySqBzewoJbcWKYq96kw9NJrrTmQwQ?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4ma1e5P3H-skpwTnHOUe_ME9rn3w3T4wukF93GCb5wMnJZLxpHydFZN0EiDF620u1mTkozX-QKGNJ0UceloGmfFeQDZu8J9K1vhV6Kg2Cpt8k3uw9K1I9ZFeYUyappE6EN8Vfy91F_jTKqvgYjmvXk0_Nk_kJqYR5bsTI9haf7OOcW8ENWjx-wzpvsbgdFsSyv?width=660&height=369&cropmode=none
   :width: 660
-  :height: 371
+  :height: 369
 
-I call this technique "Debugging of the Minotour" because unlike before when we ran a new container to attach it to
+I call this technique "Debugging the Minotour" because unlike before when we ran a new container to attach it to
 another container's network namespace, we are still on the host and we use most of the host's namespaces and we choose
 to use one container's mount namespace (and only the mount namespace) and another container's network namespace
 (and only the network namespace). As we were creating a Minotour where the body of the Minotour is the mount namespace
