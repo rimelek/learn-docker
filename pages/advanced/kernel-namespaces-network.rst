@@ -667,6 +667,7 @@ localhost, you can access it from the web browser in the same network namespace.
 .. code:: bash
 
   docker run -d --name php-networkless --network none itsziget/phar-examples:1.0
+  pid_networkless=$(docker container inspect php --format '{{ .State.Pid }}')
   sudo nsenter --net=/proc/$pid_networkless/ns/net curl localhost
 
 Or sometimes you know that the frontend is safe to use, so you only want to test the backend.
