@@ -12,7 +12,7 @@ Linux Kernel Namespaces in general
 
 Let's start with a simple example so we can understand why namespaces are useful.
 
-.. image:: https://ams03pap003files.storage.live.com/y4m1n8TZUq1S6a4wCgpfkei-rnJHsvtcNULyw4cVjsPVblZo5ahi9pLCXYmmBQwH-mGePpXOXSjjwyIoOSdD8jZDmb-evAaciWiSxOankmwxfzspFKhF_hcCXHgbuZf9uIQqgJTHjW-PQaml-8qZhkEEWYiXki865ymC_MHzzgSTlLcwBBj2t7ghGfKf48i02pd?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4m1n8TZUq1S6a4wCgpfkei-rnJHsvtcNULyw4cVjsPVblZo5ahi9pLCXYmmBQwH-mGePpXOXSjjwyIoOSdD8jZDmb-evAaciWiSxOankmwxfzspFKhF_hcCXHgbuZf9uIQqgJTHjW-PQaml-8qZhkEEWYiXki865ymC_MHzzgSTlLcwBBj2t7ghGfKf48i02pd?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -36,7 +36,7 @@ That folder could be empty, but it is very often a folder that contains very sim
 as the root filesystem does. This way PHP will "think" it is running on a different host
 and it won't even know if there is anything outside that folder.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mzjrcPyuVn9OD1zYwNmEBN2pyox7VG1FQ_RmxFettn51tEtHuaAJUiHdC5cgro8cvuwTu4E4rlQMky1I7qCMklRt4o2F0OB-rVuihnArI3HcCO-yVj8jIXJptP47avmYzZAE4kGftN0LeCBK_xu1Vz_ckFq0GmP2BBL9Aw_cjfFyvOTSw2sYxoR8VL-wtLjAw?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mzjrcPyuVn9OD1zYwNmEBN2pyox7VG1FQ_RmxFettn51tEtHuaAJUiHdC5cgro8cvuwTu4E4rlQMky1I7qCMklRt4o2F0OB-rVuihnArI3HcCO-yVj8jIXJptP47avmYzZAE4kGftN0LeCBK_xu1Vz_ckFq0GmP2BBL9Aw_cjfFyvOTSw2sYxoR8VL-wtLjAw?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -46,7 +46,7 @@ only the processes in the same PID namespace. Since on Linux there is always a p
 for any process in the network namespace, PHP will have PID 1. For any process outside of that PID namespace,
 PHP will have a larger process ID like 2324.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mxFENT6Q7HHAuAMs8cMVMbmDPPAXSEP8RW196gW0iUp9DCO0LqQLvkEI76UEMlzk6Rcaua1kBdZ16YqMlMGwy2r9yBPTyOikhfT7OSk_DSfcZdhJTsGAaJggTTSjS51UH69UNdBctkJdyBEYZxzZuhzhcmlvGZk-SxyJ07zSGkEtpnOMWoind3nAbU3xZvYjN?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mxFENT6Q7HHAuAMs8cMVMbmDPPAXSEP8RW196gW0iUp9DCO0LqQLvkEI76UEMlzk6Rcaua1kBdZ16YqMlMGwy2r9yBPTyOikhfT7OSk_DSfcZdhJTsGAaJggTTSjS51UH69UNdBctkJdyBEYZxzZuhzhcmlvGZk-SxyJ07zSGkEtpnOMWoind3nAbU3xZvYjN?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -54,14 +54,14 @@ And finally we arrived to the network namespace. Network namespace can hide netw
 in the namespace. The network namespace can have its own IP address, but it will not necessarily have one.
 Thanks to the network namespace, PHP will only be able to listen its own IP address in a Docker network.
 
-.. image:: https://ams03pap003files.storage.live.com/y4m56sZ2NrTbPALYdSQalVVVOUuS-X54NrBLeeYMKNXhHGbr7QjW9y1YX5qzFDSgRm0Sw3YlI65Fge7R3EpdeircZLwS2cXiqVpEf7ml9iSidaDmrELqFktZF3wqjhE4fhwIm1-zeKhpUsCnFi_SlRsHkRtxgzgfL7qaK6OyHR1ou3l1lXKjQ8mHDwTkGfcoK-C?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4m56sZ2NrTbPALYdSQalVVVOUuS-X54NrBLeeYMKNXhHGbr7QjW9y1YX5qzFDSgRm0Sw3YlI65Fge7R3EpdeircZLwS2cXiqVpEf7ml9iSidaDmrELqFktZF3wqjhE4fhwIm1-zeKhpUsCnFi_SlRsHkRtxgzgfL7qaK6OyHR1ou3l1lXKjQ8mHDwTkGfcoK-C?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
 These namespaces are independent and not owned by the PHP process. Any other process could be added to these namespaces,
 and you don't need to run those processes in each namespace.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mtcvQh0D9f6yXwWqGuKJt7FEtfqYE5Ys-Mw0ke22z26QotmvwzYGeX_CjH-ltZi5CLVX6bG2h8eXkbFfp4PCBMSCi-jQKZvA66Ta5EkHdiiuoU9SE4ouQyt4w_rWTu293SG6mqBDL3bXIu0IFeBoHwbiH6CGe21b4YwPiahAgIy0Ef3AVWe4iZl471yi9LY2Z?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mtcvQh0D9f6yXwWqGuKJt7FEtfqYE5Ys-Mw0ke22z26QotmvwzYGeX_CjH-ltZi5CLVX6bG2h8eXkbFfp4PCBMSCi-jQKZvA66Ta5EkHdiiuoU9SE4ouQyt4w_rWTu293SG6mqBDL3bXIu0IFeBoHwbiH6CGe21b4YwPiahAgIy0Ef3AVWe4iZl471yi9LY2Z?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -76,7 +76,7 @@ Network traffic between a container and the outside world
 Your host machine usually has a network interface which is connected to the internet or at least to a local network.
 We will call it "the outside world".
 
-.. image:: https://ams03pap003files.storage.live.com/y4mFhcL1bVgyENw2zODj83Dq1Do9pAtW1Vu_LJyWvZX6h0ZKJHBiR1pJPZC9OnxHcM8S2h3wSczzH5i78a66BQ0FneBmaCs3RnroUGpRQq7-7qRf3NbdZREZUeRcrJzrjsyLpIjpQHleA4sTUWByNPgmvXYHsbZ3oJZKsNktcCVWqqFKjuC3ApTgmwhUy7KBLiF?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mFhcL1bVgyENw2zODj83Dq1Do9pAtW1Vu_LJyWvZX6h0ZKJHBiR1pJPZC9OnxHcM8S2h3wSczzH5i78a66BQ0FneBmaCs3RnroUGpRQq7-7qRf3NbdZREZUeRcrJzrjsyLpIjpQHleA4sTUWByNPgmvXYHsbZ3oJZKsNktcCVWqqFKjuC3ApTgmwhUy7KBLiF?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -85,7 +85,7 @@ The point is that traffic routed through this interface can leave the host machi
 its own network interface which is connected to another outside of the container on the host. The name of the interface
 on the host will start with "veth" followed by a hash.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mQMfMohZTsJLikmtdvp-yoAVD4AyXmudA8rLFTkY_vfBwVQMl3Rv3zIlbNHi9lwMMuitYSDXTOWdcpb6nyvQFkhI7bSTkuYyI5kHqZTN9jjsnSgWpGjQOlFIdcmSnBxJ6QY2yf2U54lAErzJ2MVJ9zFXC8u36_pCe-Ejd4qO2zjRx05KmMR0XyHLETQyN3wt8?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mQMfMohZTsJLikmtdvp-yoAVD4AyXmudA8rLFTkY_vfBwVQMl3Rv3zIlbNHi9lwMMuitYSDXTOWdcpb6nyvQFkhI7bSTkuYyI5kHqZTN9jjsnSgWpGjQOlFIdcmSnBxJ6QY2yf2U54lAErzJ2MVJ9zFXC8u36_pCe-Ejd4qO2zjRx05KmMR0XyHLETQyN3wt8?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -93,7 +93,7 @@ The veth interface will not have IP address. It could have, but Docker uses a di
 Docker network can communicate with each other. There will be a bridge network between the veth interface and eth0.
 The the bridge of the default Docker network is "docker0".
 
-.. image:: https://ams03pap003files.storage.live.com/y4majKY-A1ONQ4ymytVBW1-7ZXQyw1Q8DWGhqd1Pku8ofvzee8cgqkkjAtZDJ1SG5g4KFROeTswcxTglBK_4XEmktQtxvxnx8Eg5JJJKuYEOatgDeRUykZro2MbiVPogNfjg8EmLZeHQXQ9r_-BcPc5tMfbMggRVsLJipqb2NktZszCvxvMlzqk3tMOD0xUq3R2?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4majKY-A1ONQ4ymytVBW1-7ZXQyw1Q8DWGhqd1Pku8ofvzee8cgqkkjAtZDJ1SG5g4KFROeTswcxTglBK_4XEmktQtxvxnx8Eg5JJJKuYEOatgDeRUykZro2MbiVPogNfjg8EmLZeHQXQ9r_-BcPc5tMfbMggRVsLJipqb2NktZszCvxvMlzqk3tMOD0xUq3R2?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -105,7 +105,7 @@ Sometimes you don't want a containerized process to access the internet, because
 and you want to test or run it without internet access for security reasons indefinitely. This is when
 "internal networks" can help.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mppUzYKGFL3m29qkojJsrZ04p08epKXHllkDNM1T_mfW8KyEZ9MFmklxHqUrSWfo66V0YfA4XWalAHO5jTW76fuNjiwaM_Rea1VIUOZOTBmmfJFKqIBqPKat9Ytnoq6AnIqpM5icNg6jjPZ44Y2HCn6xeppNz4vmAUKiqz0lYOvQwofrUkKUOe-zeXrqMvtEZ?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mppUzYKGFL3m29qkojJsrZ04p08epKXHllkDNM1T_mfW8KyEZ9MFmklxHqUrSWfo66V0YfA4XWalAHO5jTW76fuNjiwaM_Rea1VIUOZOTBmmfJFKqIBqPKat9Ytnoq6AnIqpM5icNg6jjPZ44Y2HCn6xeppNz4vmAUKiqz0lYOvQwofrUkKUOe-zeXrqMvtEZ?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -131,7 +131,7 @@ namespace has its own localhost.
 
 Let's see what it means.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mrSPlwK5dG8gpAqcK-T4zOEgFpZrvMclsrhkRSEIYzJzMcoWV1Xm79u8vqyaoHyhBI83oTkwvCqN5a6F7qD0vHix4qK9jZXZ3ry3n3_JIfb4-F4mrPfDwdkqxraMdblvCbdtCyFZS47jiYIJy8LeWQnFuBNWKTizWnihSPEwUTtv8A4cZEw55wigmtbpJyP4X?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mrSPlwK5dG8gpAqcK-T4zOEgFpZrvMclsrhkRSEIYzJzMcoWV1Xm79u8vqyaoHyhBI83oTkwvCqN5a6F7qD0vHix4qK9jZXZ3ry3n3_JIfb4-F4mrPfDwdkqxraMdblvCbdtCyFZS47jiYIJy8LeWQnFuBNWKTizWnihSPEwUTtv8A4cZEw55wigmtbpJyP4X?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -140,7 +140,7 @@ able to access it, since it has a different localhost. The same is true when for
 is running on the host listening on port 3306 on localhost. The PHP process inside the container
 will not be able to reach it.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mfY8MswymXiqlxXUWUc90hHvRaSDOeqODcvK64ssgsNLpAh8xKwxZh4uGM3wpBZgJNjr5JaVYaqa3npDIQ5D-3NgGonwgGt4QE3KsgySwW4n7tY6cKzDlQaAfJyl-ARTRnlorF0lvGNhfhSLVZhKRCUwxS2DzBf1IcwRkpqZ9dXLCnlkJyp5v4AM85ajyG8xH?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mfY8MswymXiqlxXUWUc90hHvRaSDOeqODcvK64ssgsNLpAh8xKwxZh4uGM3wpBZgJNjr5JaVYaqa3npDIQ5D-3NgGonwgGt4QE3KsgySwW4n7tY6cKzDlQaAfJyl-ARTRnlorF0lvGNhfhSLVZhKRCUwxS2DzBf1IcwRkpqZ9dXLCnlkJyp5v4AM85ajyG8xH?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -153,14 +153,14 @@ Since the reason is the network namespace, you could just run the container in h
 which means you just don't get the network isolation. The host network mode does not mean that you are using
 a special Docker network. It only means you don't want the container to have its own network namespace.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mwLozQ9rgLbY3Mol-61Dh72xV0tY109mpEmvwb4tfz068zF5GaoycLeN_4dQ3yIIGy0wTnC7moh-oP0Vi5otpmetAVDmGo5r3aHsYxe6o28Bs5dVNIu4_4zoZxy32V-xRAaAS6yapJgYb8pAByCTZJddBdZ_uli3yTrkqZl9NYKzgpfa8jvdpj6uP3t_0x18R?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mwLozQ9rgLbY3Mol-61Dh72xV0tY109mpEmvwb4tfz068zF5GaoycLeN_4dQ3yIIGy0wTnC7moh-oP0Vi5otpmetAVDmGo5r3aHsYxe6o28Bs5dVNIu4_4zoZxy32V-xRAaAS6yapJgYb8pAByCTZJddBdZ_uli3yTrkqZl9NYKzgpfa8jvdpj6uP3t_0x18R?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
 Of course we wanted to have the network isolation and we want to keep it. The other solution is running another
 container which will use the same network namespace.
 
-.. image:: https://ams03pap003files.storage.live.com/y4m73QYpsCMLY_5zzZwYye7Vr9mSh4YB1BMmuG7Tl0i_vm6fu2R9GEB8m0HEc20FsWBDOS2TuW-TlWXphPcYq1wrQHEnN7A2RNBFULDC62TmnPnzop3jTrbMkO0tPtLoO-4vcqPjVctPAKNUMUqu02CX-0KqufP3Ghcq0SMSDpTjjVfsR25_9xZ3wDQhhikV11E?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4m73QYpsCMLY_5zzZwYye7Vr9mSh4YB1BMmuG7Tl0i_vm6fu2R9GEB8m0HEc20FsWBDOS2TuW-TlWXphPcYq1wrQHEnN7A2RNBFULDC62TmnPnzop3jTrbMkO0tPtLoO-4vcqPjVctPAKNUMUqu02CX-0KqufP3Ghcq0SMSDpTjjVfsR25_9xZ3wDQhhikV11E?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -398,7 +398,7 @@ error message.
 
 What happened?
 
-.. image:: https://ams03pap003files.storage.live.com/y4mbufvZdt6vshWKx-Kj1MXkOxlAZPhaViscJpKdqIG27H8QhKw4Nprd5tqpYRGppDDIjkj3jRBlYWAfdbl5enP2dYold3sN-Akchx8cT-7043rfEh07Fl1n4dH9KZpPIN5dCg0vh85fezDbqBuim9ff3VGIznDMHXFT5bH4M9bTeAD034WCXxD2P7-EnzaJO4E?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mbufvZdt6vshWKx-Kj1MXkOxlAZPhaViscJpKdqIG27H8QhKw4Nprd5tqpYRGppDDIjkj3jRBlYWAfdbl5enP2dYold3sN-Akchx8cT-7043rfEh07Fl1n4dH9KZpPIN5dCg0vh85fezDbqBuim9ff3VGIznDMHXFT5bH4M9bTeAD034WCXxD2P7-EnzaJO4E?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -569,7 +569,7 @@ the PHP container to run ping.
 Debugging the Minotour
 -------------------------
 
-.. image:: https://ams03pap003files.storage.live.com/y4ma1e5P3H-skpwTnHOUe_ME9rn3w3T4wukF93GCb5wMnJZLxpHydFZN0EiDF620u1mTkozX-QKGNJ0UceloGmfFeQDZu8J9K1vhV6Kg2Cpt8k3uw9K1I9ZFeYUyappE6EN8Vfy91F_jTKqvgYjmvXk0_Nk_kJqYR5bsTI9haf7OOcW8ENWjx-wzpvsbgdFsSyv?width=660&height=369&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4ma1e5P3H-skpwTnHOUe_ME9rn3w3T4wukF93GCb5wMnJZLxpHydFZN0EiDF620u1mTkozX-QKGNJ0UceloGmfFeQDZu8J9K1vhV6Kg2Cpt8k3uw9K1I9ZFeYUyappE6EN8Vfy91F_jTKqvgYjmvXk0_Nk_kJqYR5bsTI9haf7OOcW8ENWjx-wzpvsbgdFsSyv?width=1024&height=572&cropmode=none
   :width: 660
   :height: 369
 
@@ -580,7 +580,7 @@ to use one container's mount namespace (and only the mount namespace) and anothe
 of the debugger container with all of its tools and the head is the other container's network namespace which we want to
 debug. To do this, we use only :code:`nsenter` and nothing else.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mWwg4TjkrinTW0umXmovn_zlsMsu0oXjQICPIiDwHHQaZkVIUHLxfPtELVVUwW09unIqiDzOqS_w0hPbh1UFt7l7rkg_IN2s2qVxWDlA2XZmxu7Z5JTNsjiEdbhTdJB1i-VqefQBJTTx39UrRNeYXqTrf3ZkCDLBP6sU532CU3R9M9NOQxod5kZLfD1QgHNlw?width=660&height=365&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mWwg4TjkrinTW0umXmovn_zlsMsu0oXjQICPIiDwHHQaZkVIUHLxfPtELVVUwW09unIqiDzOqS_w0hPbh1UFt7l7rkg_IN2s2qVxWDlA2XZmxu7Z5JTNsjiEdbhTdJB1i-VqefQBJTTx39UrRNeYXqTrf3ZkCDLBP6sU532CU3R9M9NOQxod5kZLfD1QgHNlw?width=1024&height=566&cropmode=none
   :width: 660
   :height: 365
 
@@ -656,7 +656,7 @@ operating system and run it in the network namespace of a container. If the appl
 localhost, you can access it from the web browser in the same network namespace.
 
 
-.. image:: https://ams03pap003files.storage.live.com/y4m6ttLxII7ZuOO9XM71cxcLPYhtAoda0zvw_av_anauoCriMR4_CzK0W3Mrmp_GNtOXY0pFYtNXIxdUqXoN6p-iGelwH-eh_zxKW4LiN5O51ROevUxhck26uAzfsonkqidFHX4onEilJw7yk5IuMhSsCoBAeA6ioEbhx30jcfihB0yFUVcurVhSeDTcda9X8UJ?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4m6ttLxII7ZuOO9XM71cxcLPYhtAoda0zvw_av_anauoCriMR4_CzK0W3Mrmp_GNtOXY0pFYtNXIxdUqXoN6p-iGelwH-eh_zxKW4LiN5O51ROevUxhck26uAzfsonkqidFHX4onEilJw7yk5IuMhSsCoBAeA6ioEbhx30jcfihB0yFUVcurVhSeDTcda9X8UJ?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -667,7 +667,7 @@ localhost, you can access it from the web browser in the same network namespace.
 
 Or sometimes you know that the frontend is safe to use, so you only want to test the backend.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mXhMjni9wwMmpFJqj3lPKJojYSac-gNBsOBnPhauY_NIlBfbyF8Pyd9oV-ldlPsedtoV5HsKNKrWa-mQyVszazCiSLG1ErUId4e9ljFoEmogLdTYHmD5Knx5GWFjMb7_q0383amuLCjSf95O5-bj2-9utVrLcORhWwirk3RH6HvJr0_R-pPTWZqdWvhfmVrP9?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mXhMjni9wwMmpFJqj3lPKJojYSac-gNBsOBnPhauY_NIlBfbyF8Pyd9oV-ldlPsedtoV5HsKNKrWa-mQyVszazCiSLG1ErUId4e9ljFoEmogLdTYHmD5Knx5GWFjMb7_q0383amuLCjSf95O5-bj2-9utVrLcORhWwirk3RH6HvJr0_R-pPTWZqdWvhfmVrP9?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -705,14 +705,14 @@ When you start to use Docker Desktop, one of the most important facts is that yo
 machine even on Linux (See: :ref:`Getting Started: Docker Desktop <getting_started_docker_desktop>`).
 It means your actual host, the virtual machine and the container's will have their own "localhost".
 
-.. image:: https://ams03pap003files.storage.live.com/y4mECX4qRmNTWbprlH3XGcvtUsLmlFzsXN8URNWhaMh0xAQggd-yqWt2jLZ1Hw-id8a9zHhRlAacKNvx_a3T7x3na3jJb6cQZYJn-7mxUn-TeHOEQjF4fmzsVdT4CJ1evgpdQxbYkPy7tXbD58XWH6Hdj_XCY4aOXyKsOWUA1cUTaB_UpM0iMc8zt4MVOapsX3p?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mECX4qRmNTWbprlH3XGcvtUsLmlFzsXN8URNWhaMh0xAQggd-yqWt2jLZ1Hw-id8a9zHhRlAacKNvx_a3T7x3na3jJb6cQZYJn-7mxUn-TeHOEQjF4fmzsVdT4CJ1evgpdQxbYkPy7tXbD58XWH6Hdj_XCY4aOXyKsOWUA1cUTaB_UpM0iMc8zt4MVOapsX3p?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
 The network namespaces will be in that virtual machine, so you can't just run your web browser on your
 host operating system inside the network namespace.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mHdlEGf-ZLDYjXzq4C9mPSbTLfh70-KrSgGgqhE7IXgJ678siqxhjM6h3R62O1GIHqgc8ZaqXexQqDI1hDq7ejhjFEMX5skuuHUgvu49Ito3HLsfRyTlHDNhuIcMb_oE9yUdpC04oNWgRVrD3H29la6gk5G97WKp0KGYDaAFjm56gnbqMq-G6sRuHp3eKcNPB?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mHdlEGf-ZLDYjXzq4C9mPSbTLfh70-KrSgGgqhE7IXgJ678siqxhjM6h3R62O1GIHqgc8ZaqXexQqDI1hDq7ejhjFEMX5skuuHUgvu49Ito3HLsfRyTlHDNhuIcMb_oE9yUdpC04oNWgRVrD3H29la6gk5G97WKp0KGYDaAFjm56gnbqMq-G6sRuHp3eKcNPB?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -720,7 +720,7 @@ You can't even run the web browser in the virtual machine (in case of Docker Des
 based on LinuxKit without GUI inside so you can't simply just use an internal network and connect to the IP address
 from the browser.
 
-.. image:: https://ams03pap003files.storage.live.com/y4mSSQPTZz89Jl3ZGS-r19g4u2tWAJwAxSFgeFW5UolTHiEG7VBRlzcTAYPSFclGmXiUHjfe6xia5kjMJmCL6h7gm9TijyJG9fTDwfTz_xNNTWK73RNxNpT5qEq1Hg6RJxEFOUguIpGbaQDpkld0QKDbuTQW0-Lp2BVnhGnlCYomOpAyI4bctjjs5XWiy0K_6Mp?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4mSSQPTZz89Jl3ZGS-r19g4u2tWAJwAxSFgeFW5UolTHiEG7VBRlzcTAYPSFclGmXiUHjfe6xia5kjMJmCL6h7gm9TijyJG9fTDwfTz_xNNTWK73RNxNpT5qEq1Hg6RJxEFOUguIpGbaQDpkld0QKDbuTQW0-Lp2BVnhGnlCYomOpAyI4bctjjs5XWiy0K_6Mp?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
@@ -742,7 +742,7 @@ We need a much more complex solution which requires everything that we have lear
 
 How will this all look like? The following diagram illustrates it.
 
-.. image:: https://ams03pap003files.storage.live.com/y4m1KEFbfoWny_yv1Bp1TBAqStQfTw3DjvXsy4nX-jIhH3CajaoaYesfUqHIQ2toAJQEhKCVEvssJiyo8jIBsaTFNB2yN2qMoPQLIOVQ1bPzWDFnXdoE95U0Y6_0r0rRAoMDLE_6GVVVC9V33ygw8Ot6VvXm51c5LnVy02w1a9oC_x2f2YK1n8SIXqFLZVEu10w?width=660&height=371&cropmode=none
+.. image:: https://ams03pap003files.storage.live.com/y4m1KEFbfoWny_yv1Bp1TBAqStQfTw3DjvXsy4nX-jIhH3CajaoaYesfUqHIQ2toAJQEhKCVEvssJiyo8jIBsaTFNB2yN2qMoPQLIOVQ1bPzWDFnXdoE95U0Y6_0r0rRAoMDLE_6GVVVC9V33ygw8Ot6VvXm51c5LnVy02w1a9oC_x2f2YK1n8SIXqFLZVEu10w?width=1024&height=576&cropmode=none
   :width: 660
   :height: 371
 
