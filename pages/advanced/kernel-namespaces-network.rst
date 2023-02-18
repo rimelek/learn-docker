@@ -144,7 +144,7 @@ will not be able to reach it.
   :width: 660
   :height: 371
 
-The reason is the network namespace so you could just run the container in host network mode
+Since the reason is the network namespace, you could just run the container in host network mode
 
 .. code:: bash
 
@@ -152,6 +152,10 @@ The reason is the network namespace so you could just run the container in host 
 
 which means you just don't get the network isolation. The host network mode does not mean that you are using
 a special Docker network. It only means you don't want the container to have its own network namespace.
+
+.. image:: https://ams03pap003files.storage.live.com/y4mwLozQ9rgLbY3Mol-61Dh72xV0tY109mpEmvwb4tfz068zF5GaoycLeN_4dQ3yIIGy0wTnC7moh-oP0Vi5otpmetAVDmGo5r3aHsYxe6o28Bs5dVNIu4_4zoZxy32V-xRAaAS6yapJgYb8pAByCTZJddBdZ_uli3yTrkqZl9NYKzgpfa8jvdpj6uP3t_0x18R?width=660&height=371&cropmode=none
+  :width: 660
+  :height: 371
 
 Of course we wanted to have the network isolation and we want to keep it. The other solution is running another
 container which will use the same network namespace.
