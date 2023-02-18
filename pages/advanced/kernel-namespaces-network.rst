@@ -1,5 +1,8 @@
 .. _nicolaka/netshoot: https://hub.docker.com/r/nicolaka/netshoot
 
+:og:image: https://ams03pap003files.storage.live.com/y4mjikSlU8xJP68WUPZ1K84w32mGAs-iXRpjMZA7XWsQy80gIzxY-nUDIF6X1GWQrEjJZnuMHUza2X2kmVQwoK0PUeiY4tCyHSFmsAcSzRfAZOTp7fQtO47ocHroiyYe6CjQWlQ3Dchntkb002ayLclh2_FfYHmam99vHAwYPRoEvs-nuJIeOBEvFc6jakeoZyi?width=1024&height=576&cropmode=none
+:og:description: Learn about the network namespace and how you can use it for debugging and testing.
+
 =================================================
 Docker network and network namespaces in practice
 =================================================
