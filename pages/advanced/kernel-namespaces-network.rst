@@ -519,7 +519,6 @@ First we will set the variables again with an additional :code:`project_dir` whi
 .. code:: bash
 
   sandboxKey=$(docker container inspect php --format '{{ .NetworkSettings.SandboxKey }}')
-  netns=$(basename "$sandboxKey")
   pid="$(docker container inspect php --format '{{ .State.Pid }}')"
 
   project_dir="$HOME/projects/netns"
