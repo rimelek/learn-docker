@@ -537,7 +537,7 @@ Mount the system root to a local folder called "root".
   mkdir -p root
   sudo mount --bind / root
 
-Since "run" is on tmpfs and it wasn'T mounted, we create an empty file to work as a placeholder for the target
+Since "run" is on tmpfs and it wasn't mounted, we create an empty file to work as a placeholder for the target
 of the symbolic link at :code:`/etc/resolv.conf`
 
 .. code:: bash
