@@ -1,3 +1,5 @@
+name: p07web
+
 volumes:
   apache2:
 

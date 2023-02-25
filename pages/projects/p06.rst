@@ -62,7 +62,7 @@ Navigate to the web1 folder:
 
 At this point you need to have the NIP variable set as :doc:`../../index` refers to it.
 
-Alternative option: set the NIP variable in the ".env" file:
+Alternative option: set the NIP variable in a ".env" file:
 
 Start the containers:
 

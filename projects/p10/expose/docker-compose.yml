@@ -1,3 +1,5 @@
+name: p10expose
+
 networks:
   default:
   client:

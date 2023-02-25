@@ -1,3 +1,5 @@
+name: p07proxy
+
 networks:
   default:
     external: true
