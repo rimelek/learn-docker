@@ -48,6 +48,11 @@ Navigate to the nginxproxy folder
 
   cd nginxproxy
 
+The compose file is the following:
+
+.. literalinclude:: ../../projects/p06/nginxproxy/docker-compose.yml
+  :language: yaml
+
 Start the proxy:
 
 .. code:: bash
@@ -60,9 +65,13 @@ Navigate to the web1 folder:
 
   cd ../web1
 
-At this point you need to have the NIP variable set as :doc:`../../index` refers to it.
+Here you will have a compose file:
 
-Alternative option: set the NIP variable in a ".env" file:
+.. literalinclude:: ../../projects/p06/web1/docker-compose.yml
+  :language: yaml
+
+At this point you need to have the NIP variable set as :doc:`../../index` refers to it.
+Alternative option: set the NIP variable in a ".env" file.
 
 Start the containers:
 
@@ -70,7 +79,7 @@ Start the containers:
 
   docker-compose up -d
 
-In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
+In case of working in the cloned repository of this tutorial, you can also run the below command to set the variable
 
 .. code:: bash
 
@@ -82,17 +91,18 @@ Navigate to the web2 folder:
 
   cd ../web2
 
+The compose file is similar to the previous one:
+
+.. literalinclude:: ../../projects/p06/web2/docker-compose.yml
+  :language: yaml
+
 Start the containers:
 
 .. code:: bash
 
   docker compose up -d
 
-In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
-
-.. code:: bash
-
-  NIP=$(../../../system/usr/local/bin/nip.sh) docker compose up -d
+Or you can use :code:`nip.sh` as we did in web1.
 
 Both of the services are available on port 80. Example:
 

@@ -16,16 +16,26 @@ Project structure:
   ├── nginxproxy
   │   └── docker-compose.yml
   └── web
+      ├── .env
       ├── docker-compose.yml
       └── www
           └── index.html
 
-The first step is the same as it was in :doc:`p06`.
+The first step is the same as it was in :doc:`p06`. Let's go to :code:`nginxproxy`
+
+.. code-block:: bash
+
+  cd nginxproxy
+
+The compose file is:
+
+.. literalinclude:: ../../projects/p07/nginxproxy/docker-compose.yml
+  :language: yaml
+
 Start the proxy server:
 
 .. code:: bash
 
-  cd nginxproxy
   docker compose up -d
 
 Go to the web folder:
@@ -34,13 +44,21 @@ Go to the web folder:
 
   cd ../web
 
+The compose file is
+
+.. literalinclude:: ../../projects/p07/web/docker-compose.yml
+  :language: yaml
+
 You can simply start a web server protected by HTTP authentication. The name and the password will come from environment variables.
 I recommend you to use a more secure way in production. Create the .htpasswd file manually and mount it inside the container.
 
 The htpasswd container will create .htpasswd automatically and exit.
 
 In the ".env" file you can find two variables.
-HTTPD_USER and HTTPD_PASS will be used in "docker-compose.yml"
+
+.. literalinclude:: ../../projects/p07/web/.env
+
+The variables will be used in "docker-compose.yml"
 by the "htpasswd" service to generate the password file and then the "httpd" service will read it from the common volume.
 
 
@@ -50,7 +68,7 @@ Use the "depends_on" option to control which service starts first.
 
 At this point you need to have the NIP variable set as the :doc:`../../index` refers to it.
 
-Alternative option: set the NIP variable in the ".env" file:
+Alternative option: set the NIP variable in the ".env" file.
 
 Start the web server
 
