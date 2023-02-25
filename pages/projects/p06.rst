@@ -1,8 +1,8 @@
 .. _nginx-proxy: https://hub.docker.com/r/nginxproxy/nginx-proxy
 
-==================================================================
-Run more Docker Compose project on the same port using nginx-proxy
-==================================================================
+=======================================================================
+Run multiple Docker Compose projects on the same port using nginx-proxy
+=======================================================================
 
 See `nginx-proxy`_
 
