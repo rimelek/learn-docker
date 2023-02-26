@@ -7,6 +7,8 @@
 Docker network and network namespaces in practice
 =================================================
 
+This tutorial can be watched on YouTube: https://youtu.be/HtJEmjW3qmg
+
 Linux Kernel Namespaces in general
 ==================================
 
