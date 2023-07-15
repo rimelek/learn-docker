@@ -17,6 +17,15 @@ Project structure:
   └── www
       └── index.php
 
+The content of the index.php
+
+.. literalinclude:: ../../projects/p03/www/index.php
+
+and the Dockerfile
+
+.. literalinclude:: ../../projects/p03/Dockerfile
+  :language: Dockerfile
+
 Build an image:
 
 .. code:: bash

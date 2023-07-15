@@ -30,7 +30,8 @@ Project structure:
       └── www
           └── index.php
 
-Create the proxy network:
+We will need a proxy network which will be used by all of the compose projects
+for the communication between NGinX and the webservers:
 
 .. code:: bash
 
@@ -70,6 +71,16 @@ Here you will have a compose file:
 .. literalinclude:: ../../projects/p06/web1/docker-compose.yml
   :language: yaml
 
+a Dockerfile
+
+.. literalinclude:: ../../projects/p06/web1/Dockerfile
+  :language: Dockerfile
+
+and the PHP file
+
+.. literalinclude:: ../../projects/p06/web1/www/index.php
+  :language: php
+
 At this point you need to have the NIP variable set as :doc:`../../index` refers to it.
 Alternative option: set the NIP variable in a ".env" file.
 
@@ -95,6 +106,16 @@ The compose file is similar to the previous one:
 
 .. literalinclude:: ../../projects/p06/web2/docker-compose.yml
   :language: yaml
+
+we also have another Dockerfile
+
+.. literalinclude:: ../../projects/p06/web2/Dockerfile
+  :language: Dockerfile
+
+and a PHP file
+
+.. literalinclude:: ../../projects/p06/web2/www/index.php
+  :language: php
 
 Start the containers:
 

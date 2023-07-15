@@ -20,6 +20,21 @@ Project structure:
   └── www
       └── index.php
 
+The content of index.php
+
+.. literalinclude:: ../../projects/p04/www/index.php
+  :language: php
+
+the compose file
+
+.. literalinclude:: ../../projects/p04/docker-compose.yml
+  :language: yaml
+
+and the Dockerfile
+
+.. literalinclude:: ../../projects/p04/Dockerfile
+  :language: Dockerfile
+
 Build an image and start the container using `Docker Compose`_:
 
 .. code:: bash

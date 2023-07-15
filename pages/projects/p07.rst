@@ -49,6 +49,11 @@ The compose file is
 .. literalinclude:: ../../projects/p07/web/docker-compose.yml
   :language: yaml
 
+In this case we have a simple html file
+
+.. literalinclude:: ../../projects/p07/web/www/index.html
+  :language: yaml
+
 You can simply start a web server protected by HTTP authentication. The name and the password will come from environment variables.
 I recommend you to use a more secure way in production. Create the .htpasswd file manually and mount it inside the container.
 

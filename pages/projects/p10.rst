@@ -47,6 +47,7 @@ We will use :code:`noexpose/Dockerfile` to build an example Python HTTP server:
 :code:`noexpose/Dockerfile`:
 
 .. literalinclude:: ../../projects/p10/noexpose/Dockerfile
+  :language: Dockerfile
 
 Let's build the image
 
@@ -96,8 +97,8 @@ Let's remove the container
 
   docker container rm -f p10_noexpose
 
-Using usr-defined networks to access services in containers
-===========================================================
+Using user-defined networks to access services in containers
+============================================================
 
 You could think the previous example worked because we used the default Docker bridge which is a little different
 than user-defined networks. The following example shows you that it doesn't matter. Docker Compose creates a user-defined network
@@ -106,6 +107,7 @@ for each project, so let's use Docker Compose to run the containers. One for the
 The `noexpose/docker-compose.yml` is the following:
 
 .. literalinclude:: ../../projects/p10/noexpose/docker-compose.yml
+  :language: yaml
 
 .. note::
 
@@ -175,6 +177,7 @@ We will use the other compose project in which :code:`EXPOSE 8080` is defined in
 :code:`expose/Dockerfile`:
 
 .. literalinclude:: ../../projects/p10/expose/Dockerfile
+  :language: Dockerfile
 
 It will COPY an :code:`index.html` containing one line:
 
@@ -183,6 +186,7 @@ It will COPY an :code:`index.html` containing one line:
 and we use the :code:`docker-compose.yml` below:
 
 .. literalinclude:: ../../projects/p10/expose/docker-compose.yml
+  :language: yaml
 
 Run the project
 

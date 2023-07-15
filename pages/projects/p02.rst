@@ -17,6 +17,15 @@ Project structure:
   └── www
       └── index.html
 
+The content of the html file
+
+.. literalinclude:: ../../projects/p02/www/index.html
+
+and the Dockerfile
+
+.. literalinclude:: ../../projects/p02/Dockerfile
+  :language: Dockerfile
+
 Building an image:
 
 .. code:: bash
