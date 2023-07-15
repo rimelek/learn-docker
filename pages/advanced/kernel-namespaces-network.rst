@@ -737,7 +737,7 @@ We need a much more complex solution which requires everything that we have lear
 - Since Docker Desktop runs containers in a virtual machine, we definitely need network in the PHP container
   so we can access it from the outside.
   It means we obviously need to forward a port from the host to Docker Desktop's virtual machine,
-  but we have also learnt that internal networks `do not accept forwarded ports <internal_network_port_forward>`_.
+  but we have also learnt that internal networks :ref:`do not accept forwarded ports <internal_network_port_forward>`.
 - We can however run a container with only an internal network and a proxy container with an internal and a public
   network which will be accessible from the outside. This container will forward all traffic to another container
   in the internal network.
