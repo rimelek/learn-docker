@@ -115,7 +115,7 @@ system/usr/local/bin/nip.sh
   the current WAN or LAN IP address of the host machine.
   It must be copied into /usr/local/bin/ with the filename "nip.sh".
   When you execute "nip.sh", a domain name will be shown (Ex.: 192.168.1.2.nip.io) which you can use for the examples.
-  The command takes one optional parameter as a subdomain. Ex.: "nip.sh web1". The result would be: web1.192.168.1.2.xnip.io
+  The command takes one optional parameter as a subdomain. Ex.: "nip.sh web1". The result would be: web1.192.168.1.2.nip.io
 
 system/etc/profile.d/nip.variable.sh
   It uses the nip command to set the NIP environment variable so
