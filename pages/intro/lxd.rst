@@ -25,7 +25,7 @@ Now you need to initialize the configuration:
 
 You will found the following questions:
 
-1. | **Questin:** Would you like to use LXD clustering? (yes/no) [default=no]:
+1. | **Question:** Would you like to use LXD clustering? (yes/no) [default=no]:
    | **Answer:** no
 2. | **Question:** Do you want to configure a new storage pool? (yes/no) [default=yes]:
    | **Answer:** yes

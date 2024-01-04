@@ -188,7 +188,7 @@ the containers command is "bash" or some other shell.
 .. note::
 
   Actually only :code:`-i` or :code:`-t` would be enough to keep the container
-  in the backgorund, but if you want to attach the container later, it requires
+  in the background, but if you want to attach the container later, it requires
   both of them. Of course, :code:`-d` is always required.
 
 Attach the container
