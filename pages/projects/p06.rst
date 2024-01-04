@@ -4,6 +4,8 @@
 Run multiple Docker Compose projects on the same port using nginx-proxy
 =======================================================================
 
+.. include:: ../projects-header.rst
+
 See `nginx-proxy`_
 
 Go to Project 6 from the git repository root:

@@ -2,6 +2,8 @@
 Memory limit test in a Bash container
 =====================================
 
+.. include:: ../projects-header.rst
+
 Go to Project 8 from the git repository root:
 
 .. code:: bash

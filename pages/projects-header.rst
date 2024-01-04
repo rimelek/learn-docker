@@ -1,0 +1,1 @@
+.. note:: :ref:`Clone the git repository <clone_git_repo>` if you haven't done it yet.

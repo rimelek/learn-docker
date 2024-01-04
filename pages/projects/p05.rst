@@ -2,6 +2,8 @@
 Communication of PHP and Apache HTTPD web server with the help of Docker Compose
 ================================================================================
 
+.. include:: ../projects-header.rst
+
 Go to Project 5 from the git repository root:
 
 .. code:: bash

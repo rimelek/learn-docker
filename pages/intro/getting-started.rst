@@ -99,6 +99,7 @@ Operating system
 Linux is always supported and I do my best to support Docker Desktop on macOS, but not all the examples
 will work on macOS unless you run Linux in a virtual machine.
 
+.. _clone_git_repo:
 
 Clone the git repository
 ========================

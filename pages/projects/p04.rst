@@ -4,6 +4,8 @@
 Create a simple Docker Compose project
 ======================================
 
+.. include:: ../projects-header.rst
+
 Go to Project 4 from the git repository root:
 
 .. code:: bash

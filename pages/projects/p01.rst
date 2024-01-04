@@ -2,6 +2,8 @@
 Start a simple web server with mounted document root
 ====================================================
 
+.. include:: ../projects-header.rst
+
 Go to Project 1 from the git repository root:
 
 .. code:: bash
