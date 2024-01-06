@@ -577,6 +577,12 @@ following three contexts:
   desktop-linux *     moby                Docker Desktop                            unix:///home/ta/.docker/desktop/docker.sock
   rootless            moby                Rootless mode                             unix:///run/user/1000/docker.sock
 
+In order to use Docker Desktop, you need to switch to the context
+called "desktop-linux".
+
+.. code-block:: bash
+
+  docker context use desktop-linux
 
 .. important::
 
