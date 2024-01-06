@@ -2,6 +2,10 @@
 .. _daemon configuration: https://docs.docker.com/engine/reference/commandline/dockerd/#on-linux
 .. _rootless Docker: https://docs.docker.com/engine/security/rootless/
 
+.. important::
+
+  This tutorial is still in progress.
+
 =============================
 Where are the Docker volumes?
 =============================
@@ -385,28 +389,280 @@ And list the content:
 Docker Desktop volumes on Windows
 ---------------------------------
 
+Docker Desktop on Windows allows you to switch between Linux containers
+and Windows containers.
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133432&authkey=%21AG_OMIggB6CmAJI&width=687&height=372
+  :width: 330
+  :height: 178
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133431&authkey=%21AOgI2KQ2PKdvU4A&width=762&height=372
+  :width: 330
+  :height: 161
+
+To find out which one you are using,
+run the following command:
+
+.. code-block:: powershell
+
+  docker info --format '{{ .OSType }}'
+
+If it returns "windows", you are using Windows containers, and if it returns
+"linux", you are using Linux containers.
+
 Linux containers
 ++++++++++++++++
 
+Since Linux containers always require a virtual machine, you will have
+your volumes in the virtual machine the same way as you would on macOS.
+The difference is how you can access it them. A common way is through
+a Docker container. Usually I would run the following command.
+
+.. code-block:: powershell
+
+  docker run --rm -it --privileged --pid host ubuntu:22.04 `
+    nsenter --all -t 1 `
+      sh -c 'cd /var/lib/docker/volumes && sh'
+
+But if you have an older kernel in WSL2 which doesn't support the time namespace,
+you can get an error message like:
+
+.. code-block:: text
+
+  nsenter: cannot open /proc/1/ns/time: No such file or directory
+
+If that happens, make sure you have the latest kernel in WSL2.
+If you built a custom kernel, you may need to rebuild it from a new
+version.
+
+If can't update the kernel yet, exclude the time namespace,
+and run the following command:
+
+.. code-block:: powershell
+
+  docker run --rm -it --privileged --pid host ubuntu:22.04 `
+    nsenter -m -n -p -u -t 1 `
+      sh -c 'cd /var/lib/docker/volumes && sh'
+
+You can simply mount the base directory in a container
+the same way as we could on macOS:
+
+.. code-block:: powershell
+
+  docker run --rm -it `
+    -v /var/lib/docker/volumes:/var/lib/docker/volumes `
+    --workdir /var/lib/docker/volumes `
+    ubuntu:22.04 `
+    bash
+
+We don't need to run a server in a container to share the volumes,
+since it works out of the box in WSL2. You can just open the Windows
+explorer and go to
+
+.. code-block:: text
+
+  \\wsl.localhost\docker-desktop-data\data\docker\volumes
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133430&authkey=%21AD5cDeb5_HcLF2M&width=660
+  :width: 660
+  :height: 235
+
+.. warning::
+
+  WSL2 let's you edit files more easily even if the files are owned by root
+  on the volume, so do it at your own risk.
+  My recommendation is using it only for debugging.
+
 Windows Containers
 ++++++++++++++++++
+
+Windows containers can mount their volumes from the host.
+Let's create a volume
+
+.. code-block:: powershell
+
+  docker volume create windows-volume
+
+Inspect the volume:
+
+.. code-block::: powershell
+
+  docker volume inspect windows-volume
+
+You will get something like this:
 
 .. code-block:: json
 
   [
       {
-          "CreatedAt": "2024-01-05T13:13:20+01:00",
+          "CreatedAt": "2024-01-06T16:27:03+01:00",
           "Driver": "local",
           "Labels": null,
-          "Mountpoint": "C:\\ProgramData\\Docker\\volumes\\windowsvolume\\_data",
-          "Name": "windowsvolume",
+          "Mountpoint": "C:\\ProgramData\\Docker\\volumes\\windows-volume\\_data",
+          "Name": "windows-volume",
           "Options": null,
           "Scope": "local"
       }
   ]
 
+So now you got the volume path on Windows in the "Mountpoint" field,
+but you don't have access to it unless you are Administrator.
+The following command works only from Powershell run as Administrator
+
+.. code-block:: powershell
+
+  cd $(docker volume inspect windows-volume --format '{{ .Mountpoint }}')
+
+If you want to access it from Windows Explorer, you can first go to
+
+.. code-block::
+
+  C:\ProgramData
+
+.. note::
+
+  This folder is hidden by default, so if you want to open it, just type
+  the path manually in the navigation bar, or enable hidden folders
+  on Windows 11 (works differently on older Windows):
+
+  .. code-block:: text
+
+    Menu bar » View » Show » Hidden Items
+
+  .. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133427&authkey=%21APhiCiUQGq72UQM&width=660
+    :width: 660
+    :height: 456
+
+Then try to open the folder called "Docker" which gives you a prompt
+to ask for Admin privileges
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133428&authkey=%21AKUGZd-hYWHwoqg&width=660
+  :width: 660
+  :height: 368
+
+and then try to open the folder called "volumes"
+which will do the same.
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133429&authkey=%21AALcQVxwylnJ_kc&width=660
+  :width: 660
+  :height: 435
+
+After that you can open any Windows container volume from Windows explorer.
+
 Docker Desktop volumes on Linux
 -------------------------------
 
-Docker CE on Windows (server?) ?
---------------------------------
+On Windows, you could have Linux containers and Window containers,
+so you had to switch between them.
+On Linux, you can install Docker CE in rootful and rootless mode,
+and you can also install Docker Desktop. These is 3 different
+and separate Docker installations and you can switch between them
+by changing context or logging in as a different user.
+
+You can check the existing contexts by running the following command:
+
+.. code-block:: bash
+
+  docker context ls
+
+If you have Docker CE installed on your Linux, and you are logged
+in as a user who installed the rootless Docker,
+and you also have Docker Desktop installed, you can see at least the
+following three contexts:
+
+.. code-block:: text
+
+  NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                                       KUBERNETES ENDPOINT   ORCHESTRATOR
+  default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock
+  desktop-linux *     moby                Docker Desktop                            unix:///home/ta/.docker/desktop/docker.sock
+  rootless            moby                Rootless mode                             unix:///run/user/1000/docker.sock
+
+
+.. important::
+
+  The default is usually rootful Docker CE and the other too are obvious.
+  Only the rootful Docker CE needs to run as root, so if you want to use
+  interact with Docker Desktop, don't make the mistake of running the docker commands
+  with sudo:
+
+  .. code-block:: bash
+
+    sudo docker context ls
+
+  .. code-block:: text
+
+    NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT   ORCHESTRATOR
+    default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock
+
+In terms of accessing volumes, Docker Desktop works similarly on
+macOS and Linux, so you have the following options:
+
+Run a shell in the virtual machine using nsenter:
+
+.. code-block:: bash
+
+  docker run --rm -it --privileged --pid host ubuntu:22.04 \
+    nsenter --all -t 1 \
+      sh -c 'cd /var/lib/docker/volumes && sh'
+
+Or just simply mount that folder to a container:
+
+.. code-block:: bash
+
+  docker run --rm -it \
+    -v /var/lib/docker/volumes:/var/lib/docker/volumes \
+    --workdir /var/lib/docker/volumes \
+    ubuntu:22.04 \
+    bash
+
+And of course, you can use the nfs server compose project with
+the following :code:`compose.yml`
+
+.. code-block:: yaml
+
+  services:
+    nfs-server:
+      image: openebs/nfs-server-alpine:0.11.0
+      volumes:
+         - /var/lib/docker/volumes:/mnt/nfs
+      environment:
+        SHARED_DIRECTORY: /mnt/nfs
+        SYNC: sync
+        FILEPERMISSIONS_UID: 0
+        FILEPERMISSIONS_GID: 0
+        FILEPERMISSIONS_MODE: "0755"
+      privileged: true
+      ports:
+        - 127.0.0.1:2049:2049/tcp
+        - 127.0.0.1:2049:2049/udp
+
+and prepare the mount point. Remember, you can have Docker CE running as root,
+which means :code:`/var/lib/docker` probably exists, so let's create the mount point
+as :code:`/var/lib/docker-desktop/volumes`:
+
+.. code-block:: bash
+
+  sudo mkdir -p /var/lib/docker-desktop/volumes
+  sudo chmod 0700 /var/lib/docker-desktop
+
+And mount it:
+
+.. code-block:: bash
+
+  sudo mount -o vers=4 -t nfs 127.0.0.1:/ /var/lib/docker-desktop/volumes
+
+And check the content:
+
+.. code-block:: bash
+
+  sudo ls -l /var/lib/docker-desktop/volumes
+
+You could ask why we mount the volumes into a folder on the host,
+which requires sudo if the docker commands doesn't.
+The reason is that you will need sudo to use the mount command,
+so it shouldn't be a problem to access the volumes as root.
+
+Editing files on volumes
+========================
+
+...  coming soon ...
