@@ -238,7 +238,7 @@ Docker CE volumes on Linux
 This question seems to be already answered in the previous section, but let's
 evaluate what we learned and add some more details.
 
-`Docker CE <concept_docker_ce>`_ is the community edition of Docker and can run
+:ref:`Docker CE <concept_docker_ce>` is the community edition of Docker and can run
 directly on Linux. Docker CE has a data root directory, which is the following by default:
 
 .. code-block:: text
