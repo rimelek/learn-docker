@@ -61,3 +61,4 @@ Before you start working with the example projects, read :doc:`pages/intro/getti
    :caption: Advanced topics
 
    pages/advanced/kernel-namespaces-network
+   pages/advanced/volume-locations

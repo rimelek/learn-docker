@@ -25,6 +25,8 @@ have their own way to install Docker or Docker Desktop.
 Keep in mind that in those cases it is likely that the developers of Docker or people on the Docker forum
 can't help you and you need to rely on the community of the distribution you have chosen.
 
+.. _concept_docker_ce:
+
 Docker CE
   Docker Community Edition. It is free to use even for commercial projects, although it does not have commercial support.
   Docker CE is open source an the source code of the daemon is available on GitHub in `moby/moby <https://github.com/moby/moby>`_
