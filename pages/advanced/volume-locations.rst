@@ -354,8 +354,8 @@ The following :code:`compose.yml` file can be used to run the NFS server:
         FILEPERMISSIONS_MODE: "0755"
       privileged: true
       ports:
-        - 192.168.100.3:2049:2049/tcp
-        - 192.168.100.3:2049:2049/udp
+        - 127.0.0.1:2049:2049/tcp
+        - 127.0.0.1:2049:2049/udp
 
 Start the server:
 
