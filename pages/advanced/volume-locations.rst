@@ -1,6 +1,7 @@
 .. _Docker forum: https://forums.docker.com
 .. _daemon configuration: https://docs.docker.com/engine/reference/commandline/dockerd/#on-linux
 .. _rootless Docker: https://docs.docker.com/engine/security/rootless/
+.. _Use Compose watch: https://docs.docker.com/compose/file-watch/
 
 .. important::
 
@@ -97,6 +98,8 @@ to populate it with the content of the directory to which you mount it
 in the container. That's not the case with bind mounts. Bind mounts just
 completely override the content of the mount point in the container, but at least
 you can choose where you want to mount it from.
+
+.. _custom_volume_path:
 
 Custom volume path
 ==================
@@ -752,4 +755,130 @@ so it shouldn't be a problem to access the volumes as root.
 Editing files on volumes
 ========================
 
-...  coming soon ...
+Now you know how you can find out where the volumes are.
+You also know how you can create a volume with a custom path,
+even if you are using Docker Desktop, which creates the default
+volumes inside a virtual machine.
+
+But most of you wanted to know where the volumes were to edit the files.
+
+.. danger::
+
+  Any operation inside the Docker data root is dangerous,
+  and can break your Docker completely, or cause problems
+  that you don't immediately recognize, so you should never
+  edit files without mounting the volume into a container,
+  except if you defined a :ref:`custom volume path <custom_volume_path>`
+  so you don't have to go into the Docker data root.
+
+  Even if you defined a custom path, we are still talking about
+  a volume, which will be mounted into a container,
+  in which the files can be accessed by a process which
+  requires specific ownership and permissions. By editing
+  the files from the host, you can accidentally change the permission
+  or the owner making it inaccessible for the process in the container.
+
+Even though I don't recommend it, I understand that sometimes
+we want to play with our environment to learn more about,
+but we still have to try to find a less risky way to do it.
+
+You know where the volumes are, and you can edit the files
+with a text editor from command line or even from the graphical
+interface. One problem on Linux and macOS could be setting
+the proper permissions so you can edit the files even
+if you are not root.
+Discussing permissions could be another tutorial,
+but this is one reason why we have to try to separate the data
+managed by a process in a Docker container from the source code
+or any files that requires an interactive user.
+Just think of an application that is not running in a container,
+but the files still have to be owned by another user.
+An example could be a webserver, where the files has to be
+owned by a user or group so the webserver has access to the files,
+while you still should be able to upload files.
+
+View and Edit files through Docker Desktop
+------------------------------------------
+
+Docker Desktop let's you browse files from the GUI,
+which is great for debugging, but I don't recommend it for editing files,
+even though Docker Desktop makes that possible too.
+Let's see why I am saying it.
+
+Open the Containers tab of Docker Desktop.
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133436&authkey=%21ADM4u1wAPqL8rmU&width=660
+  :width: 660
+  :height: 254
+
+Click on the three dots in the line of the container in which you want to browse files
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133437&authkey=%21ADNIjONXytcFUHs&width=660
+  :width: 660
+  :height: 254
+
+Go to a file that you want to edit
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133438&authkey=%21ACErzlwcIzzwuDI&width=660
+  :width: 660
+  :height: 254
+
+.. note::
+
+  Notice that Docker Desktop shows you whether the files are modified
+  on the container's filesystem, or you see a file on a volume.
+
+Right click on the file and select "Edit file".
+
+Before you do anything, run a test container:
+
+.. code-block:: bash
+
+  docker run -d --name httpd -v httpd_docroot:/usr/local/apache2/htdocs httpd:2.4
+
+And check the permissions of the index file:
+
+.. code-block:: bash
+
+  docker exec -it httpd ls -l /usr/local/apache2/htdocs/
+
+You will see this:
+
+.. code-block:: text
+
+  -rw-r--r-- 1 504 staff 45 Jun 11  2007 index.html
+
+You can then edit the file and click on the floppy icon on the right side or just
+press CTRL+S (Command+S on macOS) to save the modification.
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133439&authkey=%21AH9h0I_2XVC71eU&width=660
+  :width: 660
+  :height: 254
+
+Then run the following command from a terminal:
+
+.. code-block:: bash
+
+  docker exec -it httpd ls -l /usr/local/apache2/htdocs/
+
+And you will see that the owner of the file was changed to root.
+
+.. code-block:: text
+
+  total 4
+  -rw-r--r-- 1 root root 69 Jan  7 12:21 index.html
+
+One day it might work better, but I generally don't recommend
+editing files in containers from the Graphical interface.
+
+Edit only source code that you mount into the container during development
+or `Use Compose watch`_ to update the files when you edit them,
+but let the data be handled only by the processes in the containers.
+
+Some applications are not optimized for running in containers and there are
+different folders and files at the same place where the code is,
+so it is hard to work with volumes and mounts while you let the process
+in the container change a config file, which you also want to edit occasionally.
+In that case you ned to learn how permissions are handled on Linux
+using the :code:`chmod` and :code:`chown` commands so you both
+have permission to access the files.
