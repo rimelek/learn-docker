@@ -25,6 +25,33 @@ but not through a container. So I must start with a statement:
 
 Why I am saying it, you will understand if you read the next sections.
 
+.. _docker_data_root:
+
+Where does Docker store data?
+=============================
+
+Before we talk about the location of volumes, we first have to talk about
+the location of all data that Docker handles.
+When I say "Docker", I usually mean "Docker CE".
+
+:ref:`Docker CE <concept_docker_ce>` is the community edition of Docker and can run
+directly on Linux. It has a data root directory, which is the following by default:
+
+.. code-block:: text
+
+  /var/lib/docker
+
+You can change it in the `daemon configuration`_, so if it is changed on your system,
+you will need to replace this folder in the examples I show.
+To find out what the data root is, run the following command:
+
+.. code-block:: bash
+
+  docker info --format '{{ .DockerRootDir }}'
+
+In case of Docker Desktop of course, you will always have a virtual machine,
+so the path you get from the above command will be in the virtual machine.
+
 What is a Docker volume?
 ========================
 
@@ -100,7 +127,7 @@ which will always happen,
 but that you will bind mount the directory to the path where Docker would have
 created the volume if you didn't define the source.
 
-This is basically the same what yu would do on Linux with the :code:`mount` command:
+This is basically the same what you would do on Linux with the :code:`mount` command:
 
 .. code-block:: bash
 
@@ -109,8 +136,15 @@ This is basically the same what yu would do on Linux with the :code:`mount` comm
 Without :code:`-o bind` the first argument must be a block device.
 This is why we use the "device" parameter, even though we mount a folder.
 
-This is one way to know where the
-Docker volume is, but let's just test if it works and inspect the volume:
+This is one way to know where the Docker volume is.
+
+.. note::
+
+  Even the the above example assumed Linux, custom volume path
+  would work on other operating systems as well, since Docker
+  Desktop would mount the required path into the virtual machine.
+
+Let's just test if it works and inspect the volume:
 
 .. code-block:: bash
 
@@ -296,29 +330,15 @@ safely removed, but it didn't delete your data.
 Docker CE volumes on Linux
 ==========================
 
-This question seems to be already answered in the previous section, but let's
+This question seems to be already answered in the previous sections, but let's
 evaluate what we learned and add some more details.
 
-:ref:`Docker CE <concept_docker_ce>` is the community edition of Docker and can run
-directly on Linux. Docker CE has a data root directory, which is the following by default:
-
-.. code-block:: text
-
-  /var/lib/docker
-
-You can change it in the `daemon configuration`_, so if it is changed on your system,
-you will need to replace this folder in the examples I show.
-To find out what the data root is, run the following command:
-
-.. code-block:: bash
-
-  docker info --format '{{ .DockerRootDir }}'
-
 So you can find the local default volumes under :code:`/var/lib/docker/volumes`
-if you didn't change the data root. For the sake of simplicity of the commands,
-I will keep using the default path.
+if you didn't change the :ref:`data root <docker_data_root>`.
+For the sake of simplicity of the commands, I will keep using the default path.
 
 The Docker data root is not accessible by normal users, only by administrators.
+Run the following command:
 
 .. code-block:: bash
 
@@ -345,7 +365,7 @@ These are the names of the volumes and two additional special files.
 
 We are not going to discuss it in more details. All you need to know at this point is
 that this is where the volume folders are. Each folder has a sub-folder called "_data"
-where the actual data is, and there could be an `opts.json` with metadata next to the
+where the actual data is, and there could be an :code:`opts.json` with metadata next to the
 "_data" folder.
 
 .. note::
@@ -365,7 +385,7 @@ and whether you want to run Linux containers or Windows containers.
 Docker Desktop always runs a virtual machine
 for Linux containers and runs Docker CE in it in a quite complicated way,
 so your volumes will be in the virtual machine too. Because of that fact
-when you want to access the volumes, you either has to find a way to run a shell
+when you want to access the volumes, you either have to find a way to run a shell
 in the virtual machine, or find a way to share the filesystem on the network
 and use your filebrowser, IDE or terminal on the host.
 
@@ -476,7 +496,7 @@ Linux containers
 
 Since Linux containers always require a virtual machine, you will have
 your volumes in the virtual machine the same way as you would on macOS.
-The difference is how you can access it them. A common way is through
+The difference is how you can access them. A common way is through
 a Docker container. Usually I would run the following command.
 
 .. code-block:: powershell
@@ -496,7 +516,7 @@ If that happens, make sure you have the latest kernel in WSL2.
 If you built a custom kernel, you may need to rebuild it from a new
 version.
 
-If can't update the kernel yet, exclude the time namespace,
+If you can't update the kernel yet, exclude the time namespace,
 and run the following command:
 
 .. code-block:: powershell
@@ -567,7 +587,7 @@ You will get something like this:
   ]
 
 So now you got the volume path on Windows in the "Mountpoint" field,
-but you don't have access to it unless you are Administrator.
+but you don't have access to, it unless you are Administrator.
 The following command works only from Powershell run as Administrator
 
 .. code-block:: powershell
@@ -595,7 +615,7 @@ If you want to access it from Windows Explorer, you can first go to
     :height: 456
 
 Then try to open the folder called "Docker" which gives you a prompt
-to ask for Admin privileges
+to ask for permission to access to folder.
 
 .. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133428&authkey=%21AKUGZd-hYWHwoqg&width=660
   :width: 660
@@ -616,7 +636,7 @@ Docker Desktop volumes on Linux
 On Windows, you could have Linux containers and Window containers,
 so you had to switch between them.
 On Linux, you can install Docker CE in rootful and rootless mode,
-and you can also install Docker Desktop. These is 3 different
+and you can also install Docker Desktop. These are 3 different
 and separate Docker installations and you can switch between them
 by changing context or logging in as a different user.
 
@@ -648,7 +668,7 @@ called "desktop-linux".
 .. important::
 
   The default is usually rootful Docker CE and the other too are obvious.
-  Only the rootful Docker CE needs to run as root, so if you want to use
+  Only the rootful Docker CE needs to run as root, so if you want to
   interact with Docker Desktop, don't make the mistake of running the docker commands
   with sudo:
 
@@ -725,7 +745,7 @@ And check the content:
   sudo ls -l /var/lib/docker-desktop/volumes
 
 You could ask why we mount the volumes into a folder on the host,
-which requires sudo if the docker commands doesn't.
+which requires sudo if the docker commands don't.
 The reason is that you will need sudo to use the mount command,
 so it shouldn't be a problem to access the volumes as root.
 
