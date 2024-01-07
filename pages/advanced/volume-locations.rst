@@ -755,6 +755,9 @@ so it shouldn't be a problem to access the volumes as root.
 Editing files on volumes
 ========================
 
+The danger of editing volume contents outside a container
+---------------------------------------------------------
+
 Now you know how you can find out where the volumes are.
 You also know how you can create a volume with a custom path,
 even if you are using Docker Desktop, which creates the default
@@ -882,3 +885,58 @@ in the container change a config file, which you also want to edit occasionally.
 In that case you ned to learn how permissions are handled on Linux
 using the :code:`chmod` and :code:`chown` commands so you both
 have permission to access the files.
+
+Container based dev environments
+--------------------------------
+
+Docker Desktop Dev environment
+++++++++++++++++++++++++++++++
+
+One of the features of Docker Desktop is that you can run a development
+environment in a container. In this tutorial we will not discuss it in
+details, but it is good to know that it exists, and you can
+basically work inside a container into which you can mount volumes.
+
+More information in the `documentation <https://docs.docker.com/desktop/dev-environments/>`_
+
+Visual Studio Code remote development
++++++++++++++++++++++++++++++++++++++
+
+The dev environment of Docker Desktop can be opened from Visual Studio Code
+as it supports opening projects in containers similarly to how it supports
+remote development through SSH connection or in Windows Subsystem for Linux.
+You can use it without Docker Desktop to simply open a shell in a container
+or even open a project in a container.
+
+More information is in the `documentation <https://code.visualstudio.com/docs/containers/overview>`_.
+
+Visual Studio Code dev containers
++++++++++++++++++++++++++++++++++
+
+Microsoft also created container images for creating a dev container,
+which is similar to what Docker Desktop supports, but the process
+of creating a dev container is different.
+
+More information in the `documentation <https://code.visualstudio.com/docs/devcontainers/containers>`_.
+
+Conclusion
+==========
+
+There are multiple ways to browse the content of the Docker volumes,
+but it is not recommended to edit the files on the volumes.
+If you know enough about how containers work and what are the folders
+and files that you can edit without harming your system,
+you probably know enough not to edit the files that way in the first place.
+
+For debugging reasons or to learn about Docker by changing things
+in the environment, you can still edit the files at your own risk.
+
+Everything I described in this tutorial is true even if the user is not
+an interactive user, but an external user from the container's point of view,
+trying to manage files directly in the Docker data root.
+
+So with that in mind if you ever think of doing something like that,
+stop for moment, grab a paper and write the following sentence
+20 times to the paper:
+
+"I do touch the Docker data root directly."
