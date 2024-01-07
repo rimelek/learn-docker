@@ -897,7 +897,7 @@ environment in a container. In this tutorial we will not discuss it in
 details, but it is good to know that it exists, and you can
 basically work inside a container into which you can mount volumes.
 
-More information in the `documentation <https://docs.docker.com/desktop/dev-environments/>`_
+More information in the `documentation of the Dev environment <https://docs.docker.com/desktop/dev-environments/>`_
 
 Visual Studio Code remote development
 +++++++++++++++++++++++++++++++++++++
@@ -908,7 +908,7 @@ remote development through SSH connection or in Windows Subsystem for Linux.
 You can use it without Docker Desktop to simply open a shell in a container
 or even open a project in a container.
 
-More information is in the `documentation <https://code.visualstudio.com/docs/containers/overview>`_.
+More information is in the `documentation of VSCode about containers <https://code.visualstudio.com/docs/containers/overview>`_.
 
 Visual Studio Code dev containers
 +++++++++++++++++++++++++++++++++
@@ -917,7 +917,7 @@ Microsoft also created container images for creating a dev container,
 which is similar to what Docker Desktop supports, but the process
 of creating a dev container is different.
 
-More information in the `documentation <https://code.visualstudio.com/docs/devcontainers/containers>`_.
+More information in the `documentation of VSCode about dev containers <https://code.visualstudio.com/docs/devcontainers/containers>`_.
 
 Conclusion
 ==========
