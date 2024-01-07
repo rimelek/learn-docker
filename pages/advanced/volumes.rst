@@ -948,10 +948,10 @@ an interactive user, but an external user from the container's point of view,
 trying to manage files directly in the Docker data root.
 
 So with that in mind if you ever think of doing something like that,
-stop for moment, grab a paper and write the following sentence
+stop for a moment, grab a paper and write the following sentence
 20 times to the paper:
 
-"I do touch the Docker data root directly."
+"I do not touch the Docker data root directly."
 
 If you enjoyed this tutorial, I also recommend reading about
 `Volume-only Compose projects`_.
