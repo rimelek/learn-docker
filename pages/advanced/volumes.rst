@@ -102,7 +102,7 @@ In fact, the "docker run" command supports the :code:`--mount` option in additio
 :code:`-v` and :code:`--volume`, and only :code:`--mount` supports the type parameter
 to directly choose between volume and bind mount.
 
-Then what do we call volume? Let's start with answering another question.
+Then what do we call a volume? Let's start with answering another question.
 What do we not call a volume? A file can never be a volume. A volume is always a
 directory, and it is a directory which is created by Docker and handled by Docker
 throughout the entire lifetime of the volume. The main purpose of a volume is
@@ -110,6 +110,30 @@ to populate it with the content of the directory to which you mount it
 in the container. That's not the case with bind mounts. Bind mounts just
 completely override the content of the mount point in the container, but at least
 you can choose where you want to mount it from.
+
+You should also know that you can disable copying data from the container to your
+volume and use it as a simple bind mount, except that Docker creates it in the Docker
+data root, and when you delete the volume after you wrote something on it, you will lose
+the data.
+
+.. code-block:: yaml
+
+  volumes:
+    docroot:
+
+  services:
+    server:
+      image: httpd:2.4
+      volumes:
+        - type: volume
+          source: docroot
+          target: /usr/local/apache2/htdocs
+          volume:
+            nocopy: true
+
+You can find this and other parameters in the
+`documentation of volumes in a compose file <https://docs.docker.com/compose/compose-file/05-services/#volumes>`_.
+Scroll down to the "Long syntax" to read about "nocopy".
 
 .. _custom_volume_path:
 
