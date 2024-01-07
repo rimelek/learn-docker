@@ -14,12 +14,14 @@ Intro
 =====
 
 This question comes up a lot on the `Docker forum`_.
-There is no problem with curiosity, but this usually asked when someone wants to
+There is no problem with curiosity, but this is usually asked when someone wants to
 edit or at least read files directly on the volume from a terminal or an IDE,
 but not through a container. So I must start with a statement:
 
-You should never handle files on a volume directly without entering a container,
-unless there is an emergency, and even then, only at your own risk.
+.. important::
+
+  You should never handle files on a volume directly without entering a container,
+  unless there is an emergency, and even then, only at your own risk.
 
 Why I am saying it, you will understand if you read the next sections.
 
@@ -56,8 +58,8 @@ Let's just use the long syntax:
           target: /usr/local/apache2/htdocs
 
 The "volumes" section should have been "storage" or "mounts" to be more clear.
-In fact, the "docker run" command supports :code:`--mount` option in addition to
-:code:`-v` and `--volume`, and only :code:`--mount` supports the type parameter
+In fact, the "docker run" command supports the :code:`--mount` option in addition to
+:code:`-v` and :code:`--volume`, and only :code:`--mount` supports the type parameter
 to directly choose between volume and bind mount.
 
 Then what do we call volume? Let's start with answering another question.
@@ -72,8 +74,11 @@ you can choose where you want to mount it from.
 Custom volume path
 ==================
 
+Custom volume path overview
+---------------------------
+
 There is indeed a special kind of volume which seems to mix bind mounts and volumes.
-The following example will assumes you are using Docker CE on Linux.
+The following example will assume you are using Docker CE on Linux.
 
 .. code-block:: bash
 
@@ -90,9 +95,21 @@ The following example will assumes you are using Docker CE on Linux.
 Okay, so you created a volume and you also specified where the source directory is (device),
 and you specified that it is a bind mount.
 Don't worry, you find it confusing because it is confusing.
-"o=bind" doesn't mean that you will bind mount a directory into the container,
+:code:`o=bind` doesn't mean that you will bind mount a directory into the container,
+which will always happen,
 but that you will bind mount the directory to the path where Docker would have
-created the volume if you didn't define the source. This is one way to know where the
+created the volume if you didn't define the source.
+
+This is basically the same what yu would do on Linux with the :code:`mount` command:
+
+.. code-block:: bash
+
+  mount -o bind source/ target/
+
+Without :code:`-o bind` the first argument must be a block device.
+This is why we use the "device" parameter, even though we mount a folder.
+
+This is one way to know where the
 Docker volume is, but let's just test if it works and inspect the volume:
 
 .. code-block:: bash
@@ -121,7 +138,7 @@ You will get a json like this:
 
 The "Mountpoint" field in the json is not the path in a container, but the path where
 the specified device should be mounted at. In our case, the device is actually a directory.
-So let's se the content of the mount point:
+So let's see the content of the mount point:
 
 .. code-block:: bash
 
@@ -160,7 +177,7 @@ Output:
   5112515 drwxr-xr-x 1 www-data www-data 4096 Apr 12  2023 ..
    256139 -rw-r--r-- 1      501 staff      45 Jun 11  2007 index.html
 
-Notice that we added the option "i" to the "ls" command so we can see the inode number,
+Notice that we added the flag "i" to the "ls" command so we can see the inode number,
 which identifies the files and directories on the filesystem in the first column.
 
 Check the directory created by Docker:
@@ -231,6 +248,50 @@ It is empty now.
 And notice that even the inode has changed, not just the content disappeared.
 On the other hand, the directory we created is untouched and you can still find the
 :code:`index.html` there.
+
+Avoid accidental data loss on volumes
+-------------------------------------
+
+Let me show you an example using Docker Compose. The compose file would be the following:
+
+.. code-block:: yaml
+
+  volumes:
+    docroot:
+      driver: local
+      driver_opts:
+        type: none
+        device: ./docroot
+        o: bind
+
+  services:
+    httpd:
+      image: httpd:2.4
+      volumes:
+        - type: volume
+          source: docroot
+          target: /usr/local/apache2/htdocs
+
+You can populate :code:`./docroot` in the project folder by running
+
+.. code-block:: bash
+
+  docker compose up -d
+
+You will then find :code:`index.html` in the docroot folder.
+You probably know that you can delete a compose project by running
+:code:`docker compose down`, and delete the volumes too by
+passing the flag :code:`-v`.
+
+.. code-block:: bash
+
+  docker compose down -v
+
+You can run it, and the volume will be destroyed, but not the content of the
+already populated "docroot" folder. It happens, because the folder
+which is managed by Docker in the Docker data root does not physically
+have the content. So the one that was managed by Docker could be
+safely removed, but it didn't delete your data.
 
 Docker CE volumes on Linux
 ==========================
