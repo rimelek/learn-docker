@@ -5,6 +5,13 @@
 .. _Volume-only Compose projects: https://dev.to/rimelek/docker-compose-volumes-volume-only-projects-and-init-containers-5468
 .. _Docker Hub: https://hub.docker.com/
 
+:og:image: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133448&authkey=%21AC_sk0Z8Qkg_XdU&width=1024
+:og:description: Learn about Docker volumes, where they are and how you can access them.
+
+.. image:: https://onedrive.live.com/embed?resid=9d670019d6697cb6%2133448&authkey=%21AC_sk0Z8Qkg_XdU&width=1024
+  :width: 660
+  :height: 371
+
 ===============================
 Everything about Docker volumes
 ===============================
