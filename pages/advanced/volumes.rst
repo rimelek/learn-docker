@@ -35,7 +35,7 @@ Although the original goal with this tutorial was to explain where the volumes a
 it is hard to talk about it without understanding what the volumes are
 and what different options you have when using volumes.
 As a result of that, by reading this tutorial, you can learn basically
-everything about volumes the local volumes, but you can also
+everything about the local volumes, but you can also
 search for volume plugins on `Docker Hub`_.
 
 .. _docker_data_root:
