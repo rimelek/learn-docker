@@ -33,7 +33,7 @@ but not through a container. So I must start with a statement:
 Why I am saying it, you will understand if you read the next sections.
 Although the original goal with this tutorial was to explain where the volumes are,
 it is hard to talk about it without understanding what the volumes are
-and what different options you have to use a volume.
+and what different options you have when using volumes.
 As a result of that, by reading this tutorial, you can learn basically
 everything about volumes the local volumes, but you can also
 search for volume plugins on `Docker Hub`_.
