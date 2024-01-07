@@ -3,10 +3,7 @@
 .. _rootless Docker: https://docs.docker.com/engine/security/rootless/
 .. _Use Compose watch: https://docs.docker.com/compose/file-watch/
 .. _Volume-only Compose projects: https://dev.to/rimelek/docker-compose-volumes-volume-only-projects-and-init-containers-5468
-
-.. important::
-
-  This tutorial is still in progress.
+.. _Docker Hub: https://hub.docker.com/
 
 ===============================
 Everything about Docker volumes
@@ -15,6 +12,7 @@ Everything about Docker volumes
 Intro
 =====
 
+"Where are the Docker volumes?"
 This question comes up a lot on the `Docker forum`_.
 There is no problem with curiosity, but this is usually asked when someone wants to
 edit or at least read files directly on the volume from a terminal or an IDE,
@@ -26,6 +24,12 @@ but not through a container. So I must start with a statement:
   unless there is an emergency, and even then, only at your own risk.
 
 Why I am saying it, you will understand if you read the next sections.
+Although the original goal with this tutorial was to explain where the volumes are,
+it is hard to talk about it without understanding what the volumes are
+and what different options you have to use a volume.
+As a result of that, by reading this tutorial, you can learn basically
+everything about volumes the local volumes, but you can also
+search for volume plugins on `Docker Hub`_.
 
 .. _docker_data_root:
 
