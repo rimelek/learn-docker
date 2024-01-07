@@ -2,6 +2,7 @@
 .. _daemon configuration: https://docs.docker.com/engine/reference/commandline/dockerd/#on-linux
 .. _rootless Docker: https://docs.docker.com/engine/security/rootless/
 .. _Use Compose watch: https://docs.docker.com/compose/file-watch/
+.. _Volume-only Compose projects: https://dev.to/rimelek/docker-compose-volumes-volume-only-projects-and-init-containers-5468
 
 .. important::
 
@@ -940,3 +941,6 @@ stop for moment, grab a paper and write the following sentence
 20 times to the paper:
 
 "I do touch the Docker data root directly."
+
+If you enjoyed this tutorial, I also recommend reading about
+`Volume-only Compose projects`_.
