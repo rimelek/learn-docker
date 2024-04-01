@@ -24,8 +24,8 @@ It will not just see the interfaces, it will be able to listen on all the IP add
 configure PHP to listen on a specific IP address.
 PHP will also have internet access which is usually what you want, but not always.
 
-This is when Linux kernel namespaces can help us.A kernel namespace is like a magick wall between a running process
-and the rest of the host. This magick wall will only hide some parts of the host from a specific point of view.
+This is when Linux kernel namespaces can help us. A kernel namespace is like a magic wall between a running process
+and the rest of the host. This magic wall will only hide some parts of the host from a specific point of view.
 In this tutorial we will mainly cover the three best known point of views.
 
 - Filesystem (Mount namespace)
