@@ -24,9 +24,11 @@ Run a stateless DEMO application
 
 .. code:: bash
 
-  docker run --rm -p "8080:80" itsziget/phar-examples:1.0
+  docker run --rm -p "8080:80" rimelek/phar-examples:2.0
   # Press Ctrl-C to quit
 
+You can open it from a web browser using the IP address of the machine on which
+you are running the above command and port 8080.
 
 Play with the "hello-world" container
 =====================================
@@ -52,7 +54,7 @@ Output:
    2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
       (amd64)
    3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
+      executable that produces the output you are currently reading.
    4. The Docker daemon streamed that output to the Docker client, which sent it
       to your terminal.
 
@@ -174,16 +176,16 @@ Start Ubuntu in background ("detached" mode)
 --------------------------------------------
 
 Linux distribution base Docker images usually don't contain Systemd as LXD images
-so these containers cannot run in background unless you pass :code:`-it`
-to get interactive terminal. It wouldn't be necessary with a container
+so these containers cannot run in background unless you pass :code:`-t`
+to get terminal. It wouldn't be necessary with a container
 which has a process inside running in foreground continuously.
-:code:`-it` works with other containers too as long as
+:code:`-t` works with other containers too as long as
 the containers command is "bash" or some other shell. 
 
 .. code:: bash
 
   docker rm -f ubuntu-container
-  docker run -it -d --name ubuntu-container ubuntu:20.04
+  docker run -it -d --name ubuntu-container ubuntu:24.04
 
 .. note::
 
@@ -213,7 +215,7 @@ is similar to the way of LXD.
 
   docker exec -it ubuntu-container
 
-Now you can use the "exit" command to quit the container and leave it running.
+Now you can use the "exit" command to quit the container and keep it running.
 
 Start Apache HTTPD webserver
 ============================
@@ -293,6 +295,16 @@ Output:
   
   <html><body><h1>It works!</h1></body></html>
 
+.. note::
+
+  This would not work with Docker Desktop, as it runs the Docker daemon
+  in a virtual machine, so your Docker networks are also inside the virtual machine,
+  not available from the outside. You will need port forwarding,
+  or use the new `host network feature of Docker Desktop <https://docs.docker.com/engine/network/drivers/host/#docker-desktop>`_,
+  which is not a real host network, but forwards traffic in a smart way
+  so in a limited way, you could feel like you had host network,
+  which is not possible due to the virtual machine used by Docker Desktop.
+
 Use port forwarding
 -------------------
 
@@ -326,9 +338,34 @@ except it does not support Pseudo-TTY so some commands may not work.
     --pid \
     --cgroup \
     --wd \
-    env -i - $(sudo cat /proc/$CONTAINER_PID/environ | xargs -0) bash
+    env -i - $(cat /proc/$CONTAINER_PID/environ | xargs -0) bash
 
 As you can see, :code:`nsenter` runs a process inside specific Linux namespaces.
+
+.. note::
+
+  Since Docker Desktop runs containers in a virtual machine,
+  the nsenter command would not work from the host.
+  You could run the following container first:
+
+  .. code:: bash
+
+    docker run --rm -it --privileged --pid host -e CONTAINER_PID=$CONTAINER_PID ubuntu:24.04
+
+  And run the nsenter command without sudo
+
+  .. code:: bash
+
+    nsenter \
+      --target $CONTAINER_PID \
+      --mount \
+      --uts \
+      --ipc \
+      --net \
+      --pid \
+      --cgroup \
+      --wd \
+      env -i - $(cat /proc/$CONTAINER_PID/environ | xargs -0) bash
 
 Share namespaces
 ----------------
@@ -359,9 +396,11 @@ with the container.
 
   Since Docker Desktop runs Docker CE in a virtual machine, sharing namespaces with the host means that you
   will use the namespace of the virtual machine, not the actual host operating system where you run the Docker client.
-  As a result, you will still not be able to access ports on localhost of the host operating system, the hostname will
-  be the hostname of the virtual machine and the processes inside the container will see the processes running
-  inside the virtual machine only.
+  As a result, you will still not be able to access ports on localhost of the host operating system,
+  unless you enable the host networking feature of Docker Desktop which has limitations.
+  You will also see that the hostname will be the hostname of the virtual machine and the processes inside the container
+  will see the processes running inside the virtual machine only.
+  There is no feature to solve that.
 
 Now enter the container 
 
@@ -403,31 +442,5 @@ The default is :code:`runc` which runs containers.
 One of the most popular and easiest runtime is `Kata Containers`_.
 
 Follow the instructions to install the latest stable version of the Kata runtime: `Install Kata Containers`_
-and configure Docker daemon to use it. An example :code:`/etc/docker/daemon.json`
-is the following:
-
-.. code:: json
-
-  {
-    "default-runtime": "runc",
-    "runtimes": {
-      "kata": {
-        "path": "/usr/bin/kata-runtime"
-      }
-    }
-  }
-
-Now run 
-
-.. code:: bash
-
-  docker run -d -it --runtime kata --name ubuntu-vm ubuntu:20.04
-
-It is still lightweight. You can run :code:`ps aux` inside to see
-there is no systemd or other process like that, however, run the
-following command on the host machine and see it has only one CPU core:
-
-.. code:: bash
-
-  docker exec -it ubuntu-vm cat /proc/cpuinfo
-  
+and configure Docker daemon to use it. You can check the
+`Docker documentation <https://docs.docker.com/engine/daemon/alternative-runtimes/#use-containerd-shims>`_ as well.
