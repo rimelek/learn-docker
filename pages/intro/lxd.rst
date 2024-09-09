@@ -10,12 +10,14 @@ LXD can run containers and also virtual machines with similar commands.
 It uses LXC to run containers (as Docker did at the beginning) and Qemu-KVM to run virtual machines.
 To install LXD 4.0 LTS you need `snap`_.
 
-Install LXD 4.0 LTS
-===================
+Install at least LXD 4.0 LTS
+============================
 
 .. code:: bash
 
   sudo snap install --channel 4.0/stable lxd
+
+.. note:: Replace 4.0 with 5.0 or 5.21 to install newer LTS versions.
 
 Now you need to initialize the configuration:
 
