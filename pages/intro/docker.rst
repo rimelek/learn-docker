@@ -436,7 +436,7 @@ only the processes inside the container:
 Start Ubuntu virtual machine
 ============================
 
-There are multiple ways to run a virtual machine with Docker.
+You can also run a small virtual machine with Docker.
 Using a parameter is not enough. You need to choose a different runtime.
 The default is :code:`runc` which runs containers.
 One of the most popular and easiest runtime is `Kata Containers`_.
