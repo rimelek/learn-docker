@@ -22,6 +22,7 @@ Project structure:
 The content of the index.php
 
 .. literalinclude:: ../../projects/p03/www/index.php
+  :language: php
 
 and the Dockerfile
 
