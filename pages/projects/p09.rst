@@ -32,7 +32,7 @@ We test the CPU limit in this example using an image based on `petermaric/docker
 
 .. code:: bash
 
-  docker build -t localhost/stress .
+  docker build . -t localhost/stress
 
 Execute the following command to test a whole CPU core:
 

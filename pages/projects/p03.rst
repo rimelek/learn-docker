@@ -32,7 +32,7 @@ Build an image:
 
 .. code:: bash
 
-  docker build -t localhost/p03_php .
+  docker build . -t localhost/p03_php
 
 Start the container:
 

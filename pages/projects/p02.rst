@@ -32,7 +32,7 @@ Building an image:
 
 .. code:: bash
 
-  docker build -t localhost/p02_httpd .
+  docker build . -t localhost/p02_httpd
 
 
 The dot character at the and of the line is important and required.
