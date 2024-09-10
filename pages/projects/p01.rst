@@ -39,6 +39,21 @@ Generate a domain name:
   # example output:
   # 192.168.1.2.xip.io
 
+.. note::
+
+  When you run it on Linux, an additional line could appear on the standard error stream
+
+  .. code:: text
+
+    ip command detected...
+
+  It is just a status message. You can ignore it.
+  It will not added to the value of a variable when using a subshell:
+
+  .. code:: bash
+
+    ip=$(nip.sh)
+
 In case are working in the cloned repository of this tutorial, you can also run the below command to set the variable
 
 .. code:: bash
