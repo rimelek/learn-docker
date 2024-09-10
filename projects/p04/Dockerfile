@@ -1,4 +1,4 @@
-FROM php:7.4-alpine
+FROM php:8.3-alpine
 
 LABEL hu.itsziget.ld.project=p04
 
