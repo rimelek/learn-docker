@@ -1,4 +1,4 @@
-FROM itsziget/php:7.4-fpm
+FROM rimelek/php:7.4-fpm
 
 LABEL hu.itsziget.ld.project=p06
 

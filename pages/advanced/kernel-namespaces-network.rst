@@ -150,7 +150,7 @@ Since the reason is the network namespace, you could just run the container in h
 
 .. code:: bash
 
-  docker run -d --name php-hostnet --network host itsziget/phar-examples:1.0
+  docker run -d --name php-hostnet --network host rimelek/phar-examples:1.0
 
 which means you just don't get the network isolation. The host network mode does not mean that you are using
 a special Docker network. It only means you don't want the container to have its own network namespace.
@@ -185,7 +185,7 @@ network interfaces inside the PHP container.
 
 .. code:: bash
 
-  docker run -d --name php itsziget/phar-examples:1.0
+  docker run -d --name php rimelek/phar-examples:1.0
   docker run --rm -it --network container:php bash:5.1 ip addr
 
 There is a much easier solution of course. We can just use :code:`docker exec` to execute a command
@@ -667,7 +667,7 @@ localhost, you can access it from the web browser in the same network namespace.
 
 .. code:: bash
 
-  docker run -d --name php-networkless --network none itsziget/phar-examples:1.0
+  docker run -d --name php-networkless --network none rimelek/phar-examples:1.0
   pid_networkless=$(docker container inspect php --format '{{ .State.Pid }}')
   sudo nsenter --net=/proc/$pid_networkless/ns/net curl localhost
 
@@ -693,7 +693,7 @@ You need to
 .. code:: bash
 
   docker network create internal --internal
-  docker run -d --name php-internal --network internal itsziget/phar-examples:1.0
+  docker run -d --name php-internal --network internal rimelek/phar-examples:1.0
   ip_internal=$(docker container inspect php-internal --format '{{ .NetworkSettings.Networks.internal.IPAddress }}')
   curl "$ip_internal"
 
@@ -792,7 +792,7 @@ Compose file content:
 
   services:
     php:
-      image: itsziget/phar-examples:1.0
+      image: rimelek/phar-examples:1.0
 
     firefox:
       network_mode: service:php
@@ -830,7 +830,7 @@ Now that you know it is trying to load CSS and some harmless JavaScripts, you ca
 
 .. code-block:: bash
 
-  docker run -d --name php-internet -p 8080:80  itsziget/phar-examples:1.0
+  docker run -d --name php-internet -p 8080:80  rimelek/phar-examples:1.0
 
 and open it in an other tab on port 8080.
 

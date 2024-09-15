@@ -10,7 +10,7 @@ networks:
 
 services:
   htpasswd:
-    image: itsziget/httpd24:2.0
+    image: rimelek/httpd24:2.0
     volumes:
       - apache2:/usr/local/apache2
     command:
@@ -21,7 +21,7 @@ services:
   httpd:
     depends_on:
       - htpasswd
-    image: itsziget/httpd24:2.0
+    image: rimelek/httpd24:2.0
     volumes:
       - apache2:/usr/local/apache2
       - ./www:/usr/local/apache2/htdocs

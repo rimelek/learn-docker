@@ -17,7 +17,7 @@ services:
     volumes:
       - www:/var/www/html
   httpd:
-    image: itsziget/httpd24:2.0
+    image: rimelek/httpd24:2.0
     volumes:
       - www:/var/www/html
     environment:
