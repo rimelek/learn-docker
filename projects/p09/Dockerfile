@@ -8,7 +8,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends stress
 
 # Parameterize this Dockerfile, by storing the app configuration within environment variables 
-ENV STRESS_TIMEOUT 120
-ENV STRESS_MAX_CPU_CORES 1
+ENV STRESS_TIMEOUT=120
+ENV STRESS_MAX_CPU_CORES=1
 
 CMD stress --cpu $STRESS_MAX_CPU_CORES --timeout $STRESS_TIMEOUT
