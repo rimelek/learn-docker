@@ -6,7 +6,7 @@
 .. _forums.docker.com: https://forums.docker.com/
 .. _@itsziget: https://www.youtube.com/@itsziget
 .. _@akos.takacs: https://www.youtube.com/@akos.takacs
-.. _Twitter: https://twitter.com/rimelek
+.. _X (aka Twitter): https://twitter.com/rimelek
 
 :og:description: Learn about Docker and the technology behind it through examples
 
@@ -23,8 +23,10 @@ Welcome to Learn Docker's documentation!
 My name is Ákos Takács and I really like working with Docker containers and containers in general.
 I decided to share my experience so I created this page to help you through your journey in learning Docker
 and related tools and concepts.
-I am a moderator on `forums.docker.com`_, I'm on YouTube (`@itsziget`_ (Hungarian), `@akos.takacs`_ (English)),
-and you can follow me on `Twitter`_
+I am a moderator on `forums.docker.com`_ and a Docker Captain since August 28, 2024.
+I'm on YouTube (`@itsziget`_ (Hungarian), `@akos.takacs`_ (English)),
+you can find written tutorials on `dev.to/rimelek <https://dev.to/rimelek>`_
+and you can follow me on `X (aka Twitter)`_
 
 In this project I share explanations, examples and scripts.
 The examples were originally made for the participants of the Ipszilon Seminar in 2017 in Hungary. 
