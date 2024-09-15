@@ -90,7 +90,7 @@ Start the containers:
 
 .. code:: bash
 
-  docker-compose up -d
+  docker compose up -d
 
 In case of working in the cloned repository of this tutorial, you can also run the below command to set the variable
 

@@ -145,7 +145,7 @@ Now let's get the main page using curl from another container:
 
 .. code-block:: bash
 
-  docker-compose -f noexpose/docker-compose.yml exec client1 curl $IP:8080
+  docker compose -f noexpose/docker-compose.yml exec client1 curl $IP:8080
 
 Again, we get the output as we expected:
 
