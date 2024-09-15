@@ -7,7 +7,7 @@ networks:
 x-client-base: &client-base
   depends_on:
     - server
-  image: nicolaka/netshoot:v0.8
+  image: nicolaka/netshoot:v0.13
   command:
     - sleep
     - inf

@@ -84,6 +84,16 @@ Get the index page from the server:
   # or
   wget -qO- $IP:8080
 
+.. note::
+
+  Since Docker Desktop runs containers in a virtual machine,
+  Container IP addresses are not available from the host.
+  You can run curl in a container on host network:
+
+  .. code:: bash
+
+    docker run --rm -it --net host curlimages/curl $IP:8080
+
 The output should be
 
 .. literalinclude:: ../../projects/p10/noexpose/index.html
@@ -136,6 +146,16 @@ Get the index page from the server:
   curl $IP:8080
   # or
   wget -qO- $IP:8080
+
+.. note::
+
+  Since Docker Desktop runs containers in a virtual machine,
+  Container IP addresses are not available from the host.
+  You can run curl in a container on host network:
+
+  .. code:: bash
+
+    docker run --rm -it --net host curlimages/curl $IP:8080
 
 The output should be the same as before:
 
@@ -220,6 +240,16 @@ Test the port from the host:
   curl $IP:8080
   # or
   wget -qO- $IP:8080
+
+.. note::
+
+  Since Docker Desktop runs containers in a virtual machine,
+  Container IP addresses are not available from the host.
+  You can run curl in a container on host network:
+
+  .. code:: bash
+
+    docker run --rm -it --net host curlimages/curl $IP:8080
 
 And finally test it from client1 before client2, which is in a different network:
 

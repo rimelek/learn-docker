@@ -598,7 +598,7 @@ First we want to have a running debugger container.
 
 .. code:: bash
 
-  docker run -d -i --name debug nicolaka/netshoot:v0.9
+  docker run -d -i --name debug nicolaka/netshoot:v0.13
 
 Now we need to get the sandbox key for the network namespace and since we want to debug the PHP container,
 we will get the sandbox key from it. We also need something for the mount namespace of the debugger container.
