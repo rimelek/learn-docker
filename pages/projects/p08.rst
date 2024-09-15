@@ -66,7 +66,7 @@ Explanation of the parameters
 =============================
 
 The "docker compose run" is similar to "docker run", but it runs a service from the compose file.
-"--rm" means the same as it meant for "docker run". Deletes the container right after it stopped.
+":code:`--rm`" means the same as it meant for "docker run". Deletes the container right after it stopped.
 
 Clean the project:
 
